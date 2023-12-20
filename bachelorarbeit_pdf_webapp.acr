@@ -2,20 +2,23 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{gdi}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{4}}}\glsgroupskip
 \glsgroupheading{I}\relax \glsresetentrylist %
 \glossentry{iso}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{2\delimN 3}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{2\delimR 4}}}\glsgroupskip
 \glsgroupheading{P}\relax \glsresetentrylist %
+\glossentry{pades}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{II}}}%
 \glossentry{pdf}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{2\delimR 6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{2\delimR 8}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{II}}}%
 \glossentry{pdl}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3\delimR 5}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{4\delimR 6}}}\glsgroupskip
 \glsgroupheading{R}\relax \glsresetentrylist %
 \glossentry{rip}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{4\delimN 5}}}\glsgroupskip
 \glsgroupheading{S}\relax \glsresetentrylist %
 \glossentry{svm}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{19}}}%
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \end{theglossary}\glossarypostamble
