@@ -35,20 +35,15 @@
 %=== wichtig, dass folgende Pakete NACH hyperref geladen werden ===============
 \usepackage{scrhack}% Um Warnung bzgl. \float@addtolists im listings-Paket (s.u.) zu vermeiden
 \usepackage{listings}
-%
-\usepackage[nameinlink]{cleveref}
-\usepackage[all]{hypcap}
-%\usepackage[
-%	toc,
-%	symbols,
-%	acronyms,
-%]{glossaries}
-\usepackage[utf8]{inputenc}
-\usepackage[acronym,nomain,symbols,toc]{glossaries}
 
 %List enumerations in References part
 \usepackage{enumitem}
-
-%Abkürzungsverzeichnis
-%\usepackage[nohyperlinks, printonlyused]{acronym}
-%\usepackage[acronym]{glossaries}
+%
+\usepackage[nameinlink]{cleveref}
+\usepackage[all]{hypcap}
+\usepackage[
+	automake,
+	toc,
+	symbols,
+	acronyms,
+]{glossaries}

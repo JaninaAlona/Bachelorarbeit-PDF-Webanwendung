@@ -19,13 +19,7 @@
 %
 \input{glsdefs}
 %
-%\makeglossaries
-\makenoidxglossaries 
-\printnoidxglossaries 
-\newacronym{iso}{ISO}{International Organization for Standardization}
-\newacronym{pdl}{PDL}{Page Description Language}
-\newacronym{rip}{RIP}{Raster Image Processor}
-\newacronym{gdi}{GDI}{Graphics Device Interface}
+\makeglossaries
 %
 \graphicspath{{images/}}
 %
@@ -34,19 +28,9 @@
 \nocite{*} % listet alle Quellen (auch die nicht zitierten!)
 %
 %=== für schnelleres kopilieren alle ungeänderten Dateien auskommentieren =====
-%\includeonly{
-%	content/chapDeclaration,
-%	content/abstract,
-%	content/einleitung,
-%	content/forschung\_technik,
-%	content/chapForm,
-%	content/chapGestaltung,
-%	content/chapLiteratur,
-%}
 \includeonly{
 	content/chapDeclaration,
 	content/chapAbstract,
-	content/chapAbkuerzungen,
 	content/chapEinleitung,
 	content/chapGrundlagen,
 	content/chapMarktanalyse,
@@ -54,6 +38,15 @@
 	content/chapForm,
 	content/chapGestaltung,
 	content/chapLiteratur,
+	content/grundlagen/sectionPdf,
+	content/grundlagen/sectionPdfFunktionen,
+	content/grundlagen/sectionStandards,
+	content/grundlagen/sectionVersionen,
+	content/grundlagen/sectionPdfImpl,
+	content/grundlagen/sectionSicherheit,
+	content/grundlagen/sectionAktuell,
+	content/marktanalyse/sectionFreieProgr,
+	content/marktanalyse/sectionKostenProgr,
 }
 
 %List enumerations in References part
@@ -83,11 +76,10 @@
 \newcommand\itemv{\item[\textbf{[23]}]}
 
 %
+%
 %==============================================================================
 %
 \begin{document}
-
-
 %
 \pdfbookmark[0]{Titelseite}{titel}
 \input{content/Cover}
@@ -107,7 +99,6 @@
 \cleardoublepage
 \KOMAoptions{open=right}
 \pagenumbering{arabic}
-\include{content/chapAbkuerzungen}
 \include{content/chapEinleitung}
 \include{content/chapGrundlagen}
 \include{content/chapMarktanalyse}
@@ -124,5 +115,5 @@
 %
 \include{content/chapDeclaration}
 %
-
+%
 \end{document}
