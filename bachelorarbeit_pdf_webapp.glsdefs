@@ -1,0 +1,112 @@
+\glsdefs@newdocentry{iso}%
+{%
+name={\acronymfont {\glsentryshort {iso}}},%
+sort={ISO},%
+type={acronym},%
+first={ISO},%
+firstplural={ISOs},%
+text={ISO},%
+plural={ISOs},%
+description={International Organization for Standardization},%
+descriptionplural={International Organization for Standardization},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={International Organization for Standardization},%
+longplural={International Organization for Standardizations},%
+short={ISO},%
+shortplural={ISOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{pdl}%
+{%
+name={\acronymfont {\glsentryshort {pdl}}},%
+sort={PDL},%
+type={acronym},%
+first={PDL},%
+firstplural={PDLs},%
+text={PDL},%
+plural={PDLs},%
+description={Page Description Language},%
+descriptionplural={Page Description Language},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Page Description Language},%
+longplural={Page Description Languages},%
+short={PDL},%
+shortplural={PDLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rip}%
+{%
+name={\acronymfont {\glsentryshort {rip}}},%
+sort={RIP},%
+type={acronym},%
+first={RIP},%
+firstplural={RIPs},%
+text={RIP},%
+plural={RIPs},%
+description={Raster Image Processor},%
+descriptionplural={Raster Image Processor},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Raster Image Processor},%
+longplural={Raster Image Processors},%
+short={RIP},%
+shortplural={RIPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{gdi}%
+{%
+name={\acronymfont {\glsentryshort {gdi}}},%
+sort={GDI},%
+type={acronym},%
+first={GDI},%
+firstplural={GDIs},%
+text={GDI},%
+plural={GDIs},%
+description={Graphics Device Interface},%
+descriptionplural={Graphics Device Interface},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Graphics Device Interface},%
+longplural={Graphics Device Interfaces},%
+short={GDI},%
+shortplural={GDIs},%
+counter={page},%
+parent={},%
+%
+}%
+
