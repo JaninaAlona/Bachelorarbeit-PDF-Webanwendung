@@ -1,7 +1,30 @@
 \section{PDF Dateiversionen}
 
 \subsection{PDF 1.0}
+PDF 1.0 wurde 1992/1993 entwickelt und ist keine Norm. 1992 wurde die Spezifikation als Buch verkauft und 1993 wurde das der Spezifikation entsprechende digitale Format entwickelt, welches ausschließlich den RGB Farbraum darstellen konnte. Medien, die einen anderen Farbraum besaßen wurden in RGB umkonvertiert. Der RGB Farbraum ist nur für die Bildschirmdarstellung geeignet und beschreibt die für den Menschen 16,7 Mio. sichtbaren Farben mit Hilfe von additiver Farbmischung. In der Druckindustrie ist jedoch der CMYK Farbraum von Bedeutung und daher war PDF 1.0 nicht für den Printbereich ausgelegt. Damals war Adoba Acrobat 1.0 das einzige Programm, um mit dieser Dateiversion zu arbeiten. [9]
 
+\subsection{PDF 1.1}
+Genauso ist das 1994 kreierte PDF 1.1 keine Norm und implementiert weiterhin nur den RGB Farbraum, jedoch geräteunabhängig. Zusätzlich benötigte man ein Update von Adobe Acrobat auf Version 2.0. Erstmals sind in diesem Format das Einbetten von externen Links, mehrseitige Artikel und Threads, Passwortverschlüsselung und Notizen und Anmerkungen erschienen. [9]
+
+\subsection{PDF 1.2}
+Das ebenfalls 1996 erschienene PDF 1.2 wurde keine Norm, jedoch ermöglichte es erstmals den druckbaren CMYK Farbraum und Sonderfarben zu verwenden. Des weiteren wurden interaktive Formularfunktionen, Unicode Unterstützung, Multimedia Kompatibilität, Unterstützung der \gls{opi} 1.3 Spezifikationen und eine Druckrasterfunktion implementiert. [9] \gls{opi} ist ein Workflow Protokoll, welches in der elektronischen Druckvorstufe verwendet werden kann, um Desktop Publishing Systeme und high-end \gls{ceps} zu verknüpfen und optimiert die Übertragung von hochauflösenden Dateien in Netzwerken. [10]
+
+\subsection{PDF 1.3}
+1999 wurde PDF 1.3 auf den Markt gebracht und trug seinen Teil 2001 und 2002 bei zur Standardisierung des \gls{iso} PDF/X Standards be. Es ist kompatibel mit PostScript 3 und bietet die Neuerungen der 2-Byte CID Schrifttypen, OPI 2.0 Unterstützung, Farbraumerweiterung für Sonderfarben durch \gls{icc}, DeviceN, weiche Schatten und Farbübergänge (Smooth Shading), digitale Signaturen, RC4-Verschlüsselung (40 Bit in Acrobat 4 und 56 Bit in Acrobat 4.05) und JavaScript. [9]
+\par
+\gls{cid} ist ein Synonym für das PostScript Type o Format, das eine Adressierung von mehr als 256 Zeichen ermöglicht und für Fonts mit einer großen Zeichenanzahl verwendet wurde. [11] \\
+\gls{icc} meint ein \gls{icc}-Profil, das die Farbeigenschaften, Helligkeit, Weißpunkt, Gammakurve und Farbumfang eines bestimmten Monitors eines spezifischen Geräts beschreibt, sprich es beschreibt, wie Farben von diesem Gerät dargestellt werden können. Außerdem wird die Transformation zwischen dem Gerät und dem Profilverbindungsraum \gls{pcs} definiert. Dabei gibt es die Variante Eingabeprofile für Kameras und Scanner und Ausgabeprofile für Monitore und Drucker. Zweck des \gls{icc}-Profils ist möglichst Farbübereinstimmungen zwischen verschiedenen Geräten zu erzielen. [12] \\
+Beim \gls{pcs} handelt es sich um ein neutrales Farbmodell im \gls{icc}-Colormanagement, welches den Quellfarbraum mit dem Zielfarbraum verbindet und somit geräteunabhängig ist. Der \gls{pcs} kann entweder der LAB oder XYZ Farbraum sein. [13] \\
+Der DeviceN-Farbraum wird auch in PostScript 3 unterstützt und erlaubt die willkürliche Kombinationen von Farbkanälen beim Composite-Druck. Dokumente mit Schmuckfarben müssen auf einem Gerät mit physikalisch getrennten Kanälen für jede verwendete Schmuckfarbe ausgegeben werden. Folglich kann kein CMYK- oder RGB-Gerät Dokumente mit Schmuckfarben farblich korrekt darstellen. Davon sind fast alle Farbdruckersysteme betroffen, sowie die von Adobe Acrobat erzeugte Bildschirmdarstellung von PDF Dokumenten mit Schmuckfarben. Ohne den DeviceN Farbraum können Bilder mit Kombinationen von z.B. CMYK und 2 Schmuckfarben oder Schwarz und eine Schmuckfarbe nicht im Composite-PostScript und Composite-PDF wiedergegeben werden, sondern höchstens mit CMYK als Näherung. [14]
+
+
+\subsection{PDF 1.5}
+
+\subsection{PDF 1.4}
+
+\subsection{PDF 1.6}
 
 \subsection{PDF 1.7}
 Veröffentlichung am 1. Juli 2008 ist PDF in Version 1.7 als \gls{iso} 32000-1:2008 ein Offener Standard
+
+\subsection{PDF 2.0}
