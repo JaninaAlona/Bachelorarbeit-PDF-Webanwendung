@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \usepackage{ifluatex}
-\usepackage[ngerman]{babel}
+
 %
 \ifluatex
  % LuaLaTeX
@@ -12,9 +12,14 @@
 \else
  % PdfLaTeX
  \usepackage[T1]{fontenc}
- \usepackage{lmodern}
+ %\usepackage{lmodern}
 \fi
 %
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsfonts}
+
+
 \usepackage{csquotes}
 \usepackage{scrlayer-scrpage}
 \usepackage{microtype}
@@ -35,8 +40,6 @@
 \usepackage{scrhack}% Um Warnung bzgl. \float@addtolists im listings-Paket (s.u.) zu vermeiden
 \usepackage{listings}
 
-%List enumerations in References part
-\usepackage{enumitem}
 %
 \usepackage[nameinlink]{cleveref}
 \usepackage[all]{hypcap}
