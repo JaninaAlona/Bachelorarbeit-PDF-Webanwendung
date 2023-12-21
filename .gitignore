@@ -23,3 +23,6 @@ main.synctex.gz
 main.toc
 content/*.aux
 content/*.log
+content/grundlagen/*.log
+content/marktanalyse/*.log
+content/app/*.log
