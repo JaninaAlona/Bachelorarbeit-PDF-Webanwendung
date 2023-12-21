@@ -1,6 +1,22 @@
 \section{PDF Funktionsumfang}
 PDFs können Texte, Tabellen, Bilder, Links, Buttons, Formulare, Audio-, Videoelemente und Funktionen enthalten.
-Um die Navigation innerhalb eines PDF Dokuments zu erleichtern können PDFs anklickbare Inhaltsverzeichnisse und miniaturisierte Seitenvorschauen enthalten.
+Um die Navigation innerhalb eines PDF Dokuments zu erleichtern können PDFs anklickbare Inhaltsverzeichnisse und miniaturisierte Seitenvorschauen enthalten. Optional ist eine Gliederung mit hierarchischer Baumstruktur in Form von Lesezeichen möglich, mit der der Betrachter leichter durch das Dokument geführt werden kann. 
+
+\subsection{WYSIWYG}
+Ein PDF-Dokument hat ein festes Layout und eine feste Anzahl von Seiten. Unabhängig von der Software mit der das Dokument angezeigt wird oder mit welcher Hardware es ausgedruckt wird bleiben alle Elemente auf den Seiten immer exakt an derselben Position. Alle Layout- und Formatierungsangaben stammen aus der Erstellungsanwendung. Bei der Konvertierung von Dokumenten mit variablem Layout zu PDF, wie z.B. .txt-Dateien oder HTML muss der Inhalt auf die vorhandenen Seiten und Platz verteilt werden. Dabei ist keine automatische Anpassung des Seiteninhalt-Layouts, wie z.B. in Microsoft Word, möglich. Daher kann ein PDF-Dokument nicht sinnvoll in das Word-Format umgewandelt werden ohne möglicherweise das ursprüngliche PDF-Layout zu beeinflussen und zu ändern, sowie die maximalen Bearbeitungsmöglichkeiten von Word ausschöpfen zu können.
+
+\subsection{Kommentare}
+Ein Kommentarobjekt, das mit ein oder mehreren Dokumentenseiten verlinkt ist, besteht aus 2 technisch separaten Bausteinen. Zum einen werden das Kommentar oder die Kommentare durch ein grafisches Element auf den zugehörigen Seiten symbolisiert, zum anderen wird der Kommentarinhalt in einem rechteckigen Kommentarbereich dargestellt. Ein Anwender kann die Darstellung des Kommentarobjekts je nach Geschmack modifizieren. Unüblicherweise kann ein Kommentar sogar als Video-Kommentar abgespielt werden. Die wichtigsten Kommentartypen sind Notizzettel, Textmarkierung, Stempel, Wasserzeichen, Textboxen, Formen, Freihand-Markierung, Audio, Video und 3D-Illustrationen. Kommentare können optional mit ausgedruckt werden. \cite{softx}
+
+\subsection{Verweise}
+Technisch gesehen sind Verweise oder Hyperlinks spezialisierte Kommentare ohne Symboldarstellung. Auf der Seite wird ein Ausschnitt zur Platzierung des Verweises gewählt, der über einem Inhaltselement (Text oder Bild) liegt. Der Verweis zeigt auf eine Seite oder Seitenbereich im geöffneten Dokument, eine andere PDF-Datei, eine E-Mailadresse oder URL. Man kann sogar Zielobjekte mit im gesamten Dokument eindeutigen Namen einstellen. \cite{softx}
 
 \subsection{Metadaten}
-PD-Dateien enthalten Metadaten. Bei Metadaten oder Metainformationen handelt es sich um strukturierte Daten, die sich auf Merkmale anderer Daten beziehen. Beispiele für Metadaten sind Name, Titel der Datei, Autor, Stichwörter zum Inhalt, das Datum der Speicherung.
+PDF-Dateien enthalten Metadaten. Bei Metadaten oder Metainformationen handelt es sich um strukturierte Daten, die sich auf Merkmale anderer Daten beziehen. Beispiele für Metadaten sind Name, Titel der Datei, Autor, Stichwörter zum Inhalt, das Datum der Speicherung.
+
+\subsection{Inkrementelles Update}
+Die ursprüngliche Version einer PDF-Datei bleibt erhalten, während das inkrementelle Update die Änderungen im Dokument enthält. Professionelle PDF-Programme können wie eine Versionsverwaltung jede geänderte Version des Dokuments laden. Bei einfacheren PDF-Programmen wird lediglich die letzte Version geladen. Bei Verwendung von inkrementellen Updates kann man digital unterschriebene Dokumente ändern ohne dass die Unterschrift ungültig wird, da die Dokumentversion mit der digitalen Unterschrift ein andere Version ist als die nachträgliche Änderungen. Dabei muss die digitale Unterschrift als inkrementelles Update gespeichert werden, sonst würde sie verfallen bei nachträglicher Dokumentenänderung unabhängig von der Art der Änderung. Folglich sollten mehrfach signierte Dokumente ebenfalls mit der Option inkrementelles Update gespeichert werden. \cite{softx}
+
+\subsection{Formulare}
+In PDFs kann man Formularfelder erstellen vom Typ Textfeld, Kontrollkästchen, Auswahlknopf, Kombinationsfeld, Auswahlliste, Schaltfläche, Barcode- oder
+Unterschriftsfeld. \cite{softx}
