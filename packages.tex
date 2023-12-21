@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \usepackage{ifluatex}
-\usepackage{babel}
+\usepackage[ngerman]{babel}
 %
 \ifluatex
  % LuaLaTeX
@@ -24,8 +24,7 @@
 %
 \usepackage{tikz}
 \usepackage{pgfplots}
-%
-\usepackage[backend=biber]{biblatex}
+
 %
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -48,5 +47,6 @@
 	acronyms,
 ]{glossaries}
 
-%Sprache des Literaturverzeichnisses
-%\usepackage[fixlanguage]{babelbib}
+%Literaturverzeichnis
+\usepackage{notoccite}
+\usepackage[style=ieee, backend=biber, doi=true,url=true,maxcitenames=3, maxbibnames=3, sorting=none]{biblatex}

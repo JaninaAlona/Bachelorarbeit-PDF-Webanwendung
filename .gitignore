@@ -19,6 +19,7 @@ main.run.xml
 main.slg
 main.slo
 main.sls
+main.synctex.gz
 main.toc
 content/*.aux
 content/*.log

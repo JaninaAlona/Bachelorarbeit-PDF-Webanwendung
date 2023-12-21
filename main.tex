@@ -27,10 +27,6 @@
 %
 \addbibresource{Literatur.bib}
 
-%\bibliographystyle{plain}
-
-%\bibliography{references}
-%\selectbiblanguage{german}
 
 
 
@@ -45,34 +41,8 @@
 	content/chapApp,
 	content/chapDiskussion,
 	content/chapFazit,
-	content/chapLiteratur,
 }
 
-%List enumerations in References part
-\newlist{referenceslist}{itemize}{1}
-\setlist[referenceslist]{label=\textbf{[1]}}
-\newcommand\itema{\item[\textbf{[2]}]}
-\newcommand\itemb{\item[\textbf{[3]}]}
-\newcommand\itemc{\item[\textbf{[4]}]}
-\newcommand\itemd{\item[\textbf{[5]}]}
-\newcommand\iteme{\item[\textbf{[6]}]}
-\newcommand\itemf{\item[\textbf{[7]}]}
-\newcommand\itemg{\item[\textbf{[8]}]}
-\newcommand\itemh{\item[\textbf{[9]}]}
-\newcommand\itemi{\item[\textbf{[10]}]}
-\newcommand\itemj{\item[\textbf{[11]}]}
-\newcommand\itemk{\item[\textbf{[12]}]}
-\newcommand\iteml{\item[\textbf{[13]}]}
-\newcommand\itemm{\item[\textbf{[14]}]}
-\newcommand\itemn{\item[\textbf{[15]}]}
-\newcommand\itemo{\item[\textbf{[16]}]}
-\newcommand\itemp{\item[\textbf{[17]}]}
-\newcommand\itemq{\item[\textbf{[18]}]}
-\newcommand\itemr{\item[\textbf{[19]}]}
-\newcommand\items{\item[\textbf{[20]}]}
-\newcommand\itemt{\item[\textbf{[21]}]}
-\newcommand\itemu{\item[\textbf{[22]}]}
-\newcommand\itemv{\item[\textbf{[23]}]}
 
 %
 %
@@ -98,16 +68,17 @@
 \cleardoublepage
 \KOMAoptions{open=right}
 \pagenumbering{arabic}
+
 \include{content/chapEinleitung}
 \include{content/chapGrundlagen}
 \include{content/chapMarktanalyse}
 \include{content/chapApp}
 \include{content/chapDiskussion}
 \include{content/chapFazit}
-\include{content/chapLiteratur}
+
 %
 
-\nocite{*} % listet alle Quellen (auch die nicht zitierten!)
+%\nocite{*} % listet alle Quellen (auch die nicht zitierten!)
 \printbibliography
 
 
