@@ -1,27 +1,46 @@
 \section{PDF Dateiformate}
 
-\subsection{PDF-X}
+
+\subsection{PDF/X}
 Das PDF-X Dateiformat (\gls{iso} 15930) dient des simpleren Datenaustausches in der Druckvorstufe. Es beschreibt Eigenschaften von Druckvorlagen und vereinfacht die Datenübermittlung von der Druckvorstufe bis zum finalen Druck.
 
-\subsection{PDF-VT}
+
+\subsection{PDF/VT}
 Das PDF-VT Dateiformat stellt ein spezielles Austauschformat im variablen Datendruck und Transaktionsdruck dar.
 
-\subsection{PDF-A}
-Das PDF-A Dateiformat wurde zur gesetzteskonformen Langzeitarchivierung von digitalen Dokumenten entwickelt.
-Langzeitarchivierung von PDF-Dateien (als PDF/A-1 in \gls{iso} 19005-1:2005) 
 
-\subsection{PDF-E}
+\subsection{PDF/A}
+Das PDF/A Dateiformat (Archivable) wurde zur gesetzeskonformen Langzeitarchivierung von digitalen Dokumenten entwickelt und solche Dokumente sind zunächst schreibgeschützt. Der \gls{iso}-Standard definiert die Konformität der Form von Elementen wie Schriften oder Layout für eine Langzeitarchivierung. Dadurch ist die Lesbarkeit der Dokumente über lange Zeiträume gesichert und die Bedingungen einer revisionssicheren Archivierung gewährleistet. \cite{adobe-pdf-a} Revisionssichere Archivierung bedeutet, dass gespeicherte Daten vor nachträglichen Modifikationen, Fälschung oder Manipulation geschützt sind. \cite{adobe-revisions} Der Fokus in diesem Dateiformat liegt auf langfristige und einfache Speicherung der PDF-Dateien. Folglich ist die Einbettung von Audio und Video nicht implementiert, aktive Komponenten wie Links, sowie externe Ressourcen, wie Grafiken und Schriftarten werden nicht unterstützt, sondern müssen direkt eingebettet werden. Ebenso können Dokumente nicht verschlüsselt werden. Die Einbettung von Metadaten wird unterstützt, was die Identifizierung und Suche von Dokumenten erleichtert. Es gibt einige Nachteile von PDF/A. Nicht alle Dokumente können problemlos in dieses Dateiformat umgewandelt werden, wie beispielsweise Dokumente mit Audio, Video oder JavaScript. Nach der Konvertierung zu PDF/A kann es zu Fehlern in der visuellen Darstellung kommen und die Dateigröße kann enorm werden, da alle Elemente direkt eingebettet werden müssen. \cite{adobe-pdf-a}
+
+\subsubsection{PDF/A-1}
+Seit der ersten Version von PDF/A wurde es in die \gls{iso}-Norm übernommen worden als PDF/A-1 in \gls{iso} 19005-1:2005. \cite{proj-consult} Die Originalversion stellt sicher, dass alle externen Quellen wie Schriften oder Bilder eingebettet sind, unterstützt digitale Signaturen und Hyperlinks. PDF/A-1 ist abwärtskompatibel. Es gibt 2 Qualitätsebenen von PDF/A-1: PDF/A-1b (Basic) und PDF/A-1a (Accessible). Die Basic Variante legt Wert darauf, dass Dokumente eindeutig visuell reproduzierbar sind und Accessible ist zusätzlich für Barrierefreiheit optimiert. Bei Accessible können Text und inhaltliche Struktur von einem Screenreader vorgelesen werden. \cite{adobe-pdf-a} Des weiteren werden Tagged PDFs, Sprach-Angabe und Unicode Mappings unterstützt. \cite{proj-consult}
+
+\subsubsection{PDF/A-2}
+Im Jahr 2011 wurde die PDF/A-2 Version als \gls{iso} 19005-2:2011 auf den Markt gebracht. Sie ermöglicht die Kompression von Grafikformaten mit JPEG-2000, Transparenzen, PDF-Ebenen, Portfolios, Object Level \gls{xmp} Metadaten, Kommentartypen und Annotationen und digitale Signaturen. \cite{proj-consult} PDF/A-1-Dateien können in PDF/A-2-Dateien eingebunden werden. Es gibt 3 Varianten von PDF/A-2: PDF/A-2b (Basic), PDF/A-2u (Unicode-Textsemantik) und PDF/A-2a (Accessible). Basic gewährleistet das unveränderte Erscheinungsbild eines Dokuments und definiert die Mindestanforderungen. Die Unicode-Version ergänzt um Unicode-Unterstützung und Indexierung. Accessible setzt alle Anforderungen der \gls{iso}-Norm 19005-2 um. \cite{adobe-pdf-a}
+
+\subsubsection{PDF/A-3}
+Ein Jahr später wurde PDF/A-3 im Standard \gls{iso}-19005-3:2012 veröffentlicht. Er basiert auf PDF 1.7 und ermöglicht die Einbettung dynamischer, zur Laufzeit interpretierbare Komponenten und Dateiformate. Gleichfalls definiert PDF/A-3 die Konformitätsebenen 3b, 3u und 3a. Die u-Variante bietet eine Vereinfachung in der Durchsuchbarkeit von Texten und das Kopieren von Unicode-Text. \cite{proj-consult}
+
+\subsubsection{PDF/A-4}
+Viel später im Jahr 2020 wurde PDF/A-4 als \gls{iso} 19005-4:2020 herausgebracht. Dieser Standard basiert auf der PDF 2.0 Dateiversion. Sie spezifiziert 2 neue Konformitätsebenen PDF/A-4f für nicht-PDF/A konforme Dateianhänge und PDF/A-4e für Einbindung von 3D-Inhalten in den Formaten U3D oder PRC für den Engineering-Bereich. \cite{proj-consult}
+
+
+\subsection{PDF/E}
 Das PDF-E Dateiformat wurde speziell für das Ingenieurwesen entworfen und kann interaktive 3D-Elemente darstellen. Im einzelnen können \gls{cad}-Dateien im 3D- und 2D-Format eingebettet werden.
 
-\subsection{PDF-UA}
+
+\subsection{PDF/UA}
 Das PDF-UA Dateiformat dient der Erstellung barrierefreier Dokumente.
 
+
 \subsection{Durchsuchbares PDF}
-Searchable PDFs können mit Suchfunktionalitäten eines PDF-Readers durchsucht werden. Es kann gezielt nach Zahlen oder Stichwörtern durchsucht werden. Diese PDF-Art wird üblicherweise durch die \gls{ocr} Technologie erstellt. Bei OCR handelt es sich um optische Zeichenerkennung, die Textzeichen und Dokumentstruktur analysiert. Auf diese Weise können gescannte Dokumente oder Pixelbilder als PDF abgespeichert und in ein Durchsuchbares PDF in Adobe Acrobat umgewandelt werden. In Acrobat ist es außerdem möglich mit der einfachen Suche innerhalb einer Datei nach Suchbegriffen zu suchen, mit der erweiterten Suche oder der Suchen-Werkzeugleiste mehrere PDF-Dokumente zu durchsuchen und speziell in der erweiterten Suche u.a. Objektdaten und Bildern zu lokalisieren. Textbasierte PDF-Dateien können grundsätzlich durchsucht werden und auch in andere Dateiformate wie Microsoft Word, Excel oder PowerPoint umgewandelt werden.
+Searchable PDFs können mit Suchfunktionalitäten eines PDF-Readers durchsucht werden. Es kann gezielt nach Zahlen oder Stichwörtern durchsucht und Inhalte können zur Bearbeitung in anderen Programmen kopiert werden. Man erkennt durchsuchbare PDFs daran, dass man den Text markieren kann. Diese PDF-Art wird üblicherweise durch die \gls{ocr} Technologie erstellt. Bei \gls{ocr} handelt es sich um optische Zeichenerkennung, die Textzeichen und Dokumentstruktur analysiert. Auf diese Weise können gescannte Dokumente oder Pixelbilder als PDF abgespeichert und in ein Durchsuchbares PDF in Adobe Acrobat umgewandelt werden. Während der Umwandlung wird dem Dokument eine zusätzliche unsichtbare Textebene, die unter der Bildebene liegt und durchsuchbar ist, auf der Seite hinzugefügt. In Acrobat ist es außerdem möglich mit der einfachen Suche innerhalb einer Datei nach Suchbegriffen zu suchen, mit der erweiterten Suche oder der Suchen-Werkzeugleiste mehrere PDF-Dokumente zu durchsuchen und speziell in der erweiterten Suche u.a. Objektdaten und Bildern zu lokalisieren. Textbasierte PDF-Dateien können grundsätzlich durchsucht werden und auch in andere Dateiformate wie Microsoft Word, Excel oder PowerPoint umgewandelt werden. Durchsuchbare PDFs ermöglichen Barrierefreiheit. Sie können von Bildschirmleseprogrammen für Sehbehinderte vorgelesen oder vergrößert werden. 
 \cite{adobe-search}
+
 
 \subsection{PAdES}
 \gls{pades} ergänzt den Funktionsumfang um Werkzeuge, um elektronische Signaturen anzupassen.
 
-\subsection{PDF-H}
+
+\subsection{PDF/H}
 Das PDF-H Dateiformat soll im Gesundheitswesen Patientendaten erfassen, austauschen und archivieren.
