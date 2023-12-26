@@ -2,11 +2,32 @@
 
 
 \subsection{PDF/X}
-Speziell für den simpleren Datenaustausch in der Druckvorstufe wurde PDF/X (Exchange) als (\gls{iso} 15930) entwickelt. Dieser 2001 entwickelte Standard beschreibt die speziellen Eigenschaften von Druckvorlagen und vereinfacht die Datenübermittlung von der Druckvorstufe bis zum finalen Druck. Besonderen Wert wurde darauf gelegt, dass in offenen Dateiformaten aus Layoutprogrammen keine Informationen über Farbe und Schrift verloren gehen und einer Verfälschung im Druckergebnis vorgebeugt werden kann. \cite{adobe-pdf-e}
+Speziell für den simpleren Datenaustausch in der Druckvorstufe und der professionellen Druckindustrie wurde PDF/X (Exchange) als \gls{iso} 15930:2001 entwickelt. Dieser erste 2001 entwickelte Dateiformatstandard beschreibt die speziellen Eigenschaften von Druckvorlagen und vereinfacht die Datenübermittlung von der Design-Agentur und Druckvorstufe bis zum finalen Druck. Besonderen Wert wurde darauf gelegt, dass in offenen Dateiformaten aus Layoutprogrammen keine Informationen über Farbe und Schrift verloren gehen und einer Verfälschung im Druckergebnis vorgebeugt werden kann. \cite{adobe-pdf-e} Die Entwicklung von PDF/X zielt auf eine Verminderung von Druckfehlern und Mehraufwand in der Druckerei. In der Umsetzung bedeutet das, dass Elemente, die sich nicht sinnvoll drucken lassen, z.B. Video und Audio, nicht berücksichtigt werden. Beschnitt, Farbangaben und verwendete Schriften sind u.a. für den Druck notwendig und sollten verwendet werden. Qualitätsanforderungen, die sich auf bestimmte Druckverfahren beziehen, sind nicht implementiert, sondern werden abstrakter definiert. Besondere Qualitätsanforderungen liegen vor allem im Zeitungsdruck, Akzidenzdruck oder Bilderdruck vor. Des weiteren werden schwarze Schrift oder Linien im Drucker durch 3 oder 4 Farben zusammengesetzt und fehlende Schriften werden häufig durch den Font Courier kompensiert. Im Druck sollten keine verlustlosen Kompressionsalgorithmen für Bilder verwendet werden wie JPEG, da Artefakte auftreten können. Ebenso gibt es keine automatischen Einstellungen für passende Auflösungen von Vollton-, Halbton- oder Strichbildern. Vielmehr geht es darum, Grundvoraussetzungen für den Druck sicherzustellen, wie z.B. ob der richtige Farbraum gesetzt wurde oder korrekte Einstellungen für Überdrucken und Überfüllen vorliegen. PDF/X-kompatibel bezeichnet die Eigenschaft von Dokumenten, dass sie ohne vorherige Prüfung von der Druckerei direkt verwendet werden können. \cite{adobe-pdf-x}
+\par
+Es gibt verschiedene Varianten von PDF/X, die jeweils einen verbesserten Farbspielraum ermöglichen. 
+
+\subsubsection{PDF/X-1a}
+In der a-Version sind lediglich CMYK und Sonderfarben möglich. Farben können nicht auf Grundlage von \gls{icc}-Profilen definiert werden. Transparenzen, \cite{adobe-pdf-x} Ebenen, Verschlüsselung, JavaScript, LZW-Kompression, Formularfunktionen und interaktive Elemente sind nicht implementiert. Dieser Standard wurde von \gls{iso} 15930-1:2001 auf \gls{iso} 15930-4:2003 überarbeitet. Lediglich in der überarbeiteten Version, die die Version von 2001 ersetzt, werden auch Sonderfarben unterstützt.  \cite{proj-consult}
+
+\subsubsection{PDF/X-2}
+Die 2. Variante ist als \gls{iso} 15930-6:2003 erschienen und garantiert dominante Voraussetzungen zum farbigen Qualitätsdruck wie Farbmanagement, CMYK- und Sonderfarbdaten in beliebiger Kombination. \cite{proj-consult}
+
+\subsubsection{PDF/X-3}
+Zusätzlich erweitert Version 3 als \gls{iso} 15930-3:2002 \cite{proj-consult} um die Farbräume RGB und LAB, sowie \gls{icc}-Profile. Möglicherweise wird in der Druckvorstufe der im Dokument eingestellte Farbraum in CMYK umgewandelt. Es findet eine automatische Tranzparenz- und Ebenenreduzierung statt. \cite{adobe-pdf-x}
+
+\subsubsection{PDF/X-4}
+Transparenzen, Ebenen und Graustufen können in dieser PDF/X-Variante als \gls{iso} 15930-7:2008 \cite{proj-consult} verwendet werden, wodurch sie für das Bedrucken von Textilien besonders gut geeignet ist. \cite{adobe-pdf-x} 
+
+\subsubsection{PDF/X-5}
+PDF/X-5 wird wurde als \gls{iso} 15930-8:2010 als vorletzter Standard des PDF/X-Formats verabschiedet und inkludiert externe Elemente und Multichannel-\gls{icc}-Profile. \cite{proj-consult}
+
+\subsubsection{PDF/X-6}
+Der letzte PDF/X-Standard als Version 6 wurde in \gls{iso} 15930-9:2020 offenbart und basiert auf dem PDF 2.0 Standard. In dieser Version sind neben maßgeblichen Neuerungen für die heutigen Print-Anforderungen Lockerungen im Vergleich zu vorherigen PDF/X-Standards eingeführt worden. Die wichtigsten Neuerungen sind Parameter für Tiefenkompensierung, separate Ausgabebedingungen, DPart Metadaten, Informationen zu Sonderfarben mit CxF/X-4 und Mixing Hints.
+Zu den Lockerungen zählen die Möglichkeit von Notizen und grafischen Anmerkungen, strukturelle Aktionen, Formularfelder und digitale Signaturen. Außerdem besteht dieser Standard aus 2 Konformitätsstufen: PDF/X-6p zur Referenzierung von \gls{icc}-Profilen und PDF/X-6n für Multicolor-Profile. \cite{proj-consult}
 
 
 \subsection{PDF/VT}
-Basierend auf PDF/X wurde PDF/VT als spezielles Austauschformat im variablen Datendruck (V) und Transaktionsdruck (T) im Jahr 2010 auf den Markt gebracht. Wiederkehrende Elemente wie Texte, Grafiken oder Bilder sollen effizienter verarbeitet werden können. \cite{adobe-pdf-e}
+Basierend auf PDF/X wurde PDF/VT als spezielles Austauschformat im variablen Datendruck (V) und Transaktionsdruck (T) im Jahr 2010 auf den Markt gebracht. Wiederkehrende Elemente wie Texte, Grafiken oder Bilder sollen effizienter verarbeitet werden können. \cite{adobe-pdf-e} Dieses Format eignet sich am besten für den personalisierten Druck.
 
 
 \subsection{PDF/A}
@@ -44,3 +65,7 @@ Searchable PDFs können mit Suchfunktionalitäten eines PDF-Readers durchsucht w
 
 \subsection{PDF/H}
 Das PDF/H (Healthcare) Dateiformat soll im Gesundheitswesen Patientendaten erfassen, austauschen und archivieren. Hierbei wird besonders Wert auf die Anforderungen des Datenschutzes in gesundheitsspezifischen Ämtern, Institutionen und Arztpraxen gelegt. PDF/H wurde 2008 kreiert, jedoch wurde es nicht in den Normierungsprozess der \gls{iso} eingebunden. \cite{proj-consult} Es handelt sich eher um eine Best-Practice für die Umstellung von Papiergesundheitsakten auf PDF als e-Akte. Die Digitalisierung soll gesundheitsbezogene Daten strukturieren, verwalten und so präsentieren, dass Forscher*innen und Beschäftigte im Gesundheitswesen effizienter auf sie zugreifen können.
+
+\subsection{PDF/R}
+Speziell für die Speicherung, Transport und Austausch von gescannten Dokumenten gibt es das \gls{iso} 23504-1:2020 standardisierte Format PDF/R-1. Es bietet die grundsätzlichen Funktionalitäten von TIFF, bitonalen, Graustufen- und Echtfarbbilder. 
+\cite{proj-consult}
