@@ -6,16 +6,10 @@ In der Werbebranche werden PDF-Dateien vor allem für Korrekturabzüge verwendet
 
 Dank der Profile für unterschiedliche Geräte und Bedruckstoffe, kann eine Simulation des Ergebnisses am Monitor oder durch einen Prüfdruck bewerkstelligt werden. Dadurch steigt die Reproduktionssicherheit bei gleichbleibender Qualität und die Produktionszeiten verkürzen sich enorm. In den meisten Druckprojekten steht zu Beginn noch nicht fest, wann, wo und auf welchem Bedruckstoff gedruckt werden soll. Die zeitintensive Optimierung der Druckdaten kann durch PDF auf einen späteren Zeitpunkt verlegt werden.
 
+Jeglicher Schutz sollte an einer druckvorstufentauglichen PDF-Datei vermieden werden, selbst wenn lediglich das Editieren gesperrt ist. Aktionen sind innerhalb druckfähiger Dateien untersagt, unabhängig von JavaScript oder Aktionen von Acrobat. \cite{schneeberger}
 
-
-
-
-
-\subsection{Preflight}
-
-\subsection{Fontformate}
 Da allgemeine Schriftinformationen immer eingebettet sind und die Zeilenlängen im Prinzip immer stimmen, können Druckvorstufenbetriebe zumindest immer erkennen, welche Schrift bzw. Schriftschnitt der Ersteller der PDF-Datei ursprünglich vorgesehen hatte, falls die Schrift nicht eingebettet wurde. \cite{schneeberger}
 
-
-Composite-Fonts sind Basisschriften mit hierarchischem System. Die oberste hierarchische Ebene stellt den root font dar alle folgenden Fonts sind descendant fonts. Sie ermöglichen die Einführung von Type-1-Schriften im asiatischen Markt. \cite{schneeberger}
+In der Praxis werden PDF-Dateien mit Hilfe von Prüfprofilen überprüft, Agenturen entwickeln nach eigenen Kriterien vorgefertigte Prüfroutinen und einen automatisch generierten Prüfbericht (Report). Der Prüfbericht sollte auf schnelle Fehlersuche im überprüften Dokument optimiert sein. Notwendige Korrekturen können im Originaldokument, bei PDF-Erstellung oder im vorliegenden PDF-Dokument ausgeübt werden je nach Schweregrad des Fehlers. Eine Erstellung von Korrekturprofilen kann dabei hilfreich sein. Man kann zwischen einer Vielzahl an voreingestellten Prüfprofilen und einer wesentlich kleineren Menge an Korrekturprofilen in Adobe Acrobat wählen. Außerdem kann der Prüfbericht als Kommunikationsmittel zwischen Auftraggeber und Agentur dienen, falls der Agentur das Originaldokument nicht ausgehändigt wurde. Das Preflight-Werkzeug in Acrobat Pro ist ein gängiges Werkzeug in der Druckvorstufe. Die Kontrolle von PDF-Dateien mit Preflight kann viel Geld sparen. Im tiefgreifenden Preflight Check, der ein System vor dessen Einsatz überprüft, kann man die besten Ergebnisse erzielen, wenn das zum Job passende Prüfprofil verwendet wird. Beim Preflighting-Prozess werden fehlerhafte und Objekte mit speziellen Anforderungen gefunden, ihr Zustand abgefragt und dann dementsprechende ein Fehler, eine Warnung oder eine Information ausgegeben. Im Warnungsfall muss die Agentur entscheiden, ob das Objekt, was die Warnung verursacht hat, sich negative auf das Endprodukt auswirkt. Folglich können durch Preflight frühzeitig Mängel im Produktionszyklus beseitigt werden. Ein Report sollte für die automatisierte Auswertung in weiterführenden Workflow-Systemen im \gls{xml}-Standard vorliegen. Erfolgreiche selbst erstellte Prüfprofile basieren auf qualitativ hochwertig gewählte Kriterien, wobei nicht zu viele verwendet werden sollten. Prüfprofile können als wichtigste Prüfkriterien das Dokument, Seiten, Bilder, Farbe, Zeichensätze, Rendering und Standard-Konformität enthalten. 
+\cite{schneeberger}
 
