@@ -53,3 +53,26 @@
 %Literaturverzeichnis
 \usepackage{notoccite}
 \usepackage[style=ieee, backend=biber, doi=true,url=true,maxcitenames=3, maxbibnames=3, sorting=none]{biblatex}
+
+\usepackage{graphicx}
+\usepackage[format=plain,justification=RaggedRight,singlelinecheck=false,font={small},labelsep=space]{caption}
+
+\usepackage{ragged2e}
+
+\usepackage[a4paper,margin=1cm,footskip=.5cm]{geometry}
+\geometry{left=3.5cm,right=2.5cm,top=2.4cm,bottom=2.4cm}%Seitenränder
+\usepackage[onehalfspacing]{setspace}%Zeilenabstand
+\renewcommand{\\}{\vspace*{0.5\baselineskip} \newline}
+\renewcommand*\MakeUppercase[1]{#1}	
+
+\usepackage{changepage}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+%\SetCommentSty{mycommfont}
+%\SetKwInput{KwInput}{Input}                % Set the Input
+%\SetKwInput{KwOutput}{Output}              % set the Output
+\usepackage{blkarray}
+\setlength{\parskip}{.8em} 
+\setlength\parindent{0pt}
+\newcommand{\paragraphLowDistance}[1]{\vspace{-0.3cm}\paragraph{#1}}
+\newcommand{\paragraphtitle}[1]{\paragraph{#1}\hspace{0.1pt}\nopagebreak\\}
+\newcommand{\paragraphtitleLowDistance}[1]{\vspace{-0.3cm}\paragraph{#1}\hspace{0.1pt}\nopagebreak}
