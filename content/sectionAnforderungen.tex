@@ -22,3 +22,36 @@ Daraufhin habe ich mir einige freie und kostenpflichtige PDF-Programme und Onlin
 	\item Perfect PDF
 \end{itemize}
 
+
+\subsection{Vorgaben für den Funktionsumfang der PDF Web App}
+Bei der Planung der PDF Web App habe ich mir einen Funktionsumfang ausgesucht.\\
+Im Prinzip sollte die PDF Web App aus 8 Modulen bestehen:
+\begin{itemize}
+	\item Reader
+	\item Creator
+	\item Merger
+	\item Splitter
+	\item Writer
+	\item Drawer
+	\item Geometry Editor
+	\item Images Editor
+\end{itemize}
+
+Der Reader sollte eine Navigationseinheit enthalten, die die aktuelle Seitenzahl anzeigt, zu einer beliebigen Seite springen kann, eine Zoomfunktionalität implementieren und man soll zur vorherigen oder nächsten Seite blättern können. Zusätzlich soll eine Druckfunktionalität enthalten sein. Der Creator ist ein Modul zur Erstellung von leeren PDF-Dokumenten als Download mit beliebiger Größe, Anzahl an Seiten, Möglichkeiten die Orientierung (Portrait, Landscape, quadratisch) zu justieren und Presets zur DIN A Größe. Es gibt 2 Module zur Verwaltung von PDF-Dokumentkombinationen. Zum einen soll der Merger mehrere PDF-Dateien zusammenfügen und als eine Datei speichern können, dabei soll die Reihenfolge der einzelnen PDF-Dateien in einer Liste anpassbar sein und eine Druckfunktion enthalten. Hingegen soll der Splitter ein PDF zerteilen und als einzelne PDF-Dateien speichern können. Dabei gibt es verschiedene Split-Operationen: Nach jeder, nach jeder ungeraden, nach jeder geraden, nach einer bestimmten und nach einer Liste an Seiten kann der Splitter das PDF zerteilen. In meiner PDF Web App ist Speichern ein Synonym für den Download eines Output-PDFs. Beim Download soll man immer einen benutzerdefinierten Dateinamen setzen können. Diese 4 Module sind im Diagramm \ref{fig:modules4} graphisch dargestellt. 
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"images/app-funktionen-anforderungen.png"}
+	\caption{Anforderungen an den Reader, Creator, Merger und Splitter der PDF Web App}
+	\label{fig:modules4}
+\end{figure}
+
+Der Editor besteht aus den restlichen 4 Modulen. Alle Editoroperationen beziehen sich lediglich auf bereits hinzugefügte Elemente. Es sollen keine schon im PDF bestehenden Objekte bearbeitet werden können. In jedem Editorteil soll es möglich sein zu drucken und das PDF zu downloaden, sowie alle neuen Elemente auf einen Schlag zu löschen. Außerdem sollen Elemente in beliebiger Reihenfolge übereinander stapelbar sein, d.h. man kann Elemente in den Vordergrund holen oder weiter nach hinten verschieben. Im Diagramm \ref{fig:editor}, was zeigt wie die Editormodule aufgebaut sind, ist die zuletzt genannte Funktionalität mit z-axis order gekennzeichnet. Mittels des Writers soll Text hinzugefügt werden können. Dieser neue Text kann gelöscht, verschoben, gedreht, die Schriftgröße und font family angepasst und eingefärbt werden. Als Font kann man zwischen Times Roman, Helvetic oder Courrir wählen bzw. einen benutzerdefinierten Font verwenden. Im Drawer hat man die Möglichkeit zu zeichnen und zu radieren. Dabei kann man die Größe und Farbe des Stifts bzw. Radierers anpassen. Das Geometrymodul soll geometrische Formen, wie Rechteck, Dreieck oder Ellipse hinzufügen, ihre Größe und Farbe verändern, Formen löschen, verschieben und drehen können. Zuletzt soll der Images-Editor Bilder vom Dateisystem hinzufügen, bereits platzierten Bilder löschen, verschieben und drehen können.
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"images/editor-funktionen-anforderungen.png"}
+	\caption{Anforderungen an den Editor der PDF Web App}
+	\label{fig:editor}
+\end{figure}
