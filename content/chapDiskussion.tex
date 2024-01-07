@@ -1,0 +1,9 @@
+\chapter*{Diskussion und Kritik}
+Es gibt einige Kritikpunkte in meiner PDF Web App, die zur weiteren Diskussion anregen. Einige wichtige Funktionalitäten sind noch nicht implementiert und ich plane diese noch in die PDF Web App in den nächsten Releases einzubauen. In meiner PDF Web App fehlt die Spiegelung von Text, Zeichnungen, Geometrie und Bildern als wichtige affine Transformation. Die anderen Transformationen Verschiebung, Skalierung und Rotation sind bereits in der PDF Web App vorhanden. Außerdem fehlt die Searchable PDF-Eigenschaft im Reader, d.h. der Benutzer kann keinen Text oder Bilder kopieren. Am besten benutze ich für diese Eigenschaft eine \gls{ocr}-JavaScript Library, die jedes PDF in Searchable PDFs umwandeln kann. Falls der Browser oder Computer abstürzt und das in der PDF Web App geöffnete Dokument nicht gedownloaded wurde, sind die Daten verloren. Als Gegenmaßnahme könnte man einen Export und Import Button konfigurieren, der die hinzugefügten PDF-Objekte als \gls{json}-Datei speichert. Bei Export würde diese Datei angelegt und im Ordner der PDF Web App gespeichert werden und mittels Import könnte man die PDF-Objekte dem geöffneten Dokument hinzufügen, sodass sie weiter bearbeitet werden können. Zusätzlich könnte man einen automatischen Export der PDF-Objekte als Backup implementieren, der z.B. alle 10 Minuten die hinzugefügten Elemente wie Text, Zeichnungen, Geometrie und Bilder in der \gls{json}-Datei sichert.
+
+
+Bei sehr vielen Seiten dauert es mehrere Sekunden bis alle Canvaselemente für die PDF Seiten erstellt worden sind und das PDF angezeigt wird. Eventuell sollte ich noch ein inkrementelles Laden der PDF Seiten implementieren, d.h. das geladene Seiten bereits angezeigt werden, bevor das komplette PDF geladen wurde.
+
+
+
+
