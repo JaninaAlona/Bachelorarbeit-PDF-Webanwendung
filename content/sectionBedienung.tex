@@ -1,16 +1,16 @@
 \section{Bedienung der PDF Web App}
-Wenn man die PDF Web App zum ersten Mal öffnet, findet man die im Screenshot \ref{fig:start} abgebildete Startseite vor.
+Meine PDF Web App besteht aus einem Reader, Creator, Splitter, Merger und Editor. Wenn man die PDF Web App zum ersten Mal öffnet, findet man die im Screenshot \ref{fig:start} abgebildete Startseite vor.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/startseite.png"}
 	\caption{Startseite der PDF Web App}
 	\label{fig:start}
 \end{figure}
-
+\subsection{Bedienung des Readers}
 Initial ist der Reader ausgewählt. Ausgewählte Funktionen im Hauptmenü sind dunkelgrau unterlegt mit grüner Schrift. Der Button Create führt zum Creator für leere PDFs, Split zum Splitter fürs Seiten Zerteilen, Merge zum Merger für PDFs zusammenfügen und Text, Draw, Shape bzw. Image öffnen den Editor. Bei Read, Text, Draw, Shape und Image erscheint zunächst der Choose file Button, damit man im Dateisystem ein PDF-Dokument auswählen kann zum Lesen oder Bearbeiten. Klickt man auf Choose file wird der Dateibrowser geöffnet und man kann ein einzelnes PDF auswählen zum Öffnen. Der Screenshot \ref{fig:reader} zeigt den Reader mit geöffneter PDF-Datei.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/reader.png"}
 	\caption{Geöffnetes PDF im Reader der PDF Web App}
@@ -19,7 +19,7 @@ Initial ist der Reader ausgewählt. Ausgewählte Funktionen im Hauptmenü sind d
 
 Falls eine andere Dateiart im Dateibrowser geöffnet wurde erscheint die Fehlermeldung in Screenshot \ref{fig:errorfile}. 
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/errorfile.png"}
 	\caption{Fehlermeldung bei einer nicht-PDF-Datei}
@@ -28,18 +28,19 @@ Falls eine andere Dateiart im Dateibrowser geöffnet wurde erscheint die Fehlerm
 
 Auch bei einer verschlüsselten PDF-Datei wird eine im Screenshot \ref{fig:errorcrypt} dargestellte Fehlermeldung angezeigt.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/errorcrypt.png"}
 	\caption{Fehlermeldung bei einem verschlüsselten PDF}
 	\label{fig:errorcrypt}
 \end{figure}
 
-Bei diesen gezeigten Fehlermeldungen kann man einfach erneut den Dateibrowser aufrufen mit Choose file oder einen anderen Menüpunkt wählen, damit die Fehlermeldung verschwindet. Hat man eine PDF-Datei im Reader geöffnet präsentieren sich einem 2 Zeilen mit Funktionsbuttons. Mittels Previous und Next kann der Benutzer zur vorherigen bzw. nächsten Seite blättern. Zwischen diesen Buttons wird die aktuelle Seite im input field angezeigt und daneben Anzahl an Seiten im Dokument. Im input field kann man eine Seite eingeben und der Reader springt direkt zu dieser Seite. Durch die Buttons Plus und Minus kann man rein- bzw. rauszoomen. Der aktuelle Zoomfaktor wird angezeigt in Prozent und man kann den Zoomfaktor auch mittels Benutzerangabe manuell setzen mit und ohne Prozentzeichen. Spin CW und Spin CCW dreht die aktuelle Seite, die im input field angezeigt ist, um 90 Grad im Uhrzeigersinn (clockwise) und gegen den Uhrzeigersinn (counterclockwise). Durch die Funktion Drag kann man die aktuelle Seite verschieben im Viewport. Das ist nützlich, wenn man an das PDF nah rangezoomt hat und die Seite nur teilweise sehen kann. Der Save Button downloaded das aktuelle PDF im Downloads-Ordner des Benutzers. \\
+Bei diesen gezeigten Fehlermeldungen kann man einfach erneut den Dateibrowser aufrufen mit Choose file oder einen anderen Menüpunkt wählen, damit die Fehlermeldung verschwindet. Hat man eine PDF-Datei im Reader geöffnet präsentieren sich einem 2 Zeilen mit Funktionsbuttons. Mittels Previous und Next kann der Benutzer zur vorherigen bzw. nächsten Seite blättern. Zwischen diesen Buttons wird die aktuelle Seite im input field angezeigt und daneben Anzahl an Seiten im Dokument. Im input field kann man eine Seite eingeben und der Reader springt direkt zu dieser Seite. Durch die Buttons Plus und Minus kann man rein- bzw. rauszoomen. Der aktuelle Zoomfaktor wird angezeigt in Prozent und man kann den Zoomfaktor auch mittels Benutzerangabe manuell setzen mit und ohne Prozentzeichen. Spin CW und Spin CCW dreht die aktuelle Seite, die im input field angezeigt ist, um 90 Grad im Uhrzeigersinn (clockwise) und gegen den Uhrzeigersinn (counterclockwise). Durch die Funktion Drag kann man die aktuelle Seite verschieben im Viewport. Das ist nützlich, wenn man an das PDF nah rangezoomt hat und die Seite nur teilweise sehen kann. Der Save Button downloaded das aktuelle PDF im Downloads-Ordner des Benutzers. Alle Eingabefelder in der PDF Web App begrenzen Werte, die kleiner oder größer sind als der Minimal- oder Maximalwert automatisch auf den untersten bzw. obersten Schwellenwert. Außerdem werden Leerzeichen automatisch entfernt. Ungültige Eingaben werden ignoriert. Ein geöffnetes Dokument passt sich automatisch an das Browserfenster an, falls es über das Browserfenster hinausragen würde, sodass es fast formatfüllend ins Browserfenster passt. \\
 
+\subsection{Bedienung des Creators}
 Der Creator ist mittels Create Buttons im Hauptmenü aufrufbar. Im Screenshot \ref{fig:creator} ist die GUI vom Creator dargestellt. 
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/creator.png"}
 	\caption{Creator GUI der PDF Web App}
@@ -47,11 +48,57 @@ Der Creator ist mittels Create Buttons im Hauptmenü aufrufbar. Im Screenshot \r
 \end{figure}
 
 Man gibt eine Anzahl an gewünschten Seiten des leeren PDFs ein und die Breite und Höhe in mm. Wahlweise kann man den Selector verwenden um ein DIN A-Preset zu verwenden. Mittels der Schnellauswahl kann man die Orientierung bestimmten: Portrait, Landscape oder Quadratisch. Der Save Button downloaded das leere PDF. \\
+
+\subsection{Bedienung des Splitters}
 Zum Splitter kann man mit dem Split Button gelangen, der vom Screenshot \ref{fig:splitter} gezeigt wird.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/splitter.png"}
 	\caption{Splitter GUI der PDF Web App}
 	\label{fig:splitter}
 \end{figure}
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{"images/splitter2.png"}
+	\caption{Splitter Selector der PDF Web App}
+	\label{fig:splitter2}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{"images/splitter3.png"}
+	\caption{Splitter Download Datei Dialog der PDF Web App}
+	\label{fig:splitter3}
+\end{figure}
+
+Im Auswählmenü kann man zwischen Zerteilen nach jeder, jeder geraden, jeder ungeraden und eine Liste von Seiten auwählen, was in Abbildung \ref{fig:splitter2} dargestellt ist. Wählt man list of pages aus, so kann man die einzelnen Seitennummern mit Komma separiert oder auch nur eine einzelne Seitennummer eintippen. Bewegt man die Maus über den Save Button wird ein Dateibenennungsdialog sichtbar mit dem default Dateinamen. Man kann dann den Dateinamen ändern, was Abbildung \ref{fig:splitter3} präsentiert. Bei jedem Save Button in der PDF Web App kann der default Dateiname geändert werden. Hat man eine Datei ausgewählt, so wird der Dateiname und die Anzahl an Seiten des Dokuments angezeigt. \\
+
+\subsection{Bedienung des Mergers}
+Der Merger ist mit dem Hauptmenüpunkt Merge zu öffnen. Abbildung \ref{fig:merger} zeigt die Startseite des Mergers. 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/merger.png"}
+	\caption{Merger Startseite der PDF Web App}
+	\label{fig:merger}
+\end{figure}
+Hier kann man nacheinander mehrere Dateien im Dateidialog öffnen und sie erscheinen in einer Liste, je nach Auswahlreihenfolge untereinander, was der Screenshot \ref{fig:mergelist} repräsentiert. 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/mergelist.png"}
+	\caption{Merger Dateiliste der PDF Web App}
+	\label{fig:mergelist}
+\end{figure}
+In der Liste kann man dann einzelne Blöcke von Dateien einzeln auswählen und in ihrer Position mit der Maus verschieben. Die ausgewählte Datei hat einen schwarzen Hintergrund, was Screenshot \ref{fig:mergelist-selected} anzeigt.
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/mergelist-selected.png"}
+	\caption{Ausgewählte Datei im Merger der PDF Web App}
+	\label{fig:mergelist-selected}
+\end{figure}
+Mittels Remove Buttons kann eine Datei zum Mergen wieder aus der Liste entfernt werden, nachdem sie ausgewählt wurde. Der Save Button fügt alle Dateien zu einem PDF zusammen.
+
+
+
+\input{content/subsectionEditor}
