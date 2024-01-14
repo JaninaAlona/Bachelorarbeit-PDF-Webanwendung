@@ -18,7 +18,7 @@ Hat man den Texteditor aufgerufen, so präsentiert sich einem der Editor in folg
 	\label{fig:texteditor2}
 \end{figure}
 
-Mit dem Button Text in der grauen Leiste und nachfolgendem Klick aufs geöffnete Dokument kann man einen Text hinzufügen mit dem Platzhaltertext dummy. Unter dem Text erscheint eine dunkelrote control box, auf die man alle Operationen in der grauen Leiste und dem Tools Seitenmenü im Box Mode anwenden kann. Der Box Mode ist standardmäßig eingestellt. Alle Operationen im rechten Tools Seitenmenü beziehen sich jeweils auf das aktuelle Editor Element und sind nur auf diesem anwendbar. Ich werde zunächst alle Operationen im Box Mode beschreiben und später auf den Layer Mode eingehen. Man kann mehrere Texte ohne erneut Text drücken zu müssen dem PDF Dokument hinzufügen. Für jedes neu hinzugefügte Textelement wird eine Ebene mit einem  Element spezifischen Standardnamen erstellt, was im linken rosa Ebenenmenü zu sehen ist. Mit dem Delete Button und nachfolgendem Klick in eine oder mehrere control boxen im Box Mode können Texte wieder gelöscht werden. Move verschiebt einzelne Texte durch mit der Maus gedrückte control box. Wenn die Maus losgelassen, nachdem die control box verschoben wurde, springt der Text an die verschobene Stelle. Ganz oben im grünen Tools Seitenmenü werden dem Betrachter die x- und y-Koordinaten der Maus auf der PDF Seite angezeigt, wenn die Maus über eine Seite bewegt wird. Darunter kann man in der textarea den Text editieren. Es werden auch Zeilenumbrüche berücksichtigt. Nachdem man den dummy Text überschrieben hat, einem Klick auf den weißen Text Button und ein oder mehrere Klicks in control boxen, kann der Text angewendet werden. Alle Operationen in Tools werden genau gleich ausgeführt: Man tätigt seine Einstellung, drückt mit der linken Maustaste auf den weißen Button für die jeweilige Operation und klickt daraufhin auf ein oder mehrere Textelemente nacheinander. Darunter kann man den Zeilenabstand einstellen. Entweder verwendet man das selection menu mit voreingestellten Werten oder man gibt einen gewünschten Wert manuell in das input field ein. Alle selection Menüs und input fields in jedem Editor zeigen die default Werte, mit denen ein neu hinzugefügtes Element konfiguriert ist, an. Falls man zuletzt das selection Menü betätigt hat, überschreibt es den Wert im input field und umgekehrt. Maßgeblich ist, was man zuletzt betätigt hatte. Dieses Verhalten habe ich bei jeder selection menu und input field Kombination programmiert. Einen benutzerdefinierten Font kann man durch den dunkelgrauen Choose file Button auswählen und er erscheint in der Liste. Der zuletzt hochgeladene Font wird ausgewählt. Mittels clear kann man einen ausgewählten Font aus der Liste entfernen, was nicht heißt, dass er auch auf dem angewendeten Text entfernt wird. Abbildung \ref{fig:custom-font} zeigt 2 geöffnete .ttf Schriftdateien in der Liste.
+Mit dem Button Text in der grauen Leiste und nachfolgendem Klick aufs geöffnete Dokument kann man einen Text hinzufügen mit dem Platzhaltertext dummy. Unter dem Text erscheint eine dunkelrote control box, auf die man alle Operationen in der grauen Leiste und dem Tools Seitenmenü im Box Mode anwenden kann. Der Box Mode ist standardmäßig eingestellt. Alle Operationen im rechten Tools Seitenmenü beziehen sich jeweils auf das aktuelle Editor Element und sind nur auf diesem anwendbar. Ich werde zunächst alle Operationen im Box Mode beschreiben und später auf den Layer Mode eingehen. Man kann mehrere Texte ohne erneut Text drücken zu müssen dem PDF Dokument hinzufügen. Für jedes neu hinzugefügte Textelement wird eine Ebene mit einem  Element spezifischen Standardnamen erstellt, was im linken rosa Ebenenmenü zu sehen ist. Die obere linke Ecke der quadratischen control box von allen Editorelementen wird generell dort platziert, wo man mit der Maus auf die Seite geklickt hat. Alle control boxen jeglicher Editorelemente werden nicht im Ausgabe-PDF gespeichert, denn sie dienen lediglich der Steuerung von Editorelementen, um Operationen aus dem Operations Bar und Tools Menu anwenden zu können. Mit dem Delete Button und nachfolgendem Klick in eine oder mehrere control boxen im Box Mode können Texte wieder gelöscht werden. Move verschiebt einzelne Texte durch eine mit der Maus gedrückte control box. Wenn die Maus losgelassen, nachdem die control box verschoben wurde, springt der Text an die verschobene Stelle. Mehrere control boxen können hintereinander verschoben werden, ohne dass Move jedes Mal ausgelöst werden muss. Delete und Move kommen in allen Editoren vor und funktionieren immer gleich. Jedoch wirken sich Delete und Move nur auf die im jeweiligen Editor zu bearbeitenden Elemente aus. Ganz oben im grünen Tools Seitenmenü werden dem Betrachter die x- und y-Koordinaten der Maus auf der PDF Seite angezeigt, wenn die Maus über eine Seite bewegt wird. Diese Mauskoordinaten werden in jeder Editorart angezeigt. Darunter kann man in der textarea den Text editieren. Es werden auch Zeilenumbrüche berücksichtigt. Nachdem man den dummy Text überschrieben hat, einem Klick auf den weißen Text Button und ein oder mehrere Klicks in control boxen, kann der Text angewendet werden. Alle Operationen in Tools werden genau gleich ausgeführt: Man tätigt seine Einstellung, drückt mit der linken Maustaste auf den weißen Button für die jeweilige Operation und klickt daraufhin auf ein oder mehrere Textelemente nacheinander. Darunter kann man den Zeilenabstand einstellen. Entweder verwendet man das selection menu mit voreingestellten Werten oder man gibt einen gewünschten Wert manuell in das input field ein. Alle selection Menüs und input fields in jedem Editor zeigen die default Werte, mit denen ein neu hinzugefügtes Element konfiguriert ist, an. Falls man zuletzt das selection Menü betätigt hat, überschreibt es den Wert im input field und umgekehrt. Maßgeblich ist, was man zuletzt betätigt hatte. Dieses Verhalten habe ich bei jeder selection menu und input field Kombination programmiert. Einen benutzerdefinierten Font kann man durch den dunkelgrauen Choose file Button auswählen und er erscheint in der Liste. Der zuletzt hochgeladene Font wird ausgewählt. Mittels Clear kann man alle Fonts aus der Liste entfernen, was nicht heißt, dass sie auch auf dem angewendeten Text entfernt wird. Abbildung \ref{fig:custom-font} zeigt 2 geöffnete .ttf Schriftdateien in der Liste.
 
 \begin{figure}[!htbp]
 	\centering
@@ -41,7 +41,7 @@ Als vorletzte Option kann man den Text absolut drehen. Durch den weißen Button 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{"images/text.png"}
-	\caption{Bearbeiteter Text in der PDF Web App}
+	\caption{Bearbeiteter Text im Writer der PDF Web App}
 	\label{fig:text}
 \end{figure}
 
@@ -60,7 +60,7 @@ Das Ebenenmenü und Tools Seitenmenü des Zeichneneditors erscheint selbst wenn 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/drawing.png"}
-	\caption{Zeichnungen in der PDF Web App}
+	\caption{Zeichnungen im Drawer der PDF Web App}
 	\label{fig:drawing}
 \end{figure}
 
@@ -71,32 +71,94 @@ Die Startseite des Geometrieeditors ist in den Screenshots \ref{fig:shaper} und 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/shaper.png"}
-	\caption{Geometrieeditor in der PDF Web App}
+	\caption{Geometrieeditor der PDF Web App}
 	\label{fig:shaper}
 \end{figure}
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/shaper2.png"}
-	\caption{Mehr Tools des Geometrieeditors in der PDF Web App}
+	\caption{Mehr Tools des Geometrieeditors der PDF Web App}
 	\label{fig:shaper2}
 \end{figure}
 
-Der Geometrietyp kann durch die Buttons Rectangle für Rechteck, Triangle für Dreieck oder Ellipse  und einem oder mehreren Klicks auf eine PDF-Seite bestimmt werden. Ebenfalls können alle Shapetypen durch Delete gelöscht und durch Move auf der Seite verschoben werden. Im Tools Seitenmenü des Geometrieeditors gibt es eine einzige Operation, die nur auf Dreiecke angewendet werden kann. Es handelt sich um die oberste Einstellung für die Position des dritten Punktes des Dreiecks. Hiermit kann der rechte Punkt der langen Spitze des default Dreiecks bearbeitet werden. Alle anderen Einstellmöglichkeiten können auf allen Geometrieelementen Rechteck, Dreieck und Ellipse arbeiten. Man hat 2 Möglichkeiten einen Shape zu skalieren. Zum einen kann man die Breite und Höhe unabhängig voneinander einstellen, was eine absolute Skalierung bedeutet, oder man verwendet den Skalierungsfaktor, der relativ vergrößert genauso wie beim Zeichneneditor. Für die Shape Umrandungslinien kann man auf der einen Seite die Farbe inklusive Deckkraft und auf der anderen Seite die Breite der Linie justieren. Die Strichfarbe muss mit der Checkbox Use Stroke in Grün eingeschaltet sein, was sie beim ersten Öffnen des Editors auch ist. Deaktiviert man die Use Stroke Checkbox schaltet sich automatisch die Use Fill Checkbox an. Man kann auch beide Checkboxen einschalten, aber nicht beide zusammen ausschalten. Ist Use Stroke rosa, d.h. deaktiviert, und man wendet die Strichbreite an, dann wird trotzdem ein Strich in der letzten Strichfarbe gesetzt in der gewünschten Breite. Use Fill muss Grün sein, um die Füllfarbe anzuwenden. Bei Strich- und Füllfarbe wird ein wie in dem Text- und Zeicheneditor der gleiche color picker verwendet. Alle Shapes können mit absoluter Rotation rotiert werden. Im ganzen Editor kann ausschließlich absolut rotiert werden. Zuunterst entfernt der Remove Button alle Geometrieelemente im geöffneten PDF. Der Screenshot \ref{fig:shaping} hebt mehrere bearbeitete Geometrieelemente hervor.
+Der Geometrietyp kann durch die Buttons Rectangle für Rechteck, Triangle für Dreieck oder Ellipse  und einem oder mehreren Klicks auf eine PDF-Seite bestimmt werden. Jedem Shape wird eine orangene control box mehr oder weniger mittig hinzugefügt. Ebenfalls können alle Shapetypen durch Delete gelöscht und durch Move auf der Seite verschoben werden. Im Tools Seitenmenü des Geometrieeditors gibt es eine einzige Operation, die nur auf Dreiecke angewendet werden kann. Es handelt sich um die oberste Einstellung für die Position des dritten Punktes des Dreiecks. Hiermit kann der rechte Punkt der langen Spitze des default Dreiecks bearbeitet werden. Alle anderen Einstellmöglichkeiten können auf allen Geometrieelementen Rechteck, Dreieck und Ellipse arbeiten. Man hat 2 Möglichkeiten einen Shape zu skalieren. Zum einen kann man die Breite und Höhe unabhängig voneinander einstellen, was eine absolute Skalierung bedeutet, oder man verwendet den Skalierungsfaktor, der relativ vergrößert genauso wie beim Zeichneneditor. Für die Shape Umrandungslinien kann man auf der einen Seite die Farbe inklusive Deckkraft und auf der anderen Seite die Breite der Linie justieren. Die Strichfarbe muss mit der Checkbox Use Stroke in Grün eingeschaltet sein, was sie beim ersten Öffnen des Editors auch ist. Deaktiviert man die Use Stroke Checkbox schaltet sich automatisch die Use Fill Checkbox an. Man kann auch beide Checkboxen einschalten, aber nicht beide zusammen ausschalten. Ist Use Stroke rosa, d.h. deaktiviert, und man wendet die Strichbreite an, dann wird trotzdem ein Strich in der letzten Strichfarbe gesetzt in der gewünschten Breite. Use Fill muss Grün sein, um die Füllfarbe anzuwenden. Bei Strich- und Füllfarbe wird ein wie in dem Text- und Zeicheneditor der gleiche color picker verwendet. Alle Shapes können mit absoluter Rotation rotiert werden. Im ganzen Editor kann ausschließlich absolut rotiert werden. Die control boxen werden bei den Shapes mitgedreht. Zuunterst entfernt der Remove Button alle Geometrieelemente im geöffneten PDF. Der Screenshot \ref{fig:shaping} hebt mehrere bearbeitete Geometrieelemente hervor.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/shaping.png"}
-	\caption{Zeichnungen in der PDF Web App}
+	\caption{Shapes im Geometrieeditor der PDF Web App}
 	\label{fig:shaping}
 \end{figure}
 
 
-
 \subsubsection{Bilder einfügen}
+Der Bildeditor ist im Bild \ref{fig:images} dargestellt. 
 
-\subsubsection{Arbeiten im Layer Mode}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/images.png"}
+	\caption{Zeichnungen in der PDF Web App}
+	\label{fig:images}
+\end{figure}
+
+Um ein Bild mit dem Image Button im Operations Bar hinzuzufügen, muss man erst ein Bild mittels dem schwarzen Choose file Button vom Dateisystem ausgewählt haben. Dann erscheint der Bildname wie im Texteditor bei einem benutzerdefinierten Font in der Liste unter Choose file. Man kann mehrere Bilder hochladen. Sie werden alle in der Liste untereinander angezeigt. Das zuletzt ausgewählte Bild wird zuunterst in der Liste angefügt und ausgewählt. Das Bild muss mit der runden Checkbox in Blau ausgewählt sein, um es mit Image und einem Klick auf eine Dokumentenseite auf dem PDF zu platzieren. Weiße Checkboxen stellen nicht ausgewählte Bilder dar. Mittels des dunkelgrauen Clear Buttons wird die Bildliste gelöscht. Die Bildselektionssektion funktioniert genauso wie der benutzerdefinierte Fontselektionsbereich im Texteditor. Bei der Bildplatzierung wird ebenfalls eine hellblaue control box hinzugefügt. Bilder können einzeln mit Delete gelöscht oder mit Move verschoben werden. Ein Bild kann in Breite und Höhe unterschiedlich absolut skaliert werden und proportional mit einem Skalierungsfaktor relativ verkleinert bzw. vergrößert werden. Unter den Skalierungsoptionen kann man die Deckkraft eines Bildes bestimmen. Ebenfalls kann man ein Bild absolut drehen. Zuletzt können alle hinzugefügten Bildelemente im PDF mit dem Remove Button entfernt werden. Die Abbildung \ref{fig:imaging} zeigt den Bildeditor in Aktion.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/imaging.png"}
+	\caption{Platzierte Bilder im Bildeditor der PDF Web App}
+	\label{fig:imaging}
+\end{figure}
+
+
 
 \subsubsection{Ebenensteuerung}
+Die in Abbildung \ref{fig:ebenenmenu} gezeigten Ebenenmenüschaltflächen lässen sich mit einem Klick auf Menu im rosa linken Ebenen Seitenmenü hervorholen oder verbergen. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/ebenenmenu.png"}
+	\caption{Ausgeklapptes Ebenenmenu im Editor der PDF Web App}
+	\label{fig:ebenenmenu}
+\end{figure}
+
+Wird ein PDF im Editor geöffnet sind die Schaltflächen zunächst eingeklappt. Fügt man ein Element unabhängig vom Typ einer PDF-Seite hinzu wird für dieses Element eine Ebene angelegt, die dann automatisch ausgewählt ist. Eine ausgewählte ist rosa und eine abgewählte Ebene ist schwarz. Man kann mehrere Ebenen auswählen. Wenn eine Ebene angelegt wird, bekommt sie einen Standardnamen gesetzt, der durch den Elementtyp und einem nummerischen Index gekennzeichnet ist. Der Standardname kann durch Tastatureingabe im grauen Feld auf der Ebene überschrieben werden. Ebenen werden nach Seitenzahlen in einem schwarzen Kasten, der oberhalb mit der Seitenzahl gekennzeichnet ist, gruppiert. Dies verdeutlicht die Abbildung \ref{fig:ebenen}.   
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{"images/ebenen.png"}
+	\caption{Ebenen mit Elementen allen Typs im Editor der PDF Web App}
+	\label{fig:ebenen}
+\end{figure}
+
+Im Ebenenmenü kann man zwischen Box Mode und Layer Mode wechseln. Ist der Modus Button grün, so ist der betreffende Modus eingeschaltet. Hingegen ist ein ausgeschalteter Modus mit einem weißen Button versehen. Man kann nur entweder im Box Mode oder im Layer Mode sein, aber nicht in beiden Modi gleichzeitig. Mit dem dunkelgrauen Copy Button kann der Benutzer ausgewählte Ebenen kopieren. Folglich werden die beinhaltenden Elemente dubliziert. Wird eine Ebene kopiert, so wird an den Ebenennamen copy angehängt. Mit Lock und Unlock kann man Ebenen sperren bzw. entsperren. Eine gesperrte Ebene kann nicht verändert werden, d.h. keine Operationen können auf ihr beinhaltendes Element angewendet werden. Eine gesperrte unausgewählte Ebene ist weiß und eine gesperrte ausgewählte ist Rosa mit weißer Umrandung, was auf Abbildung \ref{fig:ebenen2} verdeutlicht wird. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{"images/ebenen2.png"}
+	\caption{Teilweise gesperrte Ebenen im Editor der PDF Web App}
+	\label{fig:ebenen2}
+\end{figure}
+
+Die dunkelgrauen Select All und Deselect All Buttons stellen Auswahlfilter dar. Bewegt man die Maus auf die Buttons klappt sich ein Filtermenü auf, was im Bildausschnitt \ref{fig:filtermenu} gezeigt wird. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{"images/filtermenu.png"}
+	\caption{Selection Filtermenü im Editor der PDF Web App}
+	\label{fig:ebenen2}
+\end{figure}
 
 
+
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{"images/filtermenu.png"}
+	\caption{Deselection Filtermenü mit aktivierten Filtern im Editor der PDF Web App}
+	\label{fig:ebenen2}
+\end{figure}
+
+
+\subsubsection{Arbeiten im Layer Mode}
