@@ -1,5 +1,5 @@
-\section{Bedienung und Funktionalität der PDF Web App}
-Meine PDF Web App besteht aus den Modulen Reader, Creator, Splitter, Merger und Editor. Wenn man die PDF Web App zum ersten Mal öffnet, findet man die im Screenshot \ref{fig:start} abgebildete Startseite vor.
+\section{Realisierte Funktionalität und Bedienung der PDF Web App}
+In der PDF Web App habe ich alle geplanten Module Reader, Creator, Splitter, Merger, Writer, Drawer, Geometry Editor und Images Editor realisiert. Wenn man die PDF Web App zum ersten Mal öffnet, findet man die im Screenshot \ref{fig:start} abgebildete Startseite vor.
 
 \begin{figure}[!htbp]
 	\centering
@@ -8,19 +8,7 @@ Meine PDF Web App besteht aus den Modulen Reader, Creator, Splitter, Merger und 
 	\label{fig:start}
 \end{figure}
 
-Bei fast allen Modulen gibt es Möglichkeiten Benutzereingaben zu machen. Diese Benutzereingaben sind so programmiert, dass sie bei ungültigen Eingaben automatische korrigiert werden oder die darauf bezogene Operation nicht ausgeführt wird. Gibt man in ein input field, wo eine Zahl erwartet wird, einen String ein, so wird dessen Funktion nicht angewendet. Liegt eine Benutzereingabe als Zahl unter oder über dem Wertebereich des Eingabefeldes, so wird entsprechen auf den niedrigsten oder obersten Wert substituiert. Manche Eingabefelder erwarten Integers, anstatt Floats, z.B. das Eingabefeld für die Seitenzahl. In diesem Fall wird die Nachkommastelle automatisch von der Benutzereingabe entfernt. Haben sich beim Benutzer ein oder mehrere Leerzeichen in die Eingabe eingeschlichen, so werden diese Leerzeichen von der App automatisiert entfernt. 
-
-\subsection{Bedienung des Readers}
-Initial ist der Reader ausgewählt. Ausgewählte Funktionen im Hauptmenü sind dunkelgrau unterlegt mit grüner Schrift. Der Button Create führt zum Creator für leere PDFs, Split zum Splitter fürs Seiten Zerteilen, Merge zum Merger für PDFs zusammenfügen und Text, Draw, Shape bzw. Image öffnen den Editor. Bei Read, Text, Draw, Shape und Image erscheint zunächst der Choose file Button, damit man im Dateisystem ein PDF-Dokument auswählen kann zum Lesen oder Bearbeiten. Klickt man auf Choose file wird der Dateibrowser geöffnet und man kann ein einzelnes PDF auswählen zum Öffnen. Der Screenshot \ref{fig:reader} zeigt den Reader mit geöffneter PDF-Datei.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=1\textwidth]{"images/reader.png"}
-	\caption{Geöffnetes PDF im Reader der PDF Web App}
-	\label{fig:reader}
-\end{figure}
-
-Falls eine andere Dateiart in der PDF Web App geöffnet wurde, unabhängig vom Modul der App, erscheint die Fehlermeldung in Screenshot \ref{fig:errorfile}. 
+Bei fast allen Modulen gibt es Möglichkeiten Benutzereingaben zu machen. Die Benutzereingaben sind so umgesetzt, dass sie bei ungültigem Input automatische korrigiert werden oder die darauf bezogene Operation nicht ausgeführt wird. Gibt man in ein input field, wo eine Zahl erwartet wird, einen String ein, so wird dessen Funktion nicht angewendet. Liegt eine Benutzereingabe als Zahl unter oder über dem minimalen oder maximalen Schwellenwert des Eingabefeldes, so wird die Eingabe mit dem niedrigsten oder obersten Wert substituiert. Manche Eingabefelder erwarten Integers, anstatt Floats, z.B. das Eingabefeld für die Seitenzahl. In diesem Fall wird die Nachkommastelle automatisch von der Benutzereingabe entfernt. Haben sich beim Benutzer ein oder mehrere Leerzeichen in die Eingabe eingeschlichen, so werden diese Leerzeichen von der Anwendung automatisiert erkannt und entfernt. Falls eine andere Dateiart als PDF in der PDF Web App geöffnet wurde, unabhängig vom Modul der App, erscheint die Fehlermeldung in Screenshot \ref{fig:errorfile}. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -29,7 +17,7 @@ Falls eine andere Dateiart in der PDF Web App geöffnet wurde, unabhängig vom M
 	\label{fig:errorfile}
 \end{figure}
 
-Auch bei einer verschlüsselten PDF-Datei wird eine in Screenshot \ref{fig:errorcrypt} dargestellte Fehlermeldung angezeigt.
+Auch beim Versuch eine verschlüsselte PDF-Datei zu öffnen, wird eine in Screenshot \ref{fig:errorcrypt} dargestellte Fehlermeldung angezeigt.
 
 \begin{figure}[!htbp]
 	\centering
@@ -38,10 +26,35 @@ Auch bei einer verschlüsselten PDF-Datei wird eine in Screenshot \ref{fig:error
 	\label{fig:errorcrypt}
 \end{figure}
 
-Bei diesen gezeigten Fehlermeldungen kann man einfach erneut den Dateibrowser aufrufen mit Choose file oder einen anderen Menüpunkt wählen, damit die Fehlermeldung verschwindet. Hat man eine PDF-Datei im Reader geöffnet präsentieren sich einem 2 Zeilen mit Funktionsbuttons. Mittels Previous und Next kann der Benutzer zur vorherigen bzw. nächsten Seite blättern. Zwischen diesen Buttons wird die aktuelle Seite im Viewport im page counter input field und daneben die Anzahl an Seiten im Dokument angezeigt. Im input field kann man eine Seite eingeben und der Reader springt direkt zu dieser Seite. Alternativ kann man mit dem Scrollbar am linken Browserfensterrand oder dem Scrollrad der Maus durch die Seiten scrollen. Durch die Buttons Plus und Minus kann man in 20 \%-Schritten rein- bzw. rauszoomen. Der aktuelle Zoomfaktor wird angezeigt in Prozent und man kann den Zoomfaktor auch mittels Benutzerangabe manuell setzen mit und ohne Prozentzeichen. Außerdem wird der minimale und maximale Zoomwert in Prozent angezeigt. Spin CW und Spin CCW dreht die aktuelle Seite, die im input field angezeigt ist, um 90 Grad im Uhrzeigersinn (clockwise) und gegen den Uhrzeigersinn (counterclockwise). Durch die Funktion Drag kann man die aktuelle Seite verschieben im Viewport. Das ist beispielsweise nützlich, wenn man an das PDF nah rangezoomt hat und die Seite nur teilweise sehen kann. Dabei klickt man zuerst auf Drag, hält die Maustaste auf der aktuellen Seite, die im page counter input field angezeigt wird, gedrückt und bewegt sie in jegliche Richtungen. Dabei bekommt der Mauscursor das Aussehen eines weißen Kreuzes mit Pfeilen an den Enden. Der Save Button downloaded das aktuelle PDF im Downloads-Ordner des Benutzers. Alle Eingabefelder in der PDF Web App begrenzen Werte, die kleiner oder größer sind als der Minimal- oder Maximalwert automatisch auf den untersten bzw. obersten Schwellenwert. Außerdem werden Leerzeichen automatisch entfernt. Ungültige Eingaben werden ignoriert. Ein geöffnetes Dokument passt sich automatisch an das Browserfenster an, falls es über das Browserfenster hinausragen würde, sodass es fast formatfüllend ins Browserfenster passt. \\
+Bei diesen gezeigten Fehlermeldungen kann man erneut den Dateibrowser im jeweiligen Modul öffnen und eine unverschlüsselte PDF-Datei auswählen oder einen anderen Hauptmenüpunkt wählen, damit die Fehlermeldung verschwindet. \\
+
+Ist ein Modul der PDF Web App geöffnet, so wird der entsprechende Hauptmenübutton durch einen dunkelgrauen Hintergrund mit grüner Schrift symbolisiert. Initial ist der Reader ausgewählt. Der Button Create führt zum Creator für leere PDFs, Split zum Splitter für das Seiten Zerteilen, Merge zum Merger für das Zusammenfügen von PDF-Dateien, Text zum Writer für Textbearbeitung, Draw zum Drawer fürs Zeichnen, Shape zum Geometry Editor zur Geometrieerstellung und Image zum Image Editor zur Bildbearbeitung. Jedes Modul der PDF Web App hat einen grünen Save Button, mit dem der Benutzer das veränderte PDF downloaden kann. Es wird im Downloads-Ordner im lokalen Dateisystem abgelegt. Bewegt man die Maus über den Save Button erscheint eine schwarze Dialogbox, in der man einen benutzerdefinierten Dateinamen vergeben kann. Der Screenshot \ref{fig:save} bildet diese Dialogbox ab. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{"images/save.png"}
+	\caption{Dateibenennungsdialog des Save Buttons der PDF Web App}
+	\label{fig:save}
+\end{figure}
+
+Ansonsten wird der in dem input field abgebildete default Dateiname für den Download verwendet. Bei Read, Text, Draw, Shape und Image erscheint zunächst der Choose file Button, damit man im Dateisystem ein PDF-Dokument auswählen kann zum Lesen oder Bearbeiten. Klickt man auf Choose file wird der Dateibrowser geöffnet und man kann ein einzelnes PDF zum Öffnen auswählen. Ein geöffnetes Dokument passt seine Zoomgröße automatisch an das Browserfenster an, falls es bei 100 \% über das Browserfenster hinausragen würde, sodass es fast formatfüllend mit etwas Abstsand zum Rand in den Viewport des Browserfensters passt. 
+
+
+\subsection{Bedienung des Readers}
+Der Reader mit geöffneter PDF-Datei präsentiert sich in Screenshot \ref{fig:reader}.
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/reader.png"}
+	\caption{Geöffnetes PDF im Reader der PDF Web App}
+	\label{fig:reader}
+\end{figure}
+
+Hat der Anwender eine PDF-Datei im Reader geöffnet, so entdeckt er 2 dunkelgraue Leisten mit Funktionsbuttons. Mittels Previous und Next kann der Benutzer zur vorherigen bzw. nächsten Seite blättern. Zwischen diesen Buttons informiert das page counter input field über die aktuelle Seite im Viewport und rechts daneben ist die Anzahl an Seiten im Dokument zu sehen. Im page counter input field kann man eine Seitenzahl des Dokuments eingeben und der Reader springt direkt zu dieser Zielseite. Alternativ kann man mit dem Scrollbar am linken Browserfensterrand oder dem Scrollrad der Maus durch die Seiten scrollen. Mittels der Buttons Plus und Minus kann man in 20 \%-Schritten rein- bzw. rauszoomen. Der aktuelle Zoomwert in Prozent wird im input field dazwischen signalisiert. Der Anwender kann den Zoomwert auch auf einen gewünschten Wert mit oder ohne Prozentzeichen setzen. Wird kein Prozentzeichen über die Tastatur eingegeben, sondern nur der Wert, so wird ein Prozentzeichen von der Anwendung hinzugefügt. Dabei werden nur ganze Zahlen ohne Nachkommastellen berücksichtigt. Außerdem wird der minimale und maximale Zoomwert in Prozent angezeigt. Spin CW und Spin CCW dreht die aktuelle Seite, die im page counter steht, um 90 Grad-Intervalle im Uhrzeigersinn (clockwise) und gegen den Uhrzeigersinn (counterclockwise). Durch den Button Drag kann man die aktuelle Seite im Viewport verschieben. Das ist beispielsweise nützlich, wenn man an das PDF besonders nah rangezoomt hat und die Seite nur teilweise sehen kann, weil man einen kleinen Laptopbildschirm besitzt. Dabei klickt man zuerst auf Drag, hält die Maustaste auf der aktuellen Seite gedrückt und bewegt sie in die gewünschte Richtung. Dabei verschiebt sich nicht nur die aktuelle Seite, sondern alle Seiten und der Mauscursor wechselt das Aussehen zu einem weißen Kreuz mit Pfeilen an den Enden.
+
 
 \subsection{Bedienung des Creators}
-Der Creator ist mittels Create Buttons im Hauptmenü aufrufbar. Im Screenshot \ref{fig:creator} ist die GUI vom Creator dargestellt. 
+Der Creator ist mittels des Create Buttons im Hauptmenü aufrufbar. Im Screenshot \ref{fig:creator} ist die GUI vom Creator dargestellt. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -50,10 +63,11 @@ Der Creator ist mittels Create Buttons im Hauptmenü aufrufbar. Im Screenshot \r
 	\label{fig:creator}
 \end{figure}
 
-Man gibt eine Anzahl an gewünschten Seiten des leeren PDFs ein und die Breite und Höhe in mm. Wahlweise kann man den Selector verwenden um ein DIN A-Preset zu verwenden. Mittels der Schnellauswahl kann man die Orientierung bestimmten: Portrait, Landscape oder Quadratisch. Der Save Button downloaded das leere PDF. \\
+Man gibt eine Anzahl an gewünschten Seiten des leeren PDFs ein, sowie die Breite und Höhe in mm. Wahlweise kann man den Selector verwenden um ein DIN A-Preset zu verwenden. Mittels der Schnellauswahl kann man die Orientierung bestimmten: Portrait, Landscape oder Quadratisch. Minimale und Maximale Werte für die Anzahl an Seiten und die Breite und Höhe sind ebenfalls abgebildet. 
+
 
 \subsection{Bedienung des Splitters}
-Zum Splitter kann man mit dem Split Button gelangen, der vom Screenshot \ref{fig:splitter} gezeigt wird.
+Zum Splitter kann man mit dem Split Button gelangen, dessen GUI vom Screenshot \ref{fig:splitter} gezeigt wird.
 
 \begin{figure}[!htbp]
 	\centering
@@ -69,31 +83,29 @@ Zum Splitter kann man mit dem Split Button gelangen, der vom Screenshot \ref{fig
 	\label{fig:splitter2}
 \end{figure}
 
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{"images/splitter3.png"}
-	\caption{Splitter Download Datei Dialog der PDF Web App}
-	\label{fig:splitter3}
-\end{figure}
+Hat man eine Datei ausgewählt, so wird der Dateiname und die Anzahl an Seiten des Dokuments angezeigt. Durch erneutes Klicken des Choose file Buttons öffnet sich erneut der Dateidialog und man kann ein anderes PDF auswählen. Dabei ersetzt das neue PDF das vorherige, denn man kann nicht mehrere PDF-Dateien gleichzeitig splitten. Im Auswahlmenü kann man zwischen Zerteilen nach jeder, jeder geraden, jeder ungeraden und einer Liste von Seiten auswählen, was in Abbildung \ref{fig:splitter2} dargestellt ist. Wählt man list of pages aus, so kann man die einzelnen Seitennummern mit Komma separiert oder auch nur eine einzelne Seitennummer eintippen. Die Seitenzahlen müssen nicht in aufsteigender Reihenfolge angegeben werden. 
 
-Im Auswählmenü kann man zwischen Zerteilen nach jeder, jeder geraden, jeder ungeraden und eine Liste von Seiten auwählen, was in Abbildung \ref{fig:splitter2} dargestellt ist. Wählt man list of pages aus, so kann man die einzelnen Seitennummern mit Komma separiert oder auch nur eine einzelne Seitennummer eintippen. Die Seitenzahlen müssen nicht in aufsteigender Reihenfolge eingegeben werden. Bewegt man die Maus über den Save Button wird ein Dateibenennungsdialog sichtbar mit dem default Dateinamen. Man kann dann den Dateinamen ändern, was Abbildung \ref{fig:splitter3} präsentiert. Bei jedem Save Button in der PDF Web App kann der default Dateiname geändert werden. Hat man eine Datei ausgewählt, so wird der Dateiname und die Anzahl an Seiten des Dokuments angezeigt. \\
 
 \subsection{Bedienung des Mergers}
 Der Merger ist mit dem Hauptmenüpunkt Merge zu öffnen. Abbildung \ref{fig:merger} zeigt die Startseite des Mergers. 
+
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/merger.png"}
 	\caption{Merger Startseite der PDF Web App}
 	\label{fig:merger}
 \end{figure}
-Hier kann man nacheinander mehrere Dateien im Dateidialog öffnen und sie erscheinen in einer Liste, je nach Auswahlreihenfolge untereinander. In der Liste kann man dann einzelne Blöcke von Dateien einzeln auswählen und in ihrer Position mit der Maus verschieben. Die ausgewählte Datei hat einen schwarzen Hintergrund, was Screenshot \ref{fig:mergelist} anzeigt.
+
+Hier kann man nacheinander mehrere Dateien mittels Choose file öffnen und sie erscheinen je nach Auswahlreihenfolge untereinander in einer scrollbaren Liste, wobei die zuerst ausgewählte Datei am Anfang der Liste steht. In der Liste kann man dann eine Quelldatei mit gedrückter Maustaste zu einer Zieldatei in der Liste ziehen. Lässt man die Maustaste los, so wird die mit der Maus bewegte Datei in diese Listenposition eingefügt. Man kann außerdem eine Datei in der Liste selektieren und mittels des Remove Buttons wieder aus der Liste entfernen. Eine selektierte Datei wird durch einen schwarzen Hintergrund, was der Screenshot \ref{fig:mergelist} verdeutlicht, symbolisiert.
+
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{"images/mergelist.png"}
 	\caption{Merger Dateiliste der PDF Web App mit selektierter Datei}
 	\label{fig:mergelist}
 \end{figure}
-Mittels Remove Buttons kann eine Datei zum Mergen wieder aus der Liste entfernt werden, nachdem sie ausgewählt wurde. Der Save Button fügt alle Dateien zu einem PDF zusammen.
+
+Der Benutzer kann zu jeder Zeit erneut den Dateibrowser bedienen, unabhängig davon, ob die Dateiliste bereits modifiziert wurde und der Save Button mergt alle PDF-Dateien in der gegenwärtigen Liste mit der obersten Datei zuerst und der letzten am Schluss des Output PDFs.
 
 
 
