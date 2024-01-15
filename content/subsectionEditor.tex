@@ -82,7 +82,7 @@ Die Startseite des Geometrieeditors ist in den Screenshots \ref{fig:shaper} und 
 	\label{fig:shaper2}
 \end{figure}
 
-Der Geometrietyp kann durch die Buttons Rectangle für Rechteck, Triangle für Dreieck oder Ellipse  und einem oder mehreren Klicks auf eine PDF-Seite bestimmt werden. Jedem Shape wird eine orangene control box mehr oder weniger mittig hinzugefügt. Ebenfalls können alle Shapetypen durch Delete gelöscht und durch Move auf der Seite verschoben werden. Im Tools Seitenmenü des Geometrieeditors gibt es eine einzige Operation, die nur auf Dreiecke angewendet werden kann. Es handelt sich um die oberste Einstellung für die Position des dritten Punktes des Dreiecks. Hiermit kann der rechte Punkt der langen Spitze des default Dreiecks bearbeitet werden. Alle anderen Einstellmöglichkeiten können auf allen Geometrieelementen Rechteck, Dreieck und Ellipse arbeiten. Man hat 2 Möglichkeiten einen Shape zu skalieren. Zum einen kann man die Breite und Höhe unabhängig voneinander einstellen, was eine absolute Skalierung bedeutet, oder man verwendet den Skalierungsfaktor, der relativ vergrößert genauso wie beim Zeichneneditor. Für die Shape Umrandungslinien kann man auf der einen Seite die Farbe inklusive Deckkraft und auf der anderen Seite die Breite der Linie justieren. Die Strichfarbe muss mit der Checkbox Use Stroke in Grün eingeschaltet sein, was sie beim ersten Öffnen des Editors auch ist. Deaktiviert man die Use Stroke Checkbox schaltet sich automatisch die Use Fill Checkbox an. Man kann auch beide Checkboxen einschalten, aber nicht beide zusammen ausschalten. Ist Use Stroke rosa, d.h. deaktiviert, und man wendet die Strichbreite an, dann wird trotzdem ein Strich in der letzten Strichfarbe gesetzt in der gewünschten Breite. Use Fill muss Grün sein, um die Füllfarbe anzuwenden. Bei Strich- und Füllfarbe wird ein wie in dem Text- und Zeicheneditor der gleiche color picker verwendet. Alle Shapes können mit absoluter Rotation rotiert werden. Im ganzen Editor kann ausschließlich absolut rotiert werden. Die control boxen werden bei den Shapes mitgedreht. Zuunterst entfernt der Remove Button alle Geometrieelemente im geöffneten PDF. Der Screenshot \ref{fig:shaping} hebt mehrere bearbeitete Geometrieelemente hervor.
+Der Geometrietyp kann durch die Buttons Rectangle für Rechteck, Triangle für Dreieck oder Ellipse  und einem oder mehreren Klicks auf eine PDF-Seite bestimmt werden. Jedem Shape wird eine orangene control box mehr oder weniger mittig hinzugefügt. Ebenfalls können alle Shapetypen durch Delete gelöscht und durch Move auf der Seite verschoben werden. Im Tools Seitenmenü des Geometrieeditors gibt es eine einzige Operation, die nur auf Dreiecke angewendet werden kann. Es handelt sich um die oberste Einstellung für die Position des dritten Punktes des Dreiecks. Hiermit kann der rechte Punkt der langen Spitze des default Dreiecks bearbeitet werden. Alle anderen Einstellmöglichkeiten können auf allen Geometrieelementen Rechteck, Dreieck und Ellipse arbeiten. Man hat 2 Möglichkeiten einen Shape zu skalieren. Zum einen kann man die Breite und Höhe unabhängig voneinander einstellen, was eine absolute Skalierung bedeutet, oder man verwendet den Skalierungsfaktor, der relativ vergrößert genauso wie beim Zeichneneditor. Für die Shape Umrandungslinien kann man auf der einen Seite die Farbe inklusive Deckkraft und auf der anderen Seite die Breite der Linie justieren. Die Strichfarbe muss mit der Checkbox Use Stroke in Grün eingeschaltet sein, was sie beim ersten Öffnen des Editors auch ist. Deaktiviert man die Use Stroke Checkbox schaltet sich automatisch die Use Fill Checkbox an und umgekehrt. Man kann auch beide Checkboxen einschalten, aber nicht beide zusammen ausschalten. Ist Use Stroke rosa, d.h. deaktiviert, und man wendet die Strichbreite an, dann hat Stroke Width keinen Effekt. Use Fill muss Grün sein, um die Füllfarbe anzuwenden. Bei Strich- und Füllfarbe wird ein wie in dem Text- und Zeicheneditor der gleiche color picker verwendet. Alle Shapes können mit absoluter Rotation rotiert werden. Im ganzen Editor kann ausschließlich absolut rotiert werden. Die control boxen werden bei den Shapes mitgedreht. Zuunterst entfernt der Remove Button alle Geometrieelemente im geöffneten PDF. Der Screenshot \ref{fig:shaping} hebt mehrere bearbeitete Geometrieelemente hervor.
 
 \begin{figure}[!htbp]
 	\centering
@@ -127,7 +127,7 @@ Wird ein PDF im Editor geöffnet sind die Schaltflächen zunächst eingeklappt. 
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.4\textwidth]{"images/ebenen.png"}
+	\includegraphics[width=0.3\textwidth]{"images/ebenen.png"}
 	\caption{Ebenen mit Elementen allen Typs im Editor der PDF Web App}
 	\label{fig:ebenen}
 \end{figure}
@@ -136,7 +136,7 @@ Im Ebenenmenü kann man zwischen Box Mode und Layer Mode wechseln. Ist der Modus
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.4\textwidth]{"images/ebenen2.png"}
+	\includegraphics[width=0.3\textwidth]{"images/ebenen2.png"}
 	\caption{Teilweise gesperrte Ebenen im Editor der PDF Web App}
 	\label{fig:ebenen2}
 \end{figure}
@@ -147,18 +147,20 @@ Die dunkelgrauen Select All und Deselect All Buttons stellen Auswahlfilter dar. 
 	\centering
 	\includegraphics[width=0.6\textwidth]{"images/filtermenu.png"}
 	\caption{Selection Filtermenü im Editor der PDF Web App}
-	\label{fig:ebenen2}
+	\label{fig:filtermenu}
 \end{figure}
 
-
+Bei Select All kann man mehrere Ebenen nach Seiten auswählen, nach Elementtyp und ob sie gesperrt oder nicht gesperrt sind, d.h. die Ebenen werden Rosa. Ist ein Filter aktiviert, werden die Buttons im Filtermenü Grün. Bei weißen Buttons oder einer leeren Liste an Seiten ist kein Filter aktiviert. Bei der Seitenliste muss man die Seiten durch Komma trennen und sie müssen nicht in aufsteigender Reihenfolge angegeben werden. Ist kein Filter aktiviert, so werden alle Ebenen mit Klick auf Select All ausgewählt. Deselect All hat die gleiche Funktionalität, nur dass die Filter zum Auswahl aufheben angewendet werden, d.h. Ebenen werden schwarz. Ein Klick auf Deselect All ohne Filter wählt alle Ebenen ab. Im Bildausschnitt \ref{fig:filtering.} ist ein Beispiel abgebildet. Laut des Beispiels würde die Auswahl auf allen ungesperrten Textelementen auf Seite 1 und 2 aufgehoben werden. 
 
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.6\textwidth]{"images/filtermenu.png"}
+	\includegraphics[width=0.6\textwidth]{"images/filtering.png"}
 	\caption{Deselection Filtermenü mit aktivierten Filtern im Editor der PDF Web App}
-	\label{fig:ebenen2}
+	\label{fig:filtering}
 \end{figure}
+
+Die Reihenfolge der Elemente in der z-Achse kann über die Ebenen gesteuert werden. Man kann ein einzelnes Element mit gedrückter Maustaste auf eine andere Ebene verschieben, um die Position zu ändern, wie Elemente übereinander liegen. Dabei ändert sich das Maussymbol. Man muss zwecks Verschiebung in der z-Achse auf den Ebenen Namen oder auf die rosa Fläche initial die Maus drücken und dann ziehen. Dabei kann man sogar ein Element in eine andere Seitenebenegruppe ziehen, dann erscheint das Element auf der entsprechenden Seite. Links neben jedem Ebenennamen ist eine grüne Checkbox abgebildet. Wenn man sie abwählt, färbt sie sich Rosa und das Element wird samt control box unsichtbar. Dann können ebenfalls keine Operationen angewendet werden. Ein erneuter Klick auf die Ebenencheckbox schaltet sie wieder in Grün ein und das Element wird auf der Seite erneut sichtbar. 
 
 
 \subsubsection{Arbeiten im Layer Mode}
