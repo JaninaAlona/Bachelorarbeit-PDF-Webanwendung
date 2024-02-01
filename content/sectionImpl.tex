@@ -1,10 +1,31 @@
 \section{Umsetzung in Code}
-
+Im Folgenden werde ich auf die Implementierung der einzelnen Module Schritt für Schritt eingehen und die Besonderheiten, Erfahrungen und Probleme während der Programmierung beschreiben. Ich werde argumentieren, warum ich etwas auf diese Art und Weise programmiert habe und was ich mir bei der Umsetzung gedacht habe.
 
 \subsection{Werkzeuge}
 \begin{itemize}
 	\item Entwicklungsumgebung: Visual Studio Code
 	\item ausführende Programme: Browser Firefox, Opera, Google Chrome, Microsoft Edge
 	\item Sprachen: JavaScript, CSS, HTML
-	\item Libraries: Vue JS 3, PDF-LIB, PDF.js, downloadjs
+	\item Libraries: Vue JS 3 Version 3.0.2, PDF-LIB, pdf.js, zip,js, Bootstrap Filestyle Version 2.1.0, Bootstrap Version 4.3.1, jQuery Version 3.6.0, Alwan
+	\item Tutorials: Tiddly Wiki über die Bedienung der PDF Web App
 \end{itemize}
+
+\subsection{Links der Resources}
+\begin{itemize}
+	\item \url{https://vuejs.org/}
+	\item \url{https://pdf-lib.js.org/}
+	\item \url{https://github.com/mozilla/pdf.js}
+	\item \url{https://github.com/gildas-lormeau/zip.js/}
+	\item \url{https://github.com/markusslima/bootstrap-filestyle}
+	\item \url{https://getbootstrap.com/}
+	\item \url{https://jquery.com/}
+	\item \url{https://github.com/SofianChouaib/alwan}
+	\item \url{https://tiddlywiki.com/}
+\end{itemize}
+
+
+\subsection{Umsetzung der Hauptmenüführung}
+Das Hauptmenü wollte ich sehr simpel und minimalistisch gestalten. Daher habe ich für die Startseite nur einen weißen Hintergrund mit einem oberen Balken in der Farbe \#333, der die Hauptmenübuttons hervorhebt. Die Buttons haben einen vordefinierten Style von der Library Bootstrap. In der Bootstrap Library kann man den Style durch bestimmte Klassen auswählen. Nicht ausgewählte Buttons haben die Bootstrap-Klasse btn-success für die grünen Buttons und der ausgewählte dunkle Button mit grüner Schrift und Umrandung hat die Bootstrap Klasse btn-outline-success. Anfangs war es schwierig den default Style des input type="file" HTML-Elements zu verändern. Vor allem die Beschriftung des Buttons für Choose file war standardmäßig in Deutsch gehalten und lies sich nicht in englischer Sprache programmieren. Daher habe ich die Library Bootstrap Filestyle verwendet, um den Choose file Button in Englisch und mit anderem Style zu versehen. Da haben sich die Bootstrap Button Styles angeboten. Um eine Designkonsistenz zu erzielen, habe ich die Bootstrap Buttons überall in der PDF Web App in verschiedenen Stylevarianten verwendet. Lediglich beim Tools Seitenmenü im Editor habe ich einen eigenen Style für die Buttons für Elementoperationen programmiert. 
+
+
+\subsection{Implementierung des Reader Moduls}
