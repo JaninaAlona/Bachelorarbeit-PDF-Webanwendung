@@ -40,30 +40,66 @@ Im Ordner js sind meine selbst geschriebenen JavaScript-Dateien und im Ordner cs
 Das Hauptmenü wollte ich sehr simpel und minimalistisch gestalten. Daher habe ich für die Startseite nur einen weißen Hintergrund mit einem oberen Balken in der Farbe \#333, der die Hauptmenübuttons hervorhebt. Die Buttons haben einen vordefinierten Style von der Library Bootstrap. In der Bootstrap Library kann man den Style durch bestimmte Klassen auswählen. Nicht ausgewählte Buttons haben die Bootstrap-Klasse btn-success für die grünen Buttons und der ausgewählte dunkle Button mit grüner Schrift und Umrandung hat die Bootstrap Klasse btn-outline-success. Anfangs war es schwierig den default Style des input type="file" HTML-Elements zu verändern. Vor allem die Beschriftung des Buttons für Choose file war standardmäßig in Deutsch gehalten und lies sich nicht in englischer Sprache programmieren. Daher habe ich die Library Bootstrap Filestyle verwendet, um den Choose file Button in Englisch und mit anderem Style zu versehen. Da haben sich die Bootstrap Button Styles angeboten. Um eine Designkonsistenz zu erzielen, habe ich die Bootstrap Buttons überall in der PDF Web App in verschiedenen Stylevarianten verwendet. Lediglich beim Tools Seitenmenü im Editor habe ich einen eigenen Style für die Buttons für Elementoperationen programmiert. Der Reader, Splitter und Merger bestehen aus einer separaten HTML-Seite. Das Editormodul ist eine einzelne HTML-Seite, bei der je nach Funktion die entsprechenden Schaltflächen für die Elementoperationen mit display: flex eingeblendet und mit display: none ausgeblendet werden. 
 
 
-\subsection{Implementierung des Reader Moduls}
-Die Basisstruktur der Funktion für den Choose file Button ist im folgenden Codeabschnitt dargestellt:
+\subsection{Implementierung des Readers}
+Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{code:file} dargestellt:
 
-\begin{lstlisting}[caption=Einlesen einer PDF-Datei]
-	inputFileButtons[i].addEventListener("change", function(e) {
-		file = e.target.files[0];
-		const fileReader = new FileReader(); 
-		fileReader.onload = function() {
-			const typedarray = new Uint8Array(this.result);
-			pdfState.originalPDFBytes = typedarray;
-			const loadingTask = pdfjsLib.getDocument(typedarray);
-			loadingTask.promise.then(async (pdf) => {
-				pdfState.pdf = pdf;
-			});
-		}
-		if (file) {
-			fileReader.readAsArrayBuffer(file);
-		}
-	}, false);
+\begin{lstlisting}[style=ES6, caption={Einlesen einer PDF-Datei}, label=code:file]
+	let inputFileButtons = document.getElementsByClassName('inputfile');
+	for (let i = 0; i < inputFileButtons.length; i++) {
+		inputFileButtons[i].addEventListener("change", function(e) {
+			resetAllModes();
+			cleanUp();
+			const encryptedErrorWidgets = 
+				document.getElementsByClassName("encrypted_error");
+			const noPDFErrorWidgets = 
+				document.getElementsByClassName("no_pdf_error");
+			file = e.target.files[0];
+			const fileReader = new FileReader(); 
+			fileReader.onload = function() {
+				const typedarray = new Uint8Array(this.result);
+				pdfState.originalPDFBytes = typedarray;
+				const loadingTask = pdfjsLib.getDocument(typedarray);
+				loadingTask.promise.then(async (pdf) => {
+					let pdfDoc;
+					try {
+						pdfDoc = 
+							await PDFLib.PDFDocument.load(pdfState.originalPDFBytes);
+					} catch(encryptedErr) {
+						encrypted = true;
+					}
+					if (!encrypted) {
+						if (file.name.endsWith(".pdf")) {
+							// ...
+							pdfState.pdf = pdf;
+							onetimeSetup = true;
+							pdfFileName = file.name;
+							// ...
+							adjustPDFToUserViewport(pdfDoc);
+							// ...
+							renderPage(pageCounter, false);
+						}
+					} else {
+						for (let i = 0; i < encryptedErrorWidgets.length; i++) {
+							encryptedErrorWidgets[i].style.display = "flex";
+						}
+					}
+				}).catch(unsupportedFileErr => {
+					for (let i = 0; i < noPDFErrorWidgets.length; i++) {
+						noPDFErrorWidgets[i].style.display = "flex";
+					}
+				});
+			}
+			if (file) {
+				fileLoaded = true;
+				fileReader.readAsArrayBuffer(file);
+			}
+		}, false);
+	}
 \end{lstlisting} 
 
-Das Objekt für das eingelesene PDF ist wie folgt strukturiert:
+Bei jedem Klick des Choose File Buttons werden alle Modi für aktive Buttons des Editors und andere Steuerungsmodi in der Funktion resetAllModes auf false gesetzt. Die Funktion cleanUp initialisiert globale Variablen auf ihre Standardwerte und globale Arrays werden leer angelegt. Ich lese die Datei mit einem FileReader Objekt ein und führe beim load Event eine Funktion aus, die das result als Uint8Array im Objektattribut originalPDFBytes des Objekts pdfState speichert. Die Funktionen fürs Laden, Erstellen und Speichern des PDFs der PDF-LIB erwarten und geben eine Uint8Array aus. Das Objekt für den Status des eingelesenen PDFs ist wie in Abbildung \ref{code:pdfstate} aufgebaut:
 
-\begin{lstlisting}[caption=PDF-Datei Objekt]
+\begin{lstlisting}[style=ES6, caption={Objekt für ein geöffnetes PDF-Dokument}, label=code:pdfstate]
 	let pdfState = {
 		pdf: null,
 		currentPage: 1,
@@ -74,5 +110,105 @@ Das Objekt für das eingelesene PDF ist wie folgt strukturiert:
 		existingPDFBytes: null,
 		originalWidths: [],
 		originalHeights: []
+	}
+\end{lstlisting} 
+
+Eine loadingTask wird durch die pdf.js Funktion getDocument erzeugt, die ein pdf als Return-Wert des Promise zurückliefert. Falls die geöffnete Datei keine PDF-Datei war wird ein Fehler zurückgegeben. In der Fehlerbehandlung wird das Fenster, was die Fehlerinformation erhält sichtbar gemacht. Nach der Ausführung der loadingTask wird eine asynchrone Funktion aufgerufen, falls der Return Wert der loadingTask ein erfolgreiches promise zurückliefert. Hier wird der Reader initialisiert, die Reader Schaltflächen sichtbar gemacht und die Seiten gerendert. Zuerst wird das PDF Dokument mit den originalPDFBytes als Input mit einer PDF-LIB Ladefunktion geladen, um festzustellen, ob es sich um ein verschlüsseltes Dokument handelt. Wenn ja wird der Fehler geworfen und von mir abgefangen. In der Fehlerbehandlung wird eine globale Variable encrypted auf true gesetzt und das entsprechende Fehlerinformationsfenster angeschaltet. Nur wenn encrypted false ist und die Dateiendung .pdf besitzt, werden weitere Schritte eingeleitet. Zunächst werden die Fehlerinformationsfenster ausgeschaltet und im Attribut pdf des pdfState Objekts der erfolgreiche Return-Wert der loadingTask gespeichert. Dieses Objekt wird für das Rendern der PDF-Seiten im Reader benötigt. Dann wird das unbearbeitete PDF-Dokument nochmals in originalPDFBytes und existingPDFBytes gespeichert. Darauffolgend die Reader GUI aufgebaut und das PDF wird dem Viewport des Browsers angepasst. Zum Schluss wird der Rendervorgang durch die rekursive Funktion renderPage in Gang gesetzt.
+\par
+Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
+
+\begin{lstlisting}[style=ES6, caption={Renderfunktion}, label=code:render]
+	function renderPage(num, renderSingle) {
+		pdfState.pdf.getPage(num).then(function(page) {
+			let viewport = page.getViewport({
+				scale: pdfState.zoom
+			});
+			let viewportOriginal = page.getViewport({
+				scale: 1
+			});
+			let canvas;
+			let div;
+			const pdfViewers = document.getElementsByClassName("pdf_viewer");
+			for (let i = 0; i < pdfViewers.length; i++) {
+				const pdfViewer = pdfViewers[i];
+				if (viewport.width > parseInt(pdfViewer.style.width, 10)) {
+					pdfViewer.style.width = viewport.width + "px";
+				}
+				if (writeLayerStack.length < pdfState.pdf._pdfInfo.numPages) {
+					div = document.createElement("div");
+					div.style.display = "flex";
+					div.width = viewport.width;
+					div.height = viewport.height;
+					div.style.width = viewport.width + "px";
+					div.style.height = viewport.height + "px";
+					div.style.marginBottom = "20px";
+					pdfState.originalWidths.push(viewportOriginal.width);
+					pdfState.originalHeights.push(viewportOriginal.height);
+					div.setAttribute('data-write', pageCounter);
+					div.classList.add("write_layer");
+					canvas = document.createElement("canvas");
+					canvas.style.display = "flex";
+					canvas.style.width = viewport.width + "px";
+					canvas.style.width = viewport.height + "px";
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+					canvas.setAttribute('data-page', pageCounter);
+					canvas.classList.add("render_context");
+					div.appendChild(canvas);
+					pdfViewer.appendChild(div);
+					writeLayerStack.push(div);
+				} else if (writeLayerStack.length === 
+					pdfState.pdf._pdfInfo.numPages) {
+					if (!renderSingle) {
+						div = writeLayerStack[pageCounter-1];
+						canvas = writeLayerStack[pageCounter-1].childNodes[0];
+					} else {
+						div = writeLayerStack[num-1];
+						canvas = writeLayerStack[num-1].childNodes[0];
+					}
+					div.width = viewport.width;
+					div.height = viewport.height;
+					div.style.width = viewport.width + "px";
+					div.style.height = viewport.height + "px";
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+					canvas.style.width = viewport.width + "px";
+					canvas.style.height = viewport.height + "px";
+				}
+			}
+			const context = canvas.getContext('2d');
+			let renderTask = page.render({
+				canvasContext: context,
+				viewport: viewport
+			});
+			if (!renderSingle) {
+				renderTask.promise.then(function() {
+					pdfState.renderedPage = pageCounter;
+					restrictInputValues('current_page', 1, pdfState.renderedPage, 
+						true, false);
+					const pageProgresses = 
+						document.getElementsByClassName("page_progress");
+					for (let i = 0; i < pageProgresses.length; i++) {
+						pageProgresses[i].innerText = `${pdfState.renderedPage}`;
+					}
+					pageCounter++;
+					if (pageCounter > pdfState.lastPage) {
+						const renderWidgetCons = 
+							document.getElementsByClassName("render_widget_con");
+						for (let i = 0; i < renderWidgetCons.length; i++) {
+							renderWidgetCons[i].style.display = "none";
+						}
+						const renderWidgets = 
+							document.getElementsByClassName("render_widget");
+						for (let i = 0; i < renderWidgets.length; i++) {
+							renderWidgets[i].style.display = "none";
+						}
+					} 
+					if (pdfState.pdf != null && pageCounter <= pdfState.pdf._pdfInfo.numPages) {
+						renderPage(pageCounter, false);
+					}
+				});
+			}
+		});
 	}
 \end{lstlisting} 
