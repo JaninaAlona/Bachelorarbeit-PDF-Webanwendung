@@ -7,7 +7,7 @@ Hat man eine PDF-Datei im Reader oder Editor geöffnet und löscht diese, so gib
 \subsubsection{Renderdauer}
 Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien auf dem USB-Stick getestet.
 
-\begin{table}[ht]
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
@@ -29,20 +29,18 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien auf dem USB-Stic
 \end{table}
 
 \subsubsection{Downloadleistung}
-\begin{table}[ht]
+\begin{table}[!htbp]
 	\centering
-	\begin{tabular}{|p{1.5cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+	\begin{tabular}{|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Modul}		& \textbf{Output-datei}		& \textbf{Seiten-anzahl}		& \textbf{Download-größe} 		& \textbf{Execution in ms} 	& \textbf{Kompress-ionsfaktor}	\\ 
+		\textbf{Modul}		& \textbf{Output-datei}		& \textbf{Seiten-anzahl}		& \textbf{Download-größe} 		& \textbf{Execution in ms} 	\\ 
 		\hline
-		Creator	& blank\_pdf5000 & 5000 DIN A4 & 36,96 KB & 2180 &  \\
-		Creator	& \parbox[t]{4cm}{blank\_pdf500\\p10000s} & 500 Größe: 10000 & 4,92 KB & 170 & \\
+		Creator	& blank\_pdf5000 & 5000 DIN A4 & 36,96 KB & 2180  \\
+		Creator	& \parbox[t]{4cm}{blank\_pdf500\\p10000s} & 500 Größe: 10000 & 4,92 KB & 170 \\
 		\hline
 	\end{tabular}
 	\caption{Execution Times der Download Zip Funktion}
 	\label{table:download-dur}
 \end{table}
-
-\subsection{Browserunterschiede}
 
 \subsection{Testbewertung}

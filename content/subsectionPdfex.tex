@@ -59,7 +59,7 @@ Ein \gls{mac} ist eine kryptographische Prüfsumme, die aus dem Datensatz und de
 \par
 Nicht alle PDF-Viewer unterstützen teilweise verschlüsselte Dokumente. Solche Viewer sind immun gegen direct exfiltration attacks. Trotzdem können Angreifer \gls{cbc} malleability gadgets verwenden, um die Exfiltration des Texts zu erhalten, da keine \gls{mac} für den ciphertext beim PDF-Standard verwendet wird. Für die Ausführung der Attacke müssen 2 Vorbedingungen erfüllt sein: Zum einen muss ein plaintext-Segment dem Angreifer vorliegen. Beim aktuellsten \gls{aes}V3-Algorithmus kann der plaintext als 16 Bytes aus dem verschlüsselten /Perms entry (extended permissions) einer PDF-Datei abgeleitet werden. Die zweiten 4 Bytes sind die permissions /P, die unverschlüsselt im PDF-Dokument herausgelesen werden können. Das Byte aus T oder F wird entsprechend des EncryptMetadate Booleans gesetzt. Abschließend kommen 3 Konstante characters "adb" und 4 random Bytes. Die Tabelle \ref{table:perms} bietet eine Übersicht des /Perms entries. Der /Perms entry wird mit dem gleichen Schlüssel für Streams und Strings verschlüsselt, daher kann man ihn verwendet um \gls{cbc} gadgets zu konstruieren. Obwohl der /Perms-Wert mit \gls{ecb} mode verschlüsselt wird, ist der output ciphertext gleich seinem plaintext, wenn man ihn mit \gls{cbc} verschlüsselt und dabei einen initialization vector von 0 verwendet würde. Bei älteren Versionen des \gls{aes}-Algorithmus in PDF muss der bekannte plaintext aus dem Objekt, auf das die Exfiltration angewendet werden soll, extrahiert werden \cite{ccc-break-pdf, pdfex}.
 
-\begin{table}[ht]
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 	\hline
