@@ -20,13 +20,9 @@ Mittels diese Apps konnte ich zumindest die PDF Web App in den eingebauten Brows
 
 Im Verlauf der Implementierung habe ich viele Probleme feststellen können und eine Menge gelernt. Die Mouse Events mousedown, mousemove, mouseup und alle drag Events werden auf dem Tablet nicht ausgeführt. Folglich funktionierten der Pencil, der Eraser, die Move Operationen, das Verschieben von Ebenen in allen Editormodulen und das Position Ändern von Listeneinträgen im Merger allesamt nicht. Auf Stackoverflow hatte ich dann eine Lösung für meine Mouse mousedown, mousemove und mouseup Events gefunden: Ich muss mousedown mit touchstart, mousemove mit touchmove und mouseup mit dem touchend Event ersetzten. Zusätzlich musste ich event.clientX und event.clientY wie folgt im Codebeispiel \ref{code:touch} ersetzen:
 
-\begin{lstlisting}[style=ES6, caption={e.clientX und e.clientY Ersetzung}, label=code:touch]
-	const clientXReplace = (e.targetTouches[0] ? 
-		e.targetTouches[0].pageX : 
-		e.changedTouches[e.changedTouches.length-1].pageX);
-	const clientYReplace = (e.targetTouches[0] ? 
-		e.targetTouches[0].pageY : 
-		e.changedTouches[e.changedTouches.length-1].pageY);
+\begin{lstlisting}[style=ES6, caption={e.clientX und e.clientY Ersetzung}, label=code:touch, breaklines=true]
+	const clientXReplace = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length-1].pageX);
+	const clientYReplace = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length-1].pageY);
 \end{lstlisting} 
 
 Diese Lösung hat jedoch nicht für drag Events funktioniert, d.h. das Verschieben von Ebenen im Editor und Listenelementen im Merger hat mit der Maus nicht funktioniert. Daher habe ich die dragdroptouch JavaScript Library eingebaut. Sie ist auf der folgenden Webseite zu finden:

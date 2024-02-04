@@ -6,7 +6,7 @@ Im Folgenden werde ich auf die Implementierung der einzelnen Module Schritt für
 	\item Entwicklungsumgebung: Visual Studio Code
 	\item ausführende Programme: Browser Firefox, Opera, Google Chrome, Microsoft Edge
 	\item Sprachen: JavaScript, CSS, HTML
-	\item Libraries: Vue JS 3 Version 3.0.2, PDF-LIB, pdf.js, zip,js, Bootstrap Filestyle Version 2.1.0, Bootstrap Version 4.3.1, jQuery Version 3.6.0, Alwan
+	\item Libraries: Vue JS 3 Version 3.0.2, PDF-LIB, Fontkit, pdf.js, zip,js, Bootstrap Filestyle Version 2.1.0, Bootstrap Version 4.3.1, jQuery Version 3.6.0, Alwan
 	\item Tutorials: Tiddly Wiki über die Bedienung der PDF Web App
 \end{itemize}
 
@@ -14,6 +14,7 @@ Im Folgenden werde ich auf die Implementierung der einzelnen Module Schritt für
 \begin{itemize}
 	\item \url{https://vuejs.org/}
 	\item \url{https://pdf-lib.js.org/}
+	\item \url{https://www.npmjs.com/package/@pdf-lib/fontkit}
 	\item \url{https://github.com/mozilla/pdf.js}
 	\item \url{https://github.com/gildas-lormeau/zip.js/}
 	\item \url{https://github.com/markusslima/bootstrap-filestyle}
@@ -43,16 +44,14 @@ Das Hauptmenü wollte ich sehr simpel und minimalistisch gestalten. Daher habe i
 \subsection{Einlesen einer PDF-Datei}
 Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{code:file} dargestellt:
 
-\begin{lstlisting}[style=ES6, caption={Einlesen einer PDF-Datei}, label=code:file]
+\begin{lstlisting}[style=ES6, caption={Einlesen einer PDF-Datei}, label=code:file, breaklines=true]
 	let inputFileButtons = document.getElementsByClassName('inputfile');
 	for (let i = 0; i < inputFileButtons.length; i++) {
 		inputFileButtons[i].addEventListener("change", function(e) {
 			resetAllModes();
 			cleanUp();
-			const encryptedErrorWidgets = 
-				document.getElementsByClassName("encrypted_error");
-			const noPDFErrorWidgets = 
-				document.getElementsByClassName("no_pdf_error");
+			const encryptedErrorWidgets = document.getElementsByClassName("encrypted_error");
+			const noPDFErrorWidgets = document.getElementsByClassName("no_pdf_error");
 			file = e.target.files[0];
 			const fileReader = new FileReader(); 
 			fileReader.onload = function() {
@@ -99,7 +98,7 @@ Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{cod
 
 Bei jedem Klick des Choose File Buttons werden alle Modi für aktive Buttons des Editors und andere Steuerungsmodi in der Funktion resetAllModes auf false gesetzt. Die Funktion cleanUp initialisiert globale Variablen auf ihre Standardwerte und globale Arrays werden leer angelegt. Ich lese die Datei mit einem FileReader Objekt ein und führe beim load Event eine Funktion aus, die das result als Uint8Array im Objektattribut originalPDFBytes des Objekts pdfState speichert. Die Funktionen fürs Laden, Erstellen und Speichern des PDFs der PDF-LIB erwarten und geben eine Uint8Array aus. Das Objekt für den Status des eingelesenen PDFs ist wie in Abbildung \ref{code:pdfstate} aufgebaut:
 
-\begin{lstlisting}[style=ES6, caption={Objekt für ein geöffnetes PDF-Dokument}, label=code:pdfstate]
+\begin{lstlisting}[style=ES6, caption={Objekt für ein geöffnetes PDF-Dokument}, label=code:pdfstate, breaklines=true]
 	let pdfState = {
 		pdf: null,
 		currentPage: 1,
@@ -118,7 +117,7 @@ Eine loadingTask wird durch die pdf.js Funktion getDocument erzeugt, die ein pdf
 \subsection{Renderfunktion}
 Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 
-\begin{lstlisting}[style=ES6, caption={Renderfunktion}, label=code:render]
+\begin{lstlisting}[style=ES6, caption={Renderfunktion}, label=code:render, breaklines=true]
 	function renderPage(num, renderSingle) {
 		pdfState.pdf.getPage(num).then(function(page) {
 			let viewport = page.getViewport({
@@ -158,8 +157,7 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 					div.appendChild(canvas);
 					pdfViewer.appendChild(div);
 					writeLayerStack.push(div);
-				} else if (writeLayerStack.length === 
-					pdfState.pdf._pdfInfo.numPages) {
+				} else if (writeLayerStack.length === pdfState.pdf._pdfInfo.numPages) {
 					if (!renderSingle) {
 						div = writeLayerStack[pageCounter-1];
 						canvas = writeLayerStack[pageCounter-1].childNodes[0];
@@ -185,10 +183,8 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 			if (!renderSingle) {
 				renderTask.promise.then(function() {
 					pdfState.renderedPage = pageCounter;
-					restrictInputValues('current_page', 1, pdfState.renderedPage, 
-						true, false);
-					const pageProgresses = 
-						document.getElementsByClassName("page_progress");
+					restrictInputValues('current_page', 1, pdfState.renderedPage, true, false);
+					const pageProgresses = document.getElementsByClassName("page_progress");
 					for (let i = 0; i < pageProgresses.length; i++) {
 						pageProgresses[i].innerText = `${pdfState.renderedPage}`;
 					}
@@ -220,7 +216,7 @@ Die Funktion ruft sich rekursiv auf, falls noch nicht alle Seiten gerendert wurd
 \subsection{Input Control}
 Input Kontrolle findet in allen Modulen statt außer dem Merger. Alle input fields sind input type="text" Elemente, anstatt type="number", selbst wenn nur Zahlen als Eingabewerte gültig sind. Das hat folgenden Hintergrund: Es gibt eine Funktion namens restrictInputValues, die automatisch Benutzereingaben korrigiert. Sie ist in Abbildung \ref{code:input} aufgezeigt.
 
-\begin{lstlisting}[style=ES6, caption={Funktion für Inputkontrolle und Benutzereingabekorrekturen}, label=code:input]
+\begin{lstlisting}[style=ES6, caption={Funktion für Inputkontrolle und Benutzereingabekorrekturen}, label=code:input, breaklines=true]
 	function restrictInputValues(inputId, min, max, parseIntOperation, 
 		parseFloatOperation) {
 		const inputElem = document.getElementById(inputId);
@@ -230,8 +226,7 @@ Input Kontrolle findet in allen Modulen statt außer dem Merger. Alle input fiel
 			valToRestrict = inputElem.value;
 			valToRestrict = valToRestrict.replace(/\s+/g,'');
 			document.getElementById(inputId).value = valToRestrict;
-			if (valToRestrict.match(/^-?\d+$/) || 
-				valToRestrict.match(/^\d+\.\d+$/)) {
+			if (valToRestrict.match(/^-?\d+$/) || valToRestrict.match(/^\d+\.\d+$/)) {
 				if (parseIntOperation) {
 					valToRestrict = parseInt(valToRestrict, 10);
 					document.getElementById(inputId).value = valToRestrict;
@@ -253,7 +248,7 @@ Input Kontrolle findet in allen Modulen statt außer dem Merger. Alle input fiel
 	}
 \end{lstlisting} 
  
-Die Funktion wird ausgelöst, wenn das input field verändert wurde (change-Event). Der Event-Handler wird zunächst entfernt, bevor er aktiviert wird, da diese Funktion zur Beschränkung des Eingabefeldes für die aktuelle Seitenzahl beim Rendern jeder Seite aufgerufen wird. Würde man den Event-Handler nicht zuerst entfernen, so würde dieses Eingabefeld immer mehr Event-Handler akkumulieren. Zunächst werden alle Leerzeichen und white space entfernt (Zeile 8). Dann wird getestet, ob das Input ein negativer oder positiver Integer bzw. Float ist (Zeile 11-12). Werden Floatwerte eingegeben, obwohl Integerwerte erwartet werden, werden sie in Integers geparst. Am Ende werden Inputwerte unter dem Minimum auf den minimalen Wert gesetzt und über dem Maximum auf den maximalen Wert substituiert. Außerdem gibt es eine Funktion convertInputToSuccess die den Input String in einen Zahlenwert parst und den Wert oder -1000 zurückgibt. Falls die Funktion -1000 zurückgibt, handelt es sich um ungültige Eingabewerte und Operationen im Reader und auf Elemente werden nicht ausgeführt. Für die Eingabe von eine Liste an Seiten, gibt es eine gesonderte Funktion convertPagelistToSuccess. Hier wird zusätzlich geprüft, ob die Benutzereingabe Kommas enthält. Daraufhin wird sie an der Position der Kommas zerteilt. Ebenfalls wird white space entfernt und parseInt findet statt. Falls Floats als Seiten eingegeben wurden, gilt dies als ungültiges Input. Wurden alle Seiten extrahiert, werden doppelte Seiten entfernt und die Seitenzahlen werden in aufsteigender Reihenfolge sortiert. Als return Wert wird eine Liste mit den Seitenzahlen zurückgegeben oder eine leere Liste falls die Benutzereingabe ungültig war.
+Die Funktion wird ausgelöst, wenn das input field verändert wurde (change-Event). Der Event-Handler wird zunächst entfernt, bevor er aktiviert wird, da diese Funktion zur Beschränkung des Eingabefeldes für die aktuelle Seitenzahl beim Rendern jeder Seite aufgerufen wird. Würde man den Event-Handler nicht zuerst entfernen, so würde dieses Eingabefeld immer mehr Event-Handler akkumulieren. Zunächst werden alle Leerzeichen und white space entfernt (Zeile 8). Dann wird getestet, ob das Input ein negativer oder positiver Integer bzw. Float ist (Zeile 10). Werden Floatwerte eingegeben, obwohl Integerwerte erwartet werden, werden sie in Integers geparst. Am Ende werden Inputwerte unter dem Minimum auf den minimalen Wert gesetzt und über dem Maximum auf den maximalen Wert substituiert. Außerdem gibt es eine Funktion convertInputToSuccess die den Input String in einen Zahlenwert parst und den Wert oder -1000 zurückgibt. Falls die Funktion -1000 zurückgibt, handelt es sich um ungültige Eingabewerte und Operationen im Reader und auf Elemente werden nicht ausgeführt. Für die Eingabe von eine Liste an Seiten, gibt es eine gesonderte Funktion convertPagelistToSuccess. Hier wird zusätzlich geprüft, ob die Benutzereingabe Kommas enthält. Daraufhin wird sie an der Position der Kommas zerteilt. Ebenfalls wird white space entfernt und parseInt findet statt. Falls Floats als Seiten eingegeben wurden, gilt dies als ungültiges Input. Wurden alle Seiten extrahiert, werden doppelte Seiten entfernt und die Seitenzahlen werden in aufsteigender Reihenfolge sortiert. Als return Wert wird eine Liste mit den Seitenzahlen zurückgegeben oder eine leere Liste falls die Benutzereingabe ungültig war.
 
 \subsection{Implementierung des Splittermoduls}
 
