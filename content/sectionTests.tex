@@ -2,6 +2,47 @@
 
 \subsection{Funktionale User Tests}
 
-\subsection{Stress Tests}
+\subsection{Performance Tests}
+Hat man eine PDF-Datei im Reader oder Editor geöffnet und löscht diese, so gibt es keine Fehlermeldung, wie in vielen lokalen Programmen.
+\subsubsection{Renderdauer}
+Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien auf dem USB-Stick getestet.
+
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\textbf{Datei}													& \textbf{Seitenanzahl} 	& \textbf{Dateigröße} 	& \textbf{Execution in ms}	\\ 
+		\hline
+		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}					& 1 						& 33,22 KB  			& 27						\\ 
+		02-Sensoren														& 9 						& 1,17 MB  				& 182						\\ 
+		l11manual\_en 													& 850 						& 91,8 MB  				& 99914						\\
+		the-metamorphosis-franz-kafka 									& 88 						& 298,86 KB  			& 714						\\ 
+		01. War and Peace author Leo Tolstoy 							& 2882 						& 7,21 MB  				& 29115						\\ 
+		Animal Crossing Amiibo Card Art									& 50 						& 167,05 MB  			& 53545						\\  
+		DevOps with Kubernetes											& 520 						& 13,7 MB  				& 9883						\\  
+		02. The Critique of Pure Reason author Immanuel Kant			& 1277 						& 1,78 MB  				& 9428						\\  
+		UNIX and Linux System Administration Handbook - Fifth Edition	& 1809						& 71,94 MB  			& 47366						\\ 
+		\hline
+	\end{tabular}
+	\caption{Execution Times der renderPage Funktion für verschiedene PDF-Dateien}
+	\label{table:render-dur}
+\end{table}
+
+\subsubsection{Downloadleistung}
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|p{1.5cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Modul}		& \textbf{Output-datei}		& \textbf{Seiten-anzahl}		& \textbf{Download-größe} 		& \textbf{Execution in ms} 	& \textbf{Kompress-ionsfaktor}	\\ 
+		\hline
+		Creator	& blank\_pdf5000 & 5000 DIN A4 & 36,96 KB & 2180 &  \\
+		Creator	& \parbox[t]{4cm}{blank\_pdf500\\p10000s} & 500 Größe: 10000 & 4,92 KB & 170 & \\
+		\hline
+	\end{tabular}
+	\caption{Execution Times der Download Zip Funktion}
+	\label{table:download-dur}
+\end{table}
 
 \subsection{Browserunterschiede}
+
+\subsection{Testbewertung}
