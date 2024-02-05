@@ -1,11 +1,13 @@
 \section{Testdurchführung}
+Für alle Tests habe ich Input- und Output-Dateien auf dem abgegebenen USB-Stick verwendet.
 
 \subsection{Funktionale User Tests}
 
 \subsection{Performance Tests}
 Hat man eine PDF-Datei im Reader oder Editor geöffnet und löscht diese, so gibt es keine Fehlermeldung, wie in vielen lokalen Programmen.
+
 \subsubsection{Renderdauer}
-Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien auf dem USB-Stick getestet.
+Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle bezieht sich ausschließlich auf Tests im Reader. 
 
 \begin{table}[!htbp]
 	\centering
@@ -28,19 +30,21 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien auf dem USB-Stic
 	\label{table:render-dur}
 \end{table}
 
-\subsubsection{Downloadleistung}
+\subsubsection{Modulleistung}
+In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Ich fange mit dem Creator an.
+
 \begin{table}[!htbp]
 	\centering
-	\begin{tabular}{|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+	\begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Modul}		& \textbf{Output-datei}		& \textbf{Seiten-anzahl}		& \textbf{Download-größe} 		& \textbf{Execution in ms} 	\\ 
+		\textbf{Output-datei}					& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		Creator	& blank\_pdf5000 & 5000 DIN A4 & 36,96 KB & 2180  \\
-		Creator	& \parbox[t]{4cm}{blank\_pdf500\\p10000s} & 500 Größe: 10000 & 4,92 KB & 170 \\
+		blank\_pdf5000							& DIN A4 				& 5000 						& 36,96 KB 					& 2180  					\\
+		\parbox[t]{4cm}{blank\_pdf500\\p10000s}	& 10000 x 1000			& 500 						& 4,92 KB					& 170 						\\
 		\hline
 	\end{tabular}
-	\caption{Execution Times der Download Zip Funktion}
-	\label{table:download-dur}
+	\caption{Execution Times des Creators}
+	\label{table:creator-dur}
 \end{table}
 
 \subsection{Testbewertung}
