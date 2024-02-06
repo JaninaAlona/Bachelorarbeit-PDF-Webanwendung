@@ -4,7 +4,7 @@ Für alle Tests habe ich Input- und Output-Dateien auf dem abgegebenen USB-Stick
 \subsection{Funktionale User Tests}
 
 \subsection{Performance Tests}
-Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. 
+Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. Speichert man eine PDF-Datei z.B. im Reader, ohne dass man Veränderungen gemacht hat, so wird ein wenig Kompression angewendet. Die Datei 02\_Sensoren.pdf hatte 1,17 MB und wurde auf 1,13 MB komprimiert. Das Output-PDF heißt 02-Sensoren\_compr.pdf. Die save-Funktion von PDF-LIB ist für diese Kompression verantwortlich. 
 
 \subsubsection{Renderdauer}
 Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle bezieht sich ausschließlich auf Tests im Reader. 
@@ -82,6 +82,25 @@ Bei den Tests des Mergers liste ich die Inputdateien in der Merge-Reihenfolge au
 	\end{tabular}
 	\caption{Execution Times des Mergers}
 	\label{table:merger-dur}
+\end{table}
+
+In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Bei jedem Test werde ich jeweils nur die ersten 10 Seiten mit Elementen füllen, da man sonst bei längeren PDFs zu viele Seiten betrachten muss, um die Elemente zu finden. 
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Inputdatei}					& \textbf{Anzahl Elemente}					& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\hline
+		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
+		the-metamorphosis-franz-kafka		& 4, 5,5, 5, 6 ,80, 30,30, 29, 71, 21 		& the-metamorphosis-franz-kafka\_split 				& 309,22 KB					& 247  						\\
+		DevOps with Kubernetes				& every page								& DevOps with Kubernetes\_split 					& 67,2 MB					& 4152 						\\
+		02-Sensoren							& odd pages 								& 02-Sensoren\_split-odd 							& 1,45 MB					& 241  						\\
+		02-Sensoren							& even pages								& 02-Sensoren\_split-even 							& 1,46 MB					& 206 						\\
+		\hline
+	\end{tabular}
+	\caption{Execution Times des Editors}
+	\label{table:editor-dur}
 \end{table}
 
 \subsection{Testbewertung}
