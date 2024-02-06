@@ -4,7 +4,7 @@ Für alle Tests habe ich Input- und Output-Dateien auf dem abgegebenen USB-Stick
 \subsection{Funktionale User Tests}
 
 \subsection{Performance Tests}
-Hat man eine PDF-Datei im Reader oder Editor geöffnet und löscht diese, so gibt es keine Fehlermeldung, wie in vielen lokalen Programmen.
+Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. 
 
 \subsubsection{Renderdauer}
 Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle bezieht sich ausschließlich auf Tests im Reader. 
@@ -24,6 +24,7 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 		DevOps with Kubernetes											& 520 						& 13,7 MB  				& 9883						\\  
 		02. The Critique of Pure Reason author Immanuel Kant			& 1277 						& 1,78 MB  				& 9428						\\  
 		UNIX and Linux System Administration Handbook - Fifth Edition	& 1809						& 71,94 MB  			& 47366						\\ 
+		blank\_pdf-5000-dina6											& 5000						& 69,55 KB  			& 30387						\\ 
 		\hline
 	\end{tabular}
 	\caption{Execution Times der renderPage Funktion für verschiedene PDF-Dateien}
@@ -31,13 +32,13 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 \end{table}
 
 \subsubsection{Modulleistung}
-In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Ich fange mit dem Creator an.
+In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an.
 
 \begin{table}[!htbp]
 	\centering
-	\begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+	\begin{tabular}{|p{3cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Output-datei}					& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\textbf{Outputdatei}					& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
 		blank\_pdf5000							& DIN A4 				& 5000 						& 36,96 KB 					& 2180  					\\
 		\parbox[t]{4cm}{blank\_pdf500\\p10000s}	& 10000 x 10000			& 500 						& 4,92 KB					& 170 						\\
@@ -45,6 +46,42 @@ In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. 
 	\end{tabular}
 	\caption{Execution Times des Creators}
 	\label{table:creator-dur}
+\end{table}
+
+Als nächstes nehme ich mir den Splitter vor. Falls eine Liste an Zahlen angegeben ist, ist damit die Split-Methode list of pages gemeint.
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Inputdatei}					& \textbf{Split-Methode}					& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\hline
+		Animal Crossing Amiibo Card Art		& 2,5,10,30,49 								& Animal Crossing Amiibo Card Art\_split-pagelist 	& 150,39 MB					& 3764  					\\
+		the-metamorphosis-franz-kafka		& 4, 5,5, 5, 6 ,80, 30,30, 29, 71, 21 		& the-metamorphosis-franz-kafka\_split 				& 309,22 KB					& 247  						\\
+		DevOps with Kubernetes				& every page								& DevOps with Kubernetes\_split 					& 67,2 MB					& 4152 						\\
+		02-Sensoren							& odd pages 								& 02-Sensoren\_split-odd 							& 1,45 MB					& 241  						\\
+		02-Sensoren							& even pages								& 02-Sensoren\_split-even 							& 1,46 MB					& 206 						\\
+		\hline
+	\end{tabular}
+	\caption{Execution Times des Splitters}
+	\label{table:splitter-dur}
+\end{table}
+
+Bei den Tests des Mergers liste ich die Inputdateien in der Merge-Reihenfolge auf.
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{1.7cm}|p{2.3cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Inputdateien}	& \textbf{Seiten-anzahl Output}		& \textbf{Outputdatei}		& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\hline
+		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, 02-Sensoren, the-metamorphosis-franz-kafka	& 98 & merged\_pdf1 & 1,71 MB		& 857  					\\
+		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}		& 1052 		& merged\_pdf2		& 134,66 MB		& 18605  						\\
+		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}, 02-Sensoren		& 1061 		& merged\_pdf3				& 136,1 MB					& 18798  						\\
+		\hline
+	\end{tabular}
+	\caption{Execution Times des Mergers}
+	\label{table:merger-dur}
 \end{table}
 
 \subsection{Testbewertung}
