@@ -2,20 +2,20 @@
 Ich fange mit den GUI Tests an, die sich hauptsächlich auf den Editor beziehen. Die anderen Module teste ich in den Performance Tests. Im Vorgang werde ich Screenshots von Operationen auf Elementen zur Verfügung stellen, die das Vorher (Eingabe) und Nachher (Ausgabe) zeigen.
 
 \subsubsection{Input Control Tests}
-In diesen Tests möchte ich die Funktionalität der implementierten Input Control bei input HTML-Elementen vom Typ Text auf die Probe stellen. Dies hat zum Ziel, dass meine Eingaben die minimalen und maximalen Werte für die input fields austesten und von der Anwendung Usereingaben automatisch korrigiert werden. Die Tests habe ich mit der Datei merged-sensoren-wissschreib.pdf mit 11 Seiten durchgeführt. 
+In diesen Tests möchte ich die Funktionalität der implementierten Input Control bei input HTML-Elementen vom Typ Text auf die Probe stellen. Dies hat zum Ziel, dass meine Eingaben die minimalen und maximalen Werte für die input fields austesten und von der Anwendung Usereingaben automatisch korrigiert werden. Die Tests habe ich mit der Datei merged-sensoren-wissschreib.pdf mit 11 Seiten durchgeführt. Die Tabelle \ref{table:reader-input} beschreibt alle Test im Reader, \ref{table:creator-input} steht für Creator-Tests, \ref{table:splitter-input} verdeutlicht Splitter-Test, \ref{table:text-input} führt alle Texteditor eigenen Tests auf, \ref{table:draw-input} enthält Pencil Eraser Size Tests, \ref{table:shape-input} bildet Geometrieeditor-Tests ab, \ref{table:img-input} zeigt alle Bildeditor-Tests und alle im Editor mehrfach vorkommende wurden in \ref{table:editor-input} getestet. Wenn ich in eine Tabellenzelle invalid input schreibe, dann wird die Eingabe nicht gelöscht und nicht ausgeführt, was bei einer Eingabe von einem Komma anstatt einem Punkt der Fall ist. Dies gilt für alle input fields, da ich die PDF Web App in Englisch programmiert habe. 
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
-		\textbf{input field}													& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\textbf{input field}				& \textbf{Input} 	& \textbf{Output-Korrektur}	\\ 
 		\hline
-		Aktuelle Seitenzahl												& 0 						& 1		\\ 
-		Aktuelle Seitenzahl												& 10 						& 9 					\\ 
-		Aktuelle Seitenzahl												& 1.2 						& 1 					\\ 
-		Zoom 													& 0						& 1\%  							\\
-		Zoom 									& 801 \% 						& 800\% 					\\ 
-		Zoom 									& 20 .1 						& 20 \% 					\\ 
+		Aktuelle Seitenzahl					& 0 				& 1							\\ 
+		Aktuelle Seitenzahl					& 10 				& 9 						\\ 
+		Aktuelle Seitenzahl					& 1.2 				& 1 						\\ 
+		Zoom 								& 0					& 1\%  						\\
+		Zoom 								& 801 \% 			& 800\% 					\\ 
+		Zoom 								& 20 .1 			& 20\% 						\\ 
 		\hline
 	\end{tabular}
 	\caption{input field Tests im Reader}
@@ -26,12 +26,14 @@ In diesen Tests möchte ich die Funktionalität der implementierten Input Contro
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
-		\textbf{input field}													& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\textbf{input field}		& \textbf{Input} 	& \textbf{Output-Korrektur}	\\ 
 		\hline
-		Number of Pages 							& 0 						& 1 					\\ 
-		Number of Pages									& 5001 						& 5000  					\\  
-		Width und Height											& 9 						& 10						\\  
-		Width und Height			& 10001 						& 10000 						\\  
+		Number of Pages 			& 0 				& 1 						\\ 
+		Number of Pages				& 5001 				& 5000  					\\ 
+		Number of Pages				& 1.5 				& 1  						\\ 
+		Width und Height			& 9 				& 10						\\  
+		Width und Height			& 10001 			& 10000 					\\  
+		Width und Height			& 21 0.6			& 210	 					\\
 		\hline
 	\end{tabular}
 	\caption{input field Tests im Creator}
@@ -42,11 +44,11 @@ In diesen Tests möchte ich die Funktionalität der implementierten Input Contro
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
-		\textbf{input field}													& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\textbf{input field}	& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
 		\hline
-		list of pages	& 1,2,11						& Eingabe gelöscht  						\\ 
-		list of pages	& 1,2,2,5						& 1,2,5 						\\ 
-		list of pages					& 1 0,2						& 2,10		\\ 
+		list of pages			& 1,2,11			& Eingabe gelöscht  			\\ 
+		list of pages			& 1,2,2,5			& 1,2,5 						\\ 
+		list of pages			& 1 0,2				& 2,10							\\ 
 		\hline
 	\end{tabular}
 	\caption{input field Tests im Splitter}
@@ -57,12 +59,14 @@ In diesen Tests möchte ich die Funktionalität der implementierten Input Contro
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
-		\textbf{input field}													& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\textbf{input field}			& \textbf{Input} 			& \textbf{Output-Korrektur}		\\ 
 		\hline
-		Line Height 													& 0 						& 1  							\\
-		Line Height												& 301 						& 300 					\\ 
-		Font Size 													& 2						& 3  							\\
-		Font Size									& 501						& 500 					\\ 
+		Line Height 					& 0 						& 1  							\\
+		Line Height						& 30 1 						& 300 							\\ 
+		Line Height						& 30.1 						& 30							\\ 
+		Font Size 						& 2							& 3  							\\
+		Font Size						& 501						& 500 							\\ 
+		Font Size						& 60. 6 7					& 60 							\\ 
 		\hline
 	\end{tabular}
 	\caption{input field Tests im Texteditor}
@@ -73,15 +77,68 @@ In diesen Tests möchte ich die Funktionalität der implementierten Input Contro
 	\centering
 	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
 		\hline
-		\textbf{input field}													& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\textbf{input field}			& \textbf{Input} 			& \textbf{Output-Korrektur}		\\ 
 		\hline
-		Rotate													& 850 						& 91,8 MB  							\\
-		Rotate												& 10 						& 9 					\\ 
-		Font Size 													& 0						& 1\%  							\\
-		Font Size									& 801 \% 						& 800\% 					\\ 
+		Pencil Eraser Size 					& 0 .0001					& 0.1  						\\
+		Pencil Eraser Size					& 4 0 1 					& 401						\\ 
+		Pencil Eraser Size					& 501 						& 500						\\ 
 		\hline
 	\end{tabular}
-	\caption{input field Tests im Editor}
-	\label{table:text-input}
+	\caption{input field Tests im Zeichnen Editor}
+	\label{table:draw-input}
 \end{table}
 
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\textbf{input field}			& \textbf{Input} 			& \textbf{Output-Korrektur}	\\ 
+		\hline
+		Triangle Point 					& 0							& 1  						\\
+		Triangle Point					& 30 01 					& 3000						\\ 
+		Triangle Point					& 5.6 						& 5							\\ 
+		Stroke Width 					& 00						& 0.1  						\\
+		Stroke Width					& 1 00.1 					& 100						\\ 
+		\hline
+	\end{tabular}
+	\caption{input field Tests im Shape Editor}
+	\label{table:shape-input}
+\end{table}
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\textbf{input field}		& \textbf{Input} 			& \textbf{Output-Korrektur}	\\ 
+		\hline
+		Opacity 					& 0.001						& 0.01  					\\
+		Opacity						& -3 						& 0.01						\\ 
+		Opacity						& 2 						& 1							\\ 
+		\hline
+	\end{tabular}
+	\caption{input field Tests im Bildeditor}
+	\label{table:img-input}
+\end{table}
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\textbf{input field}	& \textbf{Input} 	& \textbf{Output-Korrektur}		\\ 
+		\hline
+		Rotate					& -361 						& -360  				\\
+		Rotate					& 361 						& 360 					\\ 
+		Rotate					& -30.3 					& -30  					\\
+		Rotate					& 4 0.5 					& 40 					\\ 
+		Scale Factor			& 0.01						& 0.1 					\\
+		Scale Factor			& 2 0 . 1					& 20 					\\
+		Width und Height		& 0.1						& 1 					\\
+		Width und Height		& 3000.02					& 3000 					\\
+		Width und Height		& 100,2						& invalid input 		\\
+		\hline
+	\end{tabular}
+	\caption{Test von mehrfach vorkommenden input fields im Editor}
+	\label{table:editor-input}
+\end{table}
+
+60. 6 7
