@@ -1,8 +1,8 @@
 \subsection{Performance Tests}
-Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. Speichert man eine PDF-Datei z.B. im Reader, ohne dass man Veränderungen gemacht hat, so wird ein wenig Kompression angewendet. Die Datei 02\_Sensoren.pdf hatte 1,17 MB und wurde auf 1,13 MB komprimiert. Das Output-PDF heißt 02-Sensoren\_compr.pdf. Die save-Funktion von PDF-LIB ist für diese Kompression verantwortlich. 
+Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. Speichert man eine PDF-Datei z.B. im Reader, ohne dass man Veränderungen gemacht hat, so wird eine geringe Kompression angewendet. Die Datei 02\_Sensoren.pdf hatte 1,17 MB und wurde auf 1,13 MB komprimiert. Das Output-PDF heißt 02-Sensoren\_compressed.pdf. Die save-Funktion von PDF-LIB ist für diese Kompression verantwortlich. Dies funktioniert allerdings nur beim ersten Speichern. 
 
 \subsubsection{Renderdauer}
-Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle bezieht sich ausschließlich auf Tests im Reader. 
+Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle \ref{table:render-dur} bezieht sich ausschließlich auf Tests im Reader. 
 
 \begin{table}[!htbp]
 	\centering
@@ -10,16 +10,16 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 		\hline
 		\textbf{Datei}													& \textbf{Seitenanzahl} 	& \textbf{Dateigröße} 	& \textbf{Execution in ms}	\\ 
 		\hline
-		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}					& 1 						& 33,22 KB  			& 27						\\ 
-		02-Sensoren														& 9 						& 1,17 MB  				& 175						\\ 
-		l11manual\_en 													& 850 						& 91,8 MB  				& 103542						\\
-		the-metamorphosis-franz-kafka 									& 88 						& 298,86 KB  			& 714						\\ 
-		01. War and Peace author Leo Tolstoy 							& 2882 						& 7,21 MB  				& 29115						\\ 
-		Animal Crossing Amiibo Card Art									& 50 						& 167,05 MB  			& 53545						\\  
-		DevOps with Kubernetes											& 520 						& 13,7 MB  				& 9883						\\  
-		02. The Critique of Pure Reason author Immanuel Kant			& 1277 						& 1,78 MB  				& 9428						\\  
-		UNIX and Linux System Administration Handbook - Fifth Edition	& 1809						& 71,94 MB  			& 50443 						\\ 
-		blank\_pdf-5000-dina6											& 5000						& 69,55 KB  			& 30387						\\ 
+		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}					& 1 						& 33,22 KB  			& 28						\\ 
+		02-Sensoren														& 9 						& 1,17 MB  				& 190						\\ 		
+		the-metamorphosis-franz-kafka 									& 88 						& 298,86 KB  			& 802						\\   
+		02. The Critique of Pure Reason author Immanuel Kant			& 1277 						& 1,78 MB  				& 9419						\\ 
+		DevOps with Kubernetes											& 520 						& 13,7 MB  				& 9985						\\  
+		01. War and Peace author Leo Tolstoy 							& 2882 						& 7,21 MB  				& 30353						\\ 
+		blank\_pdf-5000-dina6											& 5000						& 69,55 KB  			& 37042 					\\ 
+		Animal Crossing Amiibo Card Art									& 50 						& 167,05 MB  			& 50767						\\   
+		UNIX and Linux System Administration Handbook - Fifth Edition	& 1809						& 71,94 MB  			& 51878 					\\ 
+		l11manual\_en 													& 850 						& 91,8 MB  				& 100658					\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times der renderPage Funktion für verschiedene PDF-Dateien}
@@ -27,23 +27,23 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 \end{table}
 
 \subsubsection{Modulleistung}
-In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an.
+In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an. Hier habe ich ein PDF erstellt, was die Maximalgröße von 10000 mm hat. Diese Größe kann nicht mehr vom Adobe Reader angezeigt werden. Die Seiten dieses PDF werden dort auf ca. 5079 mm verkleinert. Die zugehörige Tabelle \ref{table:creator-dur} zeigt 2 Extremfälle von PDF-Erstellung.
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{|p{3cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Outputdatei}					& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\textbf{Outputdatei}						& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		blank\_pdf5000							& DIN A4 				& 5000 						& 36,96 KB 					& 2180  					\\
-		\parbox[t]{4cm}{blank\_pdf500\\p10000s}	& 10000 x 10000			& 500 						& 4,92 KB					& 170 						\\
+		blank\_pdf-5000								& DIN A4 				& 5000 						& 37,01 KB 					& 2196  					\\
+		blank\_pdf-500p-10000s						& 10000 x 10000			& 500 						& 5,05 KB					& 131						\\	
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Creators}
 	\label{table:creator-dur}
 \end{table}
 
-Als nächstes nehme ich mir den Splitter vor. Falls eine Liste an Zahlen angegeben ist, ist damit die Split-Methode list of pages gemeint.
+Als nächstes nehme ich mir den Splitter vor, dessen Ergebnisse in Tabelle \ref{table:splitter-dur} gezeigt sind. Falls eine Liste an Zahlen angegeben ist, ist damit die Split-Methode list of pages gemeint.
 
 \begin{table}[!htbp]
 	\centering
@@ -51,18 +51,19 @@ Als nächstes nehme ich mir den Splitter vor. Falls eine Liste an Zahlen angegeb
 		\hline
 		\textbf{Inputdatei}					& \textbf{Split-Methode}					& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		Animal Crossing Amiibo Card Art		& 2,5,10,30,49 								& Animal Crossing Amiibo Card Art\_split-pagelist 	& 150,39 MB					& 3764  					\\
-		the-metamorphosis-franz-kafka		& 4, 5,5, 5, 6 ,80, 30,30, 29, 71, 21 		& the-metamorphosis-franz-kafka\_split 				& 309,22 KB					& 247  						\\
-		DevOps with Kubernetes				& every page								& DevOps with Kubernetes\_split 					& 67,2 MB					& 4152 						\\
-		02-Sensoren							& odd pages 								& 02-Sensoren\_split-odd 							& 1,45 MB					& 241  						\\
-		02-Sensoren							& even pages								& 02-Sensoren\_split-even 							& 1,46 MB					& 206 						\\
+		Animal Crossing Amiibo Card Art		& 2,5,10,30,49 								& Animal Crossing Amiibo Card Art\_split-pagelist 	& 150,39 MB					& 3976  						\\
+		the-metamorphosis-franz-kafka		& 4, 5,5, 5, 6 ,80, 30,30, 29, 71, 21 		& the-metamorphosis-franz-kafka\_split 				& 309,23 KB				
+											& 254  			\\
+		DevOps with Kubernetes				& every page								& DevOps with Kubernetes\_split 					& 67,2 MB					& 4146  						\\
+		02-Sensoren							& odd pages 								& 02-Sensoren\_split-odd 							& 1,45 MB					& 215  							\\
+		02-Sensoren							& even pages								& 02-Sensoren\_split-even 							& 1,46 MB					& 236 							\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Splitters}
 	\label{table:splitter-dur}
 \end{table}
 
-Bei den Tests des Mergers liste ich die Inputdateien in der Merge-Reihenfolge auf.
+Bei den Tests des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputdateien in der Merge-Reihenfolge auf.
 
 \begin{table}[!htbp]
 	\centering
@@ -70,16 +71,18 @@ Bei den Tests des Mergers liste ich die Inputdateien in der Merge-Reihenfolge au
 		\hline
 		\textbf{Inputdateien}	& \textbf{Seiten-anzahl Output}		& \textbf{Outputdatei}		& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} 02-Sensoren, the-metamorphosis-franz-kafka	& 98 & merged\_pdf1 & 1,71 MB		& 857  					\\
-		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}		& 1052 		& merged\_pdf2		& 134,66 MB		& 18605  						\\
-		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} 02-Sensoren		& 1061 		& merged\_pdf3				& 136,1 MB					& 18798  						\\
+		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} 02-Sensoren, the-metamorphosis-franz-kafka	& 98 & merged\_pdf1 & 1,72 MB		& 834  					\\
+		
+		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}		& 1052 		& merged\_pdf2		& 134,66 MB		& 18441   						\\
+		
+		DevOps with Kubernetes, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} DevOps with Kubernetes, 02-Sensoren, \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} \parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro,} 02-Sensoren		& 1061 		& merged\_pdf3				& 136,1 MB					& 18983   						\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Mergers}
 	\label{table:merger-dur}
 \end{table}
 
-In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Bei jedem Test werde ich jeweils nur die ersten 10 Seiten mit Elementen füllen, da man sonst bei längeren PDFs zu viele Seiten betrachten muss, um die Elemente zu finden. 
+In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Bei jedem Test werde ich jeweils nur maximal die ersten 10 Seiten mit Elementen füllen, da man sonst bei längeren PDFs zu viele Seiten betrachten muss, um die Elemente zu finden. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente.
 
 \begin{table}[!htbp]
 	\centering
@@ -87,13 +90,15 @@ In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. 
 		\hline
 		\textbf{Inputdatei}					& \textbf{Anzahl Elemente}					& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t	& 168,62 MB					& 79715  					\\
+		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t		& 150,56 MB					& 79612   					\\
+		Animal Crossing Amiibo Card Art		& 30 d 								& Animal Crossing Amiibo Card Art-30d				& 157,44 MB					& 131484  					\\
+		Animal Crossing Amiibo Card Art		& 30 s 								& Animal Crossing Amiibo Card Art-30s				& 160,08 MB					& 104319    					\\
+		Animal Crossing Amiibo Card Art		& 30 i 								& Animal Crossing Amiibo Card Art-30i				& 162,71 MB					& 104758   					\\
+		Animal Crossing Amiibo Card Art		& 30 t, 30 d 						& Animal Crossing Amiibo Card Art\_edited-30t-30d	& 150,97 MB					& 103472  					\\
+		Animal Crossing Amiibo Card Art	& 30 t, 30 d, 30 s 					& Animal Crossing Amiibo Card Art-30t-30d-30s		& 150,94 MB					& 127254    					\\
+		Animal Crossing Amiibo Card Art		& 30 t, 30 d, 30 s, 30 i 			& Animal Crossing Amiibo Card Art30t-30d-30s-30i	& 165,76 MB					& 154048   					\\
+		the-metamorphosis-franz-kafka		& 30 t 								& the-metamorphosis-franz-kafka-30t					& 388,27 KB					& 24521    					\\
+		02-Sensoren							& 30 t 								& 02-Sensoren-30t									& 1,27 MB					& 24865    					\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Editors}
