@@ -13,6 +13,7 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 		\parbox[t]{4cm}{vivaoptik\_Gutschein\_\\50euro}					& 1 						& 33,22 KB  			& 28						\\ 
 		02-Sensoren														& 9 						& 1,17 MB  				& 190						\\ 		
 		the-metamorphosis-franz-kafka 									& 88 						& 298,86 KB  			& 802						\\   
+		09. Beyond Good and Evil author Friedrich Nietzsche				& 301 						& 795,91 KB  			& 1924 						\\ 
 		02. The Critique of Pure Reason author Immanuel Kant			& 1277 						& 1,78 MB  				& 9419						\\ 
 		DevOps with Kubernetes											& 520 						& 13,7 MB  				& 9985						\\  
 		01. War and Peace author Leo Tolstoy 							& 2882 						& 7,21 MB  				& 30353						\\ 
@@ -35,7 +36,10 @@ In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. 
 		\hline
 		\textbf{Outputdatei}						& \textbf{Seitengröße}	& \textbf{Seiten-anzahl}	& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		blank\_pdf-5000								& DIN A4 				& 5000 						& 37,01 KB 					& 2196  					\\
+		blank\_pdf-5000-a6							& DIN A6 				& 5000 						& 36,33 KB 					& 2131  					\\
+		blank\_pdf-5000								& DIN A4 				& 5000 						& 36,96 KB 					& 2156   					\\
+		blank\_pdf-5000-a1							& DIN A1 				& 5000 						& 31,28 KB 					& 2136   					\\
+		blank\_pdf-1p-10000s						& 10000 x 10000			& 1 						& 764 Bytes					& 11						\\	
 		blank\_pdf-500p-10000s						& 10000 x 10000			& 500 						& 5,05 KB					& 131						\\	
 		\hline
 	\end{tabular}
@@ -88,17 +92,18 @@ In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. 
 	\centering
 	\begin{tabular}{|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Inputdatei}					& \textbf{Anzahl Elemente}					& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\textbf{Inputdatei}					& \textbf{Anzahl Elemente}			& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		Animal Crossing Amiibo Card Art		& 30 t 								& Animal Crossing Amiibo Card Art\_edited-30t		& 150,56 MB					& 79612   					\\
-		Animal Crossing Amiibo Card Art		& 30 d 								& Animal Crossing Amiibo Card Art-30d				& 157,44 MB					& 131484  					\\
-		Animal Crossing Amiibo Card Art		& 30 s 								& Animal Crossing Amiibo Card Art-30s				& 160,08 MB					& 104319    					\\
-		Animal Crossing Amiibo Card Art		& 30 i 								& Animal Crossing Amiibo Card Art-30i				& 162,71 MB					& 104758   					\\
-		Animal Crossing Amiibo Card Art		& 30 t, 30 d 						& Animal Crossing Amiibo Card Art\_edited-30t-30d	& 150,97 MB					& 103472  					\\
-		Animal Crossing Amiibo Card Art	& 30 t, 30 d, 30 s 					& Animal Crossing Amiibo Card Art-30t-30d-30s		& 150,94 MB					& 127254    					\\
-		Animal Crossing Amiibo Card Art		& 30 t, 30 d, 30 s, 30 i 			& Animal Crossing Amiibo Card Art30t-30d-30s-30i	& 165,76 MB					& 154048   					\\
-		the-metamorphosis-franz-kafka		& 30 t 								& the-metamorphosis-franz-kafka-30t					& 388,27 KB					& 24521    					\\
-		02-Sensoren							& 30 t 								& 02-Sensoren-30t									& 1,27 MB					& 24865    					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& keine Elemente 					& Friedrich Nietzsche-no-elems			& 150,39 MB					& 1452     					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t 								& Friedrich Nietzsche-20t		& 150,56 MB					& 79612   					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 d 								& Friedrich Nietzsche-20d				& 157,44 MB					& 131484  					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 s 								& Friedrich Nietzsche-20s				& 160,08 MB					& 104319    					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 i 								& Friedrich Nietzsche-20i				& 162,71 MB					& 104758   					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t, 20 s 						& Friedrich Nietzsche-20t-20s			& 150,97 MB					& 103472  					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche	& 20 t, 20 s, 20 i 				& Friedrich Nietzsche-20t-20s-20i	& 153,41 MB					& 135815     					\\
+		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t, 20 d, 20 s, 20 i 			& Friedrich Nietzsche-20t-20d-20s-20i	& 165,76 MB					& 154048   					\\
+		the-metamorphosis-franz-kafka		& keine Elemente 					& the-metamorphosis-franz-kafka-no-elems			& 211,38 KB					& 131    						\\
+		the-metamorphosis-franz-kafka		& 20 t 								& the-metamorphosis-franz-kafka-20t					& 388,27 KB					& 24521    					\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Editors}
