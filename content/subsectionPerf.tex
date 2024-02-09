@@ -1,5 +1,5 @@
 \subsection{Performance Tests}
-Hat man eine PDF-Datei in einem beliebigen Modul geöffnet und löscht diese, so gibt es keine Fehlermeldung in der Anwendung, weil die Datei nicht mit der Datei auf der Festplatte verknüpft ist. Speichert man eine PDF-Datei z.B. im Reader, ohne dass man Veränderungen gemacht hat, so wird eine geringe Kompression angewendet. Die Datei 02\_Sensoren.pdf hatte 1,17 MB und wurde auf 1,13 MB komprimiert. Das Output-PDF heißt 02-Sensoren\_compressed.pdf. Die save-Funktion von PDF-LIB ist für diese Kompression verantwortlich. Dies funktioniert allerdings nur beim ersten Speichern. 
+Zu Anfang habe ich die Renderdauer mit verschieden großen PDF-Dateien im Bezug auf Speichergröße und Seitenanzahl gemessen. Danach überprüfe ich die Ausführungszeit jedes Moduls. Beim Editor ermittel ich die Downloaddauer, wenn man verschiedene Elemente hinzugefügt hat.
 
 \subsubsection{Renderdauer}
 Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle \ref{table:render-dur} bezieht sich ausschließlich auf Tests im Reader. 
@@ -28,7 +28,7 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 \end{table}
 
 \subsubsection{Modulleistung}
-In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an. Hier habe ich ein PDF erstellt, was die Maximalgröße von 10000 mm hat. Diese Größe kann nicht mehr vom Adobe Reader angezeigt werden. Die Seiten dieses PDF werden dort auf ca. 5079 mm verkleinert. Die zugehörige Tabelle \ref{table:creator-dur} zeigt 2 Extremfälle von PDF-Erstellung.
+In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an. Hier habe ich ein PDF erstellt, was die Maximalgröße von 10000 mm hat. Diese Größe kann nicht mehr vom Adobe Reader angezeigt werden. Die Seiten dieses PDF werden dort auf ca. 5079 mm verkleinert. Die zugehörige Tabelle \ref{table:creator-dur} zeigt Extremfälle der PDF-Erstellung.
 
 \begin{table}[!htbp]
 	\centering
@@ -86,7 +86,7 @@ Bei den Tests des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputd
 	\label{table:merger-dur}
 \end{table}
 
-In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors mit der PDF-Datei Animal-Crossing-Amiibo-s1-2 mit 2 Seiten. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente und es sind jeweils 10 Elemente von jedem Typ auf der einen Seite und die jeweils anderen 10 Elemente auf der anderen Seite. Nach jedem Downloadvorgang habe ich das PDF erneut geöffnet.
+In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors mit der PDF-Datei Animal-Crossing-Amiibo-s1-2 mit 2 Seiten. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente und es sind jeweils 10 Elemente von jedem Typ auf der einen Seite und die jeweils anderen 10 Elemente auf der anderen Seite. Nach jedem Downloadvorgang habe ich das PDF erneut geöffnet. Die Downloadfunktion verwendet Zip-Kompression und ermöglicht sogar Downloads von großen PDF-Dateien.
 
 \begin{table}[!htbp]
 	\centering
