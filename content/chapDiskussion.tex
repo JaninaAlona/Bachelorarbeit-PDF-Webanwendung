@@ -6,39 +6,6 @@ Die Programmdesignentscheidung für 2 Modi, den Box Mode und Layer Mode, kam mir
 Ein großer Pluspunkt der PDF Web App ist, dass sie nicht installiert werden muss. Dabei werden auch keine zusätzlichen ungewünschten Werbeprogramme im System des Benutzers installiert. Das bedeutet auch, dass keine Deinstallationsdateien übrig bleiben. Ich unterstütze keine Verschlüsselung von PDF-Dokumenten, da PDF-Dateien unsicher sind und nicht für vertraulichen Inhalt verwendet werden sollten. In Zukunft könnte ich versuchen, eine sichere Verschlüsselung zu implementieren, was eher mehr Zeit in Anspruch nehmen wird. \\
 Insgesamt ist die leichte Bedienbarkeit der PDF Web App zumindest im Editor nicht ganz gelungen. Für das Verständnis von Box Mode und Layer Mode, sowie deren Vorzüge, muss man die Tutorials gelesen haben. Auch die Select All und Deselct All Filter sind nicht ganz eingängig. Als einzige Buttons sind Spin CW (clockwise) und Spin CCW (counterclockwise) weniger aussagekräftig beschriftet.
 
-\section{Erfahrungen bei der Programmierung der Tablet-Version}
-Vorzugsweise hätte ich die PDF Web App auch auf dem Tablet auf Android und iOS zum Laufen gebracht. Das GUI Layout der PDF Web App ist für eine Tablet-Version optimiert. Zunächst habe ich herausgefunden, dass man auf Android und iOS Browsern keine lokalen HTML-Dateien ausführen kann. Folglich musste ich einen lokalen Webserver auf dem Tablet starten, um per localhost:<port> die Webseite im Browser des Tablets aufrufen zu können. Zu der Zeit hatte ich noch nicht gewusst, dass man die PDF Web App mit Github Pages als kostenlose Webseite betreiben kann. Auf Android hatte ich damals die kostenlose Play Store App Simple HTTP Server gefunden. Diese Play Store App ist unter folgendem Link zu finden:
-
-\url{https://play.google.com/store/apps/details?id=com.phlox.simpleserver&hl=de&pli=1}
-
-Ich konnte dann im Firefox Browser auf dem Android Tablet die PDF Web App öffnen. Auf dem iPad war es nicht möglich einen lokalen Webserver zu starten und den Browser seiner Wahl für die Seite zu öffnen. Da ich mich im kostenlosen Sektor bewegen wollte, musste ich einen lokalen Webserver auf einem anderen Gerät als dem iPad starten. Als habe ich einen simplen Node JS HTTP-Server mit Express programmiert. Erst dann konnte ich über die IP-Adresse und Port meines Windows-Laptops die PDF Web App auf dem iPad mit dem Browser meiner Wahl testen. Eine andere Möglichkeit auf dem iPad war die iOS App Codesandbox oder iOS App Documents herunterzuladen. Im Folgenden sind die Links zu diesen Apps aufgeführt:
-
-\url{https://codesandbox.io/codesandbox-for-ios} \\
-\url{https://apps.apple.com/us/app/documents-file-manager-vpn/id364901807}
-
-Mittels diese Apps konnte ich zumindest die PDF Web App in den eingebauten Browsern der Apps verwenden. Jedoch hat mit diesen Apps kein Dateidownload funktioniert. \\
-
-Im Verlauf der Implementierung habe ich viele Probleme feststellen können und eine Menge gelernt. Die Mouse Events mousedown, mousemove, mouseup und alle drag Events werden auf dem Tablet nicht ausgeführt. Folglich funktionierten der Pencil, der Eraser, die Move Operationen, das Verschieben von Ebenen in allen Editormodulen und das Position Ändern von Listeneinträgen im Merger allesamt nicht. Auf Stackoverflow hatte ich dann eine Lösung für meine Mouse mousedown, mousemove und mouseup Events gefunden: Ich muss mousedown mit touchstart, mousemove mit touchmove und mouseup mit dem touchend Event ersetzten. Zusätzlich musste ich event.clientX und event.clientY wie folgt im Codebeispiel \ref{code:touch} ersetzen:
-
-\begin{lstlisting}[style=ES6, caption={e.clientX und e.clientY Ersetzung}, label=code:touch, breaklines=true]
-	const clientXReplace = (e.targetTouches[0] ? e.targetTouches[0].pageX : e.changedTouches[e.changedTouches.length-1].pageX);
-	const clientYReplace = (e.targetTouches[0] ? e.targetTouches[0].pageY : e.changedTouches[e.changedTouches.length-1].pageY);
-\end{lstlisting} 
-
-Diese Lösung hat jedoch nicht für drag Events funktioniert, d.h. das Verschieben von Ebenen im Editor und Listenelementen im Merger hat mit der Maus nicht funktioniert. Daher habe ich die dragdroptouch JavaScript Library eingebaut. Sie ist auf der folgenden Webseite zu finden:
-
-\url{https://github.com/Bernardo-Castilho/dragdroptouch}
-
-Mit dieser Library haben zwar die drag Events funktioniert, allerdings nicht mehr die touch Events. Die touch Events wurden auch überschrieben. Eine Lösung habe ich bisher nicht gefunden. Möglicherweise wäre folgende jQuery Library UI Touch Punch zielführend:
-
-\url{https://github.com/furf/jquery-ui-touch-punch}
-
-Jedoch habe ich diese Library noch nicht ausprobiert, da ich mich dann gegen eine Tablet-Version der PDF Web App entschieden hatte. Dies könnte ein Projekt für die Zukunft sein.
-
-
-\subsection{Bewertung der Tests und Performance der PDF Web App}
-
-
 \section{Ideen für zukünftige Releases der PDF Web App}
 Einige wichtige Funktionalitäten sind noch nicht implementiert und ich plane diese noch in die PDF Web App in den nächsten Releases einzubauen. In meiner PDF Web App fehlt die Spiegelung von Text, Zeichnungen, Geometrie und Bildern als wichtige affine Transformation. Die anderen Transformationen Verschiebung, Skalierung und Rotation sind bereits in der PDF Web App vorhanden. Außerdem fehlt die Searchable PDF-Eigenschaft im Reader bzw. Editor, d.h. der Benutzer kann keinen Text oder Bilder kopieren. Die Searchable PDF-Eigenschaft kann nicht genutzt werden, da ich die PDF Seiten des source Dokuments in Canvas HTML-Elemente rendere. Folglich werden alle Seiten gerastert und die Searchable PDF-Eigenschaft des source Dokuments geht verloren. Am besten benutze ich für diese Eigenschaft eine \gls{ocr}-JavaScript Library, die jedes geöffnete PDF in Searchable PDFs umwandeln kann. Ein fortschrittliches zukünftige Feature wäre die Editierung von bereits bestehenden Objekten im source Dokument bearbeiten zu können. Möglicherweise ist dies auch mit der \gls{ocr}-Technologie realisierbar. Im weiteren Verlauf des Projekts möchte ich unbedingt Text, Geometrie und Zeichnungen mit Vektorpfaden ersetzen. Falls der Browser oder Computer abstürzt und das in der PDF Web App geöffnete Dokument nicht gedownloaded wurde, sind die Daten verloren. Als Gegenmaßnahme könnte man einen Export und Import Button konfigurieren, der die hinzugefügten PDF-Objekte als \gls{json}-Datei speichert. Bei Export würde diese Datei angelegt und im Ordner der PDF Web App gespeichert werden und mittels Import könnte man die PDF-Objekte dem geöffneten Dokument hinzufügen, sodass sie weiter bearbeitet werden können. Zusätzlich könnte man einen automatischen Export der PDF-Objekte als Backup implementieren, der z.B. alle 10 Minuten die hinzugefügten Elemente wie Text, Zeichnungen, Geometrie und Bilder in der \gls{json}-Datei sichert. \\
 Eine Funktionalität, die ich oft benötige, ist die Kompression von PDF-Dokumenten. Anfangs wollte ich gerne eine Funktion dafür bieten, jedoch hatte ich keine geeignete JavaScript-Library für Kompression gefunden. Ich habe darauf verzichtet die Kompression selbst zu implementieren. 
