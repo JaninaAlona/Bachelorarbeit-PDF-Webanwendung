@@ -86,22 +86,22 @@ Bei den Tests des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputd
 	\label{table:merger-dur}
 \end{table}
 
-In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Bei jedem Test werde ich jeweils nur maximal die ersten 10 Seiten mit Elementen füllen, da man sonst bei längeren PDFs zu viele Seiten betrachten muss, um die Elemente zu finden. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente.
+In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors mit der PDF-Datei Animal-Crossing-Amiibo-s1-2 mit 2 Seiten. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente und es sind jeweils 10 Elemente von jedem Typ auf der einen Seite und die jeweils anderen 10 Elemente auf der anderen Seite.
 
 \begin{table}[!htbp]
 	\centering
-	\begin{tabular}{|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|}
+	\begin{tabular}{|p{2cm}|p{4cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{Inputdatei}					& \textbf{Anzahl Elemente}			& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
+		\textbf{Anzahl Elemente}			& \textbf{Outputdatei}								& \textbf{Download-größe}	& \textbf{Execution in ms} 	\\ 
 		\hline
-		09. Beyond Good and Evil author Friedrich Nietzsche		& keine Elemente 					& Friedrich Nietzsche-no-elems			& 150,39 MB					& 1452     					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t 								& Friedrich Nietzsche-20t		& 150,56 MB					& 79612   					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 d 								& Friedrich Nietzsche-20d				& 157,44 MB					& 131484  					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 s 								& Friedrich Nietzsche-20s				& 160,08 MB					& 104319    					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 i 								& Friedrich Nietzsche-20i				& 162,71 MB					& 104758   					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t, 20 s 						& Friedrich Nietzsche-20t-20s			& 150,97 MB					& 103472  					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche	& 20 t, 20 s, 20 i 				& Friedrich Nietzsche-20t-20s-20i	& 153,41 MB					& 135815     					\\
-		09. Beyond Good and Evil author Friedrich Nietzsche		& 20 t, 20 d, 20 s, 20 i 			& Friedrich Nietzsche-20t-20d-20s-20i	& 165,76 MB					& 154048   					\\
+		keine Elemente 								& Animal-Crossing-Amiibo-s1-2-no-elems		& 8,57 MB					& 422      					\\
+		20 t 								& Animal-Crossing-Amiibo-s1-2-20t		& 8,69 MB					& 19136      					\\
+		20 d 								& Animal-Crossing-Amiibo-s1-2-20d				& 157,44 MB					& 10226   					\\
+		20 s 								& Animal-Crossing-Amiibo-s1-2-20s				& 160,08 MB					& 34478      					\\
+		20 i 								& Animal-Crossing-Amiibo-s1-2-20i				& 10,31 MB					& 19190     					\\
+		20 t, 20 s 						& Animal-Crossing-Amiibo-s1-2-20t-20s			& 8,76 MB					& 34883     					\\
+		20 t, 20 s, 20 i 				& Animal-Crossing-Amiibo-s1-2-20t-20s-20i	& 153,41 MB					& 135815     					\\
+		20 t, 20 d, 20 s, 20 i 			& Animal-Crossing-Amiibo-s1-2-20t-20d-20s-20i	& 165,76 MB					& 154048   					\\
 		\hline
 	\end{tabular}
 	\caption{Execution Times des Editors}
