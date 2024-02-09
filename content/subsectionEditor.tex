@@ -17,7 +17,7 @@ Der Editor ist über den Text, Draw, Shape oder Image Button erreichbar. Ebenso 
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.3\textwidth]{"images/save-progress-steps.png"}
+	\includegraphics[width=0.4\textwidth]{"images/save-progress-steps.png"}
 	\caption{Speicherschritte der PDF Web App in der Webkonsole beim Speichern von Elementen}
 	\label{fig:save-progress-steps}
 \end{figure}
@@ -57,11 +57,11 @@ Die Fontgröße kann man ebenfalls wie die Zeilenhöhe mit selection menu und in
 	\label{fig:fontcolor}
 \end{figure}
 
-Als vorletzte Option kann man den Text absolut drehen. Durch den weißen Button Rotation und der entsprechenden Benutzerinteraktion durch selection Menu oder input field wird das Textelement rotiert. Absolute Rotation bedeutet, dass es eine feste Rotationsskala gibt anhand der das Element rotiert wird. Folglich passiert keine Veränderung, wenn man den gleichen Rotationswert 2 Mal hintereinander ausführt. Stellt man einen Rotationswinkel von 0 Grad ein, so wird das Element wieder zurück auf die Ausgangsrotation bei Erstellung gedreht. Alle Editormodule verwenden absolute Rotation. Abschließend können alle Textelemente im Dokument mit dem Remove Button auf einen Schlag gelöscht werden. Beim Zeilenabstand und der Schriftgröße wird der Benutzer außerdem über den Wertebereich von Benutzereingaben informiert. Die Textoperationen werden in Abbildung \ref{fig:text} demonstriert.
+Als vorletzte Option kann man den Text absolut drehen. Durch den weißen Button Rotation und der entsprechenden Benutzerinteraktion durch selection Menu oder input field wird das Textelement rotiert. Absolute Rotation bedeutet, dass es eine feste Rotationsskala gibt anhand der das Element rotiert wird. Folglich passiert keine Veränderung, wenn man den gleichen Rotationswert 2 Mal hintereinander ausführt. Stellt man einen Rotationswinkel von 0 Grad ein, so wird das Element wieder zurück auf die Ausgangsrotation bei Erstellung gedreht. Alle Editormodule verwenden absolute Rotation. Abschließend können alle Textelemente im Dokument mit dem Remove Button auf einen Schlag gelöscht werden. Beim Zeilenabstand und der Schriftgröße wird der Benutzer außerdem über den Wertebereich von Benutzereingaben informiert. Ein neuer und modifizierter Text wird in Abbildung \ref{fig:text} demonstriert.
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{"images/text.png"}
+	\includegraphics[width=1\textwidth]{"images/text.png"}
 	\caption{Bearbeiteter Text im Writer der PDF Web App}
 	\label{fig:text}
 \end{figure}
@@ -144,22 +144,13 @@ Die in Abbildung \ref{fig:ebenenmenu} gezeigten Ebenenmenüschaltflächen lässe
 	\label{fig:ebenenmenu}
 \end{figure}
 
-Standardmäßig sind die Schaltflächen eingeklappt. Fügt man ein Element unabhängig vom Typ einer PDF-Seite hinzu wird für dieses Element eine Ebene angelegt, die dann automatisch ausgewählt ist. Eine ausgewählte Ebene ist Rosa und eine abgewählte schwarz. Es können mehrere Ebenen ausgewählt werden. Wenn eine Ebene angelegt wird, bekommt sie einen Standardnamen gesetzt, der durch den Elementtyp und einem nummerischen Index gekennzeichnet ist. Der Standardname kann durch Tastatureingabe im grauen input field auf der Ebene überschrieben werden. Ebenen werden nach Seitenzahlen in einer schwarzen Box, die oberhalb mit der Seitenzahl gekennzeichnet ist, gruppiert. Dies verdeutlicht die Abbildung \ref{fig:ebenen}.   
+Standardmäßig sind die Schaltflächen eingeklappt. Fügt man ein Element unabhängig vom Typ einer PDF-Seite hinzu wird für dieses Element eine Ebene angelegt, die dann automatisch ausgewählt ist. Eine ausgewählte Ebene ist Rosa und eine abgewählte schwarz. Es können mehrere Ebenen ausgewählt werden. Wenn eine Ebene angelegt wird, bekommt sie einen Standardnamen gesetzt, der durch den Elementtyp und einem nummerischen Index gekennzeichnet ist. Der Standardname kann durch Tastatureingabe im grauen input field auf der Ebene überschrieben werden. Ebenen werden nach Seitenzahlen in einer schwarzen Box, die oberhalb mit der Seitenzahl gekennzeichnet ist, gruppiert. Im Ebenenschaltflächenmenü kann man zwischen Box Mode und Layer Mode wechseln. Ist der Modus Button grün, so ist der betreffende Modus eingeschaltet. Hingegen ist ein ausgeschalteter Modus mit einem weißen Button versehen. Man kann nur entweder im Box Mode oder im Layer Mode sein, aber nicht in beiden Modi gleichzeitig. Mit dem dunkelgrauen Copy Button kann der Benutzer ausgewählte Ebenen kopieren. Folglich werden die beinhaltenden Elemente dubliziert. Wird eine Ebene kopiert, so wird an den Ebenennamen copy angehängt. Mit Lock und Unlock kann man Ebenen sperren bzw. entsperren. Eine gesperrte Ebene kann nicht verändert werden, d.h. keine Operationen können auf ihr beinhaltendes Element angewendet werden. Eine gesperrte unausgewählte Ebene ist weiß und eine gesperrte ausgewählte ist rosa mit weißer Umrandung, was auf Abbildung \ref{fig:ebenen2} verdeutlicht wird. 
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.3\textwidth]{"images/ebenen.png"}
-	\caption{Ebenen mit Elementen allen Typs im Editor der PDF Web App}
-	\label{fig:ebenen}
-\end{figure}
-
-Im Ebenenschaltflächenmenü kann man zwischen Box Mode und Layer Mode wechseln. Ist der Modus Button grün, so ist der betreffende Modus eingeschaltet. Hingegen ist ein ausgeschalteter Modus mit einem weißen Button versehen. Man kann nur entweder im Box Mode oder im Layer Mode sein, aber nicht in beiden Modi gleichzeitig. Mit dem dunkelgrauen Copy Button kann der Benutzer ausgewählte Ebenen kopieren. Folglich werden die beinhaltenden Elemente dubliziert. Wird eine Ebene kopiert, so wird an den Ebenennamen copy angehängt. Mit Lock und Unlock kann man Ebenen sperren bzw. entsperren. Eine gesperrte Ebene kann nicht verändert werden, d.h. keine Operationen können auf ihr beinhaltendes Element angewendet werden. Eine gesperrte unausgewählte Ebene ist weiß und eine gesperrte ausgewählte ist rosa mit weißer Umrandung, was auf Abbildung \ref{fig:ebenen2} verdeutlicht wird. 
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.3\textwidth]{"images/ebenen2.png"}
 	\caption{Teilweise gesperrte Ebenen im Editor der PDF Web App}
-	\label{fig:ebenen2}
+	\label{fig:ebenen}
 \end{figure}
 
 Die dunkelgrauen Select All und Deselect All Buttons stellen Auswahlfilter dar. Bewegt man die Maus auf die Buttons klappt sich ein Filtermenü auf, was im Bildausschnitt \ref{fig:filtermenu} gezeigt wird. 
