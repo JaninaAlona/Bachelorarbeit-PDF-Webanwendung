@@ -250,9 +250,9 @@ Wenn man den Splitter öffnet findet man zunächst einen gesperrten Save-Button 
 Im Merger wird eine geöffnete Datei als Uint8Array einem globalen Array selectedPDFBytes hinzugefügt. Zusätzlich wird einem UL-HTML-Element, dem Dateilistencontainer, pro Datei ein LI-HTML-Element mit der Klasse file\_unselected, sowie dem Dateinamen gekürzt auf 50 Characters und einem click Event Handler für die Dateimarkierung, hinzugefügt. Erst wenn man mehr als 1 Datei oder maximal 100 ausgewählt hat werden der Save- und Remove-Button funktionstüchtig gemacht. Außerdem wird dem LI eine Reihe an drag-Events hinzugefügt: dragstart, dragover und drop. Funktion der drag-Events ist, dass der Benutzer die Listeneinträge in ihrer Reihenfolge verschieben kann. Dabei spiegelt selectedPDFBytes die Reihenfolge der Listeneinträge wieder. Für das dragging muss der Listeneintrag nicht markiert sein, jedoch beim Entfernen von einzelnen Listeneinträgen schon. Ist ein Listeneintrag schwarz markiert, so wird die Klasse file\_unselected vom entsprechenden LI entfernt und stattdessen die Klasse file\_selected hinzugefügt. Hat man so viele Listeneinträge entfernt, dass nur noch 1 oder keine Datei übrig bleibt, so wird Save abermals gesperrt. Ebenso wird Remove bei keinen Elementen deaktiviert.
 
 \subsection{Struktur der Editorelemente}
-Die 4 Editorelemente Text, Drawing, Shape und Image werden bei Erzeugung auf der Seite in 4 zugehörigen globalen Arrays in der Erstellungsreihenfolge abgelegt: userTextList für Text, drawLayerStack für Drawings, geometryPointsList für Shapes und userImageList für Images. Für die Erstellung der Editorelemente verwende ich zum einen Objekt, die die Struktur der Elemente auf der Seite abbilden und zum anderen Objekte, die die Elementeigenschaften repräsentieren. Diese Objekte werden nicht direkt verwendet, sondern sie werden als Prototypen nach dem Konzept der prototypischen Objektorientierung für die Erstellung konkreterer Objekte verwendet. Im Codeabschnitt \ref{code:control-point} ist das Prototyp-Objekt für Text, Drawing und Image abgebildet. Der darauffolgende Codeabschnitt \ref{code:shape-controller-point} zeigt das Prototyp-Objekt für Shape.
+Die 4 Editorelemente Text, Drawing, Shape und Image werden bei Erzeugung auf der Seite in 4 zugehörigen globalen Arrays in der Erstellungsreihenfolge abgelegt: userTextList für Text, drawLayerStack für Drawings, geometryPointsList für Shapes und userImageList für Images. Für die Erstellung der Editorelemente verwende ich zum einen Objekt, die die Node-Struktur der Elemente in der Webseite abbilden und zum anderen Objekte, die die elementspezifischen Eigenschaft repräsentieren. Diese Objekte werden nicht direkt verwendet, sondern sie werden als Prototypen nach dem Konzept der prototypischen Objektorientierung für die Erstellung konkreterer Objekte verwendet, die vom Prototyp erben. Im Codeabschnitt \ref{code:control-point} ist das strukturelle Prototyp-Objekt für Text, Drawing und Image abgebildet. Der darauffolgende Codeabschnitt \ref{code:shape-controller-point} zeigt das strukturelle Prototyp-Objekt für Shape.
 
-\begin{lstlisting}[style=ES6, caption={Berechnung der PDF-Seitengröße}, label=code:control-point, breaklines=true]
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die Node-Struktur von Text, Drawing und Image}, label=code:control-point, breaklines=true]
 	let controlPoint = {
 		controlBox: null,
 		editImg: null,
@@ -277,7 +277,7 @@ Die 4 Editorelemente Text, Drawing, Shape und Image werden bei Erzeugung auf der
 	}
 \end{lstlisting}
 
-\begin{lstlisting}[style=ES6, caption={Berechnung der PDF-Seitengröße}, label=code:shape-controller-point, breaklines=true]
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die Node-Struktur von Shape}, label=code:shape-controller-point, breaklines=true]
 	let shapeControllerPoint = {
 		controlBox: null,
 		editImg: null,
@@ -308,6 +308,174 @@ Die 4 Editorelemente Text, Drawing, Shape und Image werden bei Erzeugung auf der
 		}
 	}
 \end{lstlisting}  
+
+Vom controlPoint-Prototyp leitet das Objekt controlP ab und von shapeControllerPoint leitet shapeControllerP ab. ShapeControllerPoint stellt einen spezialisierten controlPoint dar, der mit Rotationseigenschaften erweitert wurde. ControlP und shapeControllerP-Objekte werden direkt in userTextList, drawLayerStack, userImageList und geometryPointsList gespeichert.
+Die Prototypen besitzen ein Attribut elementToControl, um die Objekte mit elementspezifischen Eigenschaften zu speichern. Dessen Prototypen heißen userText für Text, drawLayer für Drawings, shape für Shapes und userImage für Images. Sie sind in den Codesegmenten aufgeführt.
+
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die textspezifischen Eigenschaften}, label=code:user-text, breaklines=true]
+	let userText = {
+		pdfDoc: null,
+		pdfBytes: null,
+		text: '',
+		x: 1,
+		y: 1,
+		size: 1,
+		fontKey: null,
+		font: null,
+		lineHeight: 34,
+		color: rgb(0, 0, 0),
+		page: 1,
+		opacity: 1.0,
+		rotation: degrees(0),
+		setTextElem() {
+			this.pdfDoc.getPages()[0].drawText(this.text, {
+				x: this.x,
+				y: this.y,
+				size: this.size,
+				font: this.font,
+				color: this.color,
+				lineHeight: this.lineHeight,
+				rotate: this.rotation
+			});
+		}
+	}
+\end{lstlisting}
+
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die drawingspezifischen Eigenschaften}, label=code:draw-layer, breaklines=true]
+	let drawLayer = {
+		paths: [],
+		currentPathIndex: 0, 
+		rotation: 0,
+		wasRotated: false
+	}
+\end{lstlisting}
+
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die shapespezifischen Eigenschaften}, label=code:shape, breaklines=true]
+	let shape = {
+		context: null,
+		type: "",
+		x: 0,
+		y: 0,
+		xp2: 50,
+		yp2: 50,
+		width: 100,
+		height: 100,
+		stroke: 'rgba(0,0,0,1.0)',
+		strokeWidth: 3,
+		fill: '',
+		useFill: false,
+		useStroke: false,
+		rotation: 0,
+		page: 1,
+		drawShape() {
+			if(this.type === "rectangle") {
+				let rectCenterX = this.x + this.width / 2;
+				let rectCenterY = this.y + this.height / 2;
+				this.context.save();
+				this.context.beginPath();
+				this.context.translate(rectCenterX, rectCenterY);
+				this.context.rotate(this.rotation * Math.PI / 180);
+				this.context.translate(-rectCenterX, -rectCenterY);
+				if (this.useFill) 
+				this.context.fillStyle = this.fill;
+				if (this.useStroke) {
+					this.context.strokeStyle = this.stroke;
+					this.context.lineWidth   = this.strokeWidth;
+				}
+				if (this.useFill) {
+					this.context.fillRect(this.x, this.y, this.width, this.height);
+				}
+				if (this.useStroke) {
+					this.context.strokeRect(this.x, this.y, this.width, this.height);
+				}
+				this.context.restore();
+			} else if (this.type === "triangle") {
+				let triCenterX = this.x + this.width / 2;
+				let triCenterY = this.y + this.height / 2;
+				this.context.save();
+				this.context.beginPath();
+				this.context.translate(triCenterX, triCenterY);
+				this.context.rotate(this.rotation * Math.PI / 180);
+				this.context.translate(-triCenterX, -triCenterY);
+				this.context.moveTo(this.x, this.y);
+				this.context.lineTo(this.x, this.y + this.height);
+				this.context.lineTo(this.x + this.xp2 + this.width, this.y + this.yp2);
+				this.context.closePath();
+				
+				if (this.useFill) 
+				this.context.fillStyle = this.fill;
+				
+				if (this.useStroke) {
+					this.context.strokeStyle = this.stroke;
+					this.context.lineWidth   = this.strokeWidth;
+				}
+				
+				if (this.useFill) 
+				this.context.fill();
+				
+				if (this.useStroke)    
+				this.context.stroke();
+				
+				this.context.restore();
+			} else if (this.type === "circle") {
+				this.context.beginPath();
+				this.context.ellipse(this.x, this.y, this.width / 2, this.height / 2, this.rotation * Math.PI / 180, 0, 2 * Math.PI);
+				
+				if (this.useFill) {
+					this.context.fillStyle = this.fill;
+				}
+				if (this.useStroke) {
+					this.context.strokeStyle = this.stroke;
+					this.context.lineWidth   = this.strokeWidth;
+				}   
+				this.context.closePath();
+				if (this.useFill) {
+					this.context.fill();
+				}
+				if (this.useStroke)    
+				this.context.stroke();
+			}
+		}
+	}
+\end{lstlisting}
+
+\begin{lstlisting}[style=ES6, caption={Prototyp-Objekt für die imagespezifischen Eigenschaften}, label=code:user-image, breaklines=true]
+	let userImage = {
+		pdfDoc: null,
+		pdfBytes: null,
+		image: null,
+		base64String: "",
+		type: "",
+		x: 1,
+		y: 1,
+		width: 1,
+		height: 1,
+		page: 1,
+		opacity: 1.0,
+		rotation: degrees(0),
+		setImageElem() {
+			this.pdfDoc.getPages()[0].drawImage(this.image, {
+				x: this.x,
+				y: this.y,
+				width: this.width,
+				height: this.height,
+				rotate: this.rotation,
+			});
+		}
+	}
+\end{lstlisting}
+
+Die spezifischen Objekte zu ihren Prototypen heißen currentUserText für userText, drawingLayer für drawLayer, currentShape für shape und currentUserImage für userImage. Sowohl die Nodestrukturobjekte, als auch die Eigenschaftsobjekte werden beim Hinzufügen von Elementen erstellt und mit Standardwerten initialisiert. 
+
+\subsection{Aufbau eines PDF-Seitencontainers}
+Die Wurzel eines PDF-Seitencontainer bildet ein DIV mit der Klasse write\_layer. Die write\_layer hat mindestens ein child, eine Canvas mit der Klasse render\_context. Dieser Fall liegt vor, wenn man noch keine Elemente zum PDF hinzugefügt hat. Man kann sich den Render Context als Zeichenfläche vorstellen, die durch die Dimensionen der PDF-Seite begrenzt ist, mit dem gerenderten Seiteninhalt als Hintergrund. Sobald der Benutzer Elemente der Seite hinzufügt, werden weitere Schichten auf den Render Context gelegt, wobei ein Element aus einer Canvas, die ich editimg genannt habe, für die Darstellung und einem 40 x 40 Pixel-großen DIV namens controlBox für den Kontrollpunkt des Elements besteht. Die Canvas besitzt 3 Klassen: Editimg, visible und eine Elementtyp-Klasse. Die Klasse editimg bezeichnet die Canvas, die das gerenderte, einzelne Element enthält. Visible definiert den Sichtbarkeitsstatus für das Ein- und Ausblenden von Elementen über die Ebenensteuerung. Die Typklasse kann entweder text, drawing, shape oder image sein. Jedes editimg enthält außerdem ein data-page für die Seitenzahl und data-index für die Position in der Elementliste Attribut. Die Größe des editimgs entspricht immer der Größe des zugehörigen render\_contextes. Auf der controlBox habe ich eine Reihe von Event-Handler definiert, die die Operationen im Operations Bar und Tools ausführen. Sie besitzt eine Typklasse und die Klasse box, um alle controlBoxes im Dokument ansprechen zu können. Die controlBox besitzt ebenfalls die gleichen data-Attribute wie das zugehörige editimg. Die editimgs werden bei Erzeugung aufeinander gestapelt mit dem zuletzt erstellten editimg zuoberst. Alle editimgs werden in einem Gruppierungs-DIV mit der Klasse editimg\_group akkumuliert. Ebenfalls werden alle controlBoxes in einem gruppierenden DIV mit der Klasse control\_group vereint. Die editimg\_group liegt über dem render\_context. Ganz oben befindet sich die control\_group, damit Kontrollpunkte nicht von gerenderten Elementen verdeckt werden. Jede write\_layer hat jeweils eine editimg\_group und control\_group. Das Node-Tree Segment für den Aufbau einer write\_layer ist in Screenshot \ref{fig:write-layer} veranschaulicht. 
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{"images/write-layer.png"}
+	\caption{Node-Tree Segment für den Aufbau einer write\_layer mit 4 Elementen jedes Typs}
+	\label{fig:write-layer}
+\end{figure}
 
 
 
