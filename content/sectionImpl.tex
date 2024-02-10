@@ -245,12 +245,70 @@ for (let i = 0; i < blankNumOfPagesCount; i++) {
 
 Beim Anklicken der Portrait-Orientierung wird in den Width and Height input fields der kleinere Wert der Seitendimensionen für die Width gesetzt und der größere Wert für die Height. Im Falle von Landscape werden Width und Height vertauscht und Quadratic orientiert sich an der Width.
 \par
-Wenn man den Splitter öffnet findet man zunächst einen gesperrten Save-Button vor. Der Save-Button wird erst benutzbar, wenn man eine PDF-Datei und Split-Methode im selection menu ausgewählt hat. Der Dateiname, begrenzt auf 50 Zeichen, wird unter dem Choose file-Button abgebildet. Die Methode list of pages kann man auch zum Splitten nach einer bestimmten Seite verwenden. Erst wenn man diesen Menüpunkt ausgewählt hat, wird das input field für die Seitenliste aktiviert. Die Split-Funktion fürs Splitten nach geraden und ungeraden Seiten heißt SplitAfter. Basierend auf den Rest Modulo 2 wird die Funktion nur ausgeführt, wenn bei der even pages-Split-Methode mehr als 3 Seiten im Input-PDF vorliegen bzw. bei der odd pages-Split-Methode mehr als 2 Seiten vorhanden sind. Andernfalls wird der Save-Button ebenfalls deaktiviert. Die Input-PDF Bestandteile als Dokumentobjekte von PDF-LIB, die nach jedem Split-Vorgang bei der PDF-LIB-Funktion PDFDocument.create entstehen, werden in einem globalen Array splittedPDFs gesichert. Die Arraybestandteile werden durch Klick auf Save einzeln zu einem Uint8Array serialisiert und in einem globalen Array pdfBytesList gespeichert. PdfBytesList wird dann der compressMultipleToZip funktion übergeben. Jedes gesplittete PDF enthält den Ursprungsdateinamen, einen Unterstrich und einen Index beginnend mit 0, der das Teil-PDF in der Split-Reihenfolge aufsteigend nummeriert. Alle Source-PDF-Bestandteile werden in einen Zip-Ordner verpackt. Am Ende des Downloads werden splittedPDFs und pdfBytesList wieder als leeres Array gesetzt.
+Wenn man den Splitter öffnet findet man zunächst einen gesperrten Save-Button vor. Der Save-Button wird erst benutzbar, wenn man eine PDF-Datei und Split-Methode im selection menu ausgewählt hat. Der Dateiname, begrenzt auf 50 Zeichen, wird unter dem Choose file-Button abgebildet. Die Methode list of pages kann man auch zum Splitten nach einer bestimmten Seite verwenden. Erst wenn man diesen Menüpunkt ausgewählt hat, wird das input field für die Seitenliste aktiviert. Die Split-Funktion fürs Splitten nach geraden und ungeraden Seiten heißt SplitAfter. Basierend auf den Rest Modulo 2 wird die Funktion nur ausgeführt, wenn bei der even pages-Split-Methode mehr als 3 Seiten im Input-PDF vorliegen bzw. bei der odd pages-Split-Methode mehr als 2 Seiten vorhanden sind. Andernfalls wird der Save-Button ebenfalls deaktiviert. Die Input-PDF Bestandteile als Dokumentobjekte von PDF-LIB, die nach jedem Split-Vorgang bei der PDF-LIB-Funktion PDFDocument.create entstehen, werden in einem globalen Array splittedPDFs gesichert. Die Arraybestandteile werden durch Klick auf Save einzeln zu einem Uint8Array serialisiert und in einem globalen Array pdfBytesList gespeichert. PdfBytesList wird dann der compressMultipleToZip funktion übergeben. Jedes gesplittete PDF enthält den Ursprungsdateinamen, einen Unterstrich und einen Index beginnend mit 0, der das Teil-PDF in der Split-Reihenfolge aufsteigend nummeriert. Alle Source-PDF-Bestandteile werden in einen ZIP-Ordner verpackt. Am Ende des Downloads werden splittedPDFs und pdfBytesList wieder als leeres Array gesetzt.
 \par
 Im Merger wird eine geöffnete Datei als Uint8Array einem globalen Array selectedPDFBytes hinzugefügt. Zusätzlich wird einem UL-HTML-Element, dem Dateilistencontainer, pro Datei ein LI-HTML-Element mit der Klasse file\_unselected, sowie dem Dateinamen gekürzt auf 50 Characters und einem click Event Handler für die Dateimarkierung, hinzugefügt. Erst wenn man mehr als 1 Datei oder maximal 100 ausgewählt hat werden der Save- und Remove-Button funktionstüchtig gemacht. Außerdem wird dem LI eine Reihe an drag-Events hinzugefügt: dragstart, dragover und drop. Funktion der drag-Events ist, dass der Benutzer die Listeneinträge in ihrer Reihenfolge verschieben kann. Dabei spiegelt selectedPDFBytes die Reihenfolge der Listeneinträge wieder. Für das dragging muss der Listeneintrag nicht markiert sein, jedoch beim Entfernen von einzelnen Listeneinträgen schon. Ist ein Listeneintrag schwarz markiert, so wird die Klasse file\_unselected vom entsprechenden LI entfernt und stattdessen die Klasse file\_selected hinzugefügt. Hat man so viele Listeneinträge entfernt, dass nur noch 1 oder keine Datei übrig bleibt, so wird Save abermals gesperrt. Ebenso wird Remove bei keinen Elementen deaktiviert.
 
 \subsection{Struktur der Editorelemente}
-Die 4 Editorelemente Text, Drawing, Shape und Image werden in 4 zugehörigen globalen Arrays in der Erstellungsreihenfolge abgelegt: userTextList für Text, drawLayerStack für Drawings, geometryPointsList für Shapes und userImageList für Images.
+Die 4 Editorelemente Text, Drawing, Shape und Image werden bei Erzeugung auf der Seite in 4 zugehörigen globalen Arrays in der Erstellungsreihenfolge abgelegt: userTextList für Text, drawLayerStack für Drawings, geometryPointsList für Shapes und userImageList für Images. Für die Erstellung der Editorelemente verwende ich zum einen Objekt, die die Struktur der Elemente auf der Seite abbilden und zum anderen Objekte, die die Elementeigenschaften repräsentieren. Diese Objekte werden nicht direkt verwendet, sondern sie werden als Prototypen nach dem Konzept der prototypischen Objektorientierung für die Erstellung konkreterer Objekte verwendet. Im Codeabschnitt \ref{code:control-point} ist das Prototyp-Objekt für Text, Drawing und Image abgebildet. Der darauffolgende Codeabschnitt \ref{code:shape-controller-point} zeigt das Prototyp-Objekt für Shape.
+
+\begin{lstlisting}[style=ES6, caption={Berechnung der PDF-Seitengröße}, label=code:control-point, breaklines=true]
+	let controlPoint = {
+		controlBox: null,
+		editImg: null,
+		elementToControl: null,
+		type: '',
+		layer: null,
+		page: 1,
+		x: 0,
+		y: 0,
+		index: 0,
+		setControlPoint() {
+			let div = document.createElement("div");
+			div.style.position = "absolute";
+			div.style.left = this.x + "px";
+			div.style.top = this.y + "px";
+			div.setAttribute('data-page', this.layer.getAttribute("data-write"));
+			div.setAttribute('data-index', this.index);
+			div.classList.add(this.type);
+			div.classList.add("box");
+			this.controlBox = div;
+		}
+	}
+\end{lstlisting}
+
+\begin{lstlisting}[style=ES6, caption={Berechnung der PDF-Seitengröße}, label=code:shape-controller-point, breaklines=true]
+	let shapeControllerPoint = {
+		controlBox: null,
+		editImg: null,
+		elementToControl: null,
+		layer: null,
+		page: 1, 
+		x: 0,
+		y: 0,
+		index: 0, 
+		rotation: 0,
+		originX: 0,
+		originY: 0,
+		setControlPoint() {
+			let div = document.createElement("div");
+			div.style.position = "absolute";
+			div.style.left = this.x + "px";
+			div.style.top = this.y + "px";
+			div.setAttribute('data-page', this.layer.getAttribute("data-write"));
+			div.setAttribute('data-index', this.index);
+			div.classList.add("shape");
+			div.classList.add("box");
+			this.controlBox = div;
+		},
+		rotateControlPoint() {
+			this.controlBox.style.marginLeft = this.originX + "px";
+			this.controlBox.style.marginTop = this.originY + "px";
+			this.controlBox.style.transform = "rotate(" + this.rotation + "deg)";
+		}
+	}
+\end{lstlisting}  
+
 
 
 \subsection{Implementierung des Zooms}
