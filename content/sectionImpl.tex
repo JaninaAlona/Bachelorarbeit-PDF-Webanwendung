@@ -36,10 +36,11 @@ Abbildung \ref{fig:folders} stellt die Ordnerstruktur des Projekts dar.
 
 Im Ordner js sind meine selbst geschriebenen JavaScript-Dateien und im Ordner css meine eigenen CSS-Dateien abgelegt. Genauso wurden alle HTML-Dateien von mir erstellt. Der Ordner libs enthält alle JavaScript- und CSS-Dateien von externen Libraries. Die Datei pdf.worker.min.js ist eine dependency von pdf.js und fontkit.umd.min.js gehört zur Library PDF-LIB, um benutzerdefinierte Fonts einzubinden. Im Prinzip hat jedes Modul seine eigene JavaScript-Datei. Das Script input\_control\_script.js, welches alle Module implementiert, enthält Kontrollfunktionen für Benutzereingabefelder und die ZIP-Download-Funktionen. Der Editor enthält teilt sich die Dateien pdf\_reader\_script.js und index\_reader\_style.css mit dem Reader. Die CSS-Datei widget\_style.css deckt den Creator, Merger und Splitter ab. Der Editor besteht aus mehreren Scripten: write\_pdf\_script.js für Textelemente, draw\_pdf\_script.js für Zeichnungen, geometry\_pdf\_script.js für Shapeelemente, images\_pdf\_script.js für Bildelemente, layer\_buttons\_script.js für Ebenenmenübuttons, select\_all\_script.js für die Auswahlfilterbuttons Select All und Deselect All und stack\_layers\_script.js für Ebenenmanagementfunktionen. Der Reader, Splitter und Merger bestehen aus einer separaten HTML-Seite. Das Editormodul ist eine einzelne HTML-Seite, bei der je nach Funktion die entsprechenden Schaltflächen für die Elementoperationen mit display: flex eingeblendet und mit display: none ausgeblendet werden. 
 
-
 \subsection{Layoutgestaltung}
 Das Hauptmenü wollte ich sehr simpel und minimalistisch gestalten. Daher habe ich für die Startseite nur einen weißen Hintergrund mit einem oberen Balken in der Farbe \#333 als dunkles Grau, das die Hauptmenübuttons hervorhebt. Dieses dunkle Grau wird auch für die beiden oberen Reader-Leisten und den Reader Hintergrund verwendet. Die Buttons haben einen vordefinierten Style von der Library Bootstrap. In der Bootstrap Library kann man den Style durch bestimmte Klassen auswählen. Alle grünen Buttons in der PDF Web App und die Selection Menus im Creator und Splitter haben die Bootstrap-Klasse btn-success und der dunkle Button mit grüner Schrift und Umrandung des ausgewählten Hauptmenü-Buttons hat die Bootstrap Klasse btn-outline-success. Anfangs war es schwierig den default Style des input type="file" HTML-Elements zu überschreiben. Vor allem die Beschriftung des Buttons für Choose file war standardmäßig in Deutsch gehalten und lies sich nicht in englischer Sprache programmieren. Daher habe ich die Library Bootstrap Filestyle verwendet, um den Choose file Button in Englisch und mit einem Bootstrap-Style zu versehen. Um eine Designkonsistenz zu erzielen, habe ich die Bootstrap Buttons überall in der PDF Web App in verschiedenen Stylevarianten verwendet. Lediglich beim Tools Seitenmenü im Editor habe ich einen eigenen Style für die Buttons für Elementoperationen programmiert. Diese weißen Buttons haben eine schwarze Schrift mit einer Border Width von 2 Pixeln, Border Radius von 5 Pixeln und einer Border Color von \#333. Der inaktive weiße Modus-Button und die ausgeschalteten Selection Filter im Layers Menu hat den Bootstrap-Style btn-light und alle dunkelgrauen Buttons haben den Bootstrap-Style btn-dark. Alle rosa Flächen in der PDF Web App und ausgewählte Ebenen haben die Farbe \#dabdb6. Der hellgraue Operations Bar und das Namensfeld einer Ebene im Editor haben eine Farbe von \#8c8c8c. Tools und aktivierte Checkboxen haben eine türkise Hintergrundfarbe in \#5eb873. Der Hintergrund der Ebenen sowie die Seitengruppe für Layers einer Seite und das Tools Seitenmenüs hat einen Alphawert von 0.8. Abgewählte Ebenen, Selection Menus in Tools, der Hintergrund beim Output-Dateinamen und ausgewählte Dateinamen im Merger sind schwarz. Alle horizontalen Leisten mit Operationen haben eine Höhe von 58 Pixeln und dessen Buttons haben einen horizontalen Abstand von 5 Pixeln. Layers und Tools sind jeweils 190 Pixel breit. Hat man in Tools eine Font- oder Bilddatei ausgewählt, so wird nach 15 Zeichen im Dateinamen ein Zeilenumbruch eingefügt. Der Dateiname des Output-PDFs ist auf 50 Zeichen beschränkt. Im Reader befinden sich zwischen den gerenderten PDF-Seiten 20 Pixel Abstand. Alle input fields, Scrollbars und input type="checkbox" HTML-Elemente haben den default Style des Browsers. Die default Dateinamen für Reader und Editor sind wie folgt benannt: Source Dokument Dateiname, ein Unterstrich und edited. Der Creator besitzt den Dateinamen blank\_pdf und der Merger merged\_pdf. Im Splitter wird ebenfalls wie im Reader und Editor der Source Dateiname, ein Unterstrich und split verwendet. 
 
+\subsection{Input Control}
+Eine automatisierte Eingabekontrolle von Benutzereingabefeldern findet in allen Modulen, außer dem Merger, statt. Alle input fields sind input type="text" Elemente, anstatt type="number", selbst wenn nur Zahlen als Eingabewerte gültig sind. Das hat folgenden Hintergrund: Es gibt eine Funktion namens restrictInputValues, die automatisch Benutzereingaben korrigiert. Die Funktion wird ausgelöst, wenn das input field verändert wurde (change-Event). Im Prozess wird der event handler zunächst entfernt, bevor er aktiviert wird. Würde man den Event-Handler nicht zuallererst entfernen, so würde dieses Eingabefeld immer mehr Event-Handler akkumulieren. RestrictInputValues entfernt white space, wandelt die Benutzereingaben als String in Zahlen um und hält die eingegebenen Werte in einem gültigen Wertebereich. Außerdem gibt es eine Funktion convertInputToSuccess, die den Input-String in einen Zahlenwert parst und den geparsten Wert oder -1000 für eine ungültige Benutzereingabe zurückgibt. Die return value von convertInputToSuccess bestimmt maßgeblich, ob Operationen, z.B. die Schriftgröße im Texteditor ausgeführt werden sollen. Für die Eingabe von eine Liste an Seiten, gibt es eine gesonderte Funktion convertPagelistToSuccess. Hier wird im Falle von ungültigem Input die Benutzereingabe gelöscht. Eine genauere Beschreibung des Verhaltens der Input Control werde ich im Unterkapitel Testdurchführung, Abschnitt Testauswertung, weiter ausführen.
 
 \subsection{Einlesen einer PDF-Datei}
 Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{code:file} dargestellt:
@@ -49,40 +50,73 @@ Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{cod
 	for (let i = 0; i < inputFileButtons.length; i++) {
 		inputFileButtons[i].addEventListener("change", function(e) {
 			resetAllModes();
-			cleanUp();
-			const encryptedErrorWidgets = document.getElementsByClassName("encrypted_error");
-			const noPDFErrorWidgets = document.getElementsByClassName("no_pdf_error");
+			// ...
 			file = e.target.files[0];
 			const fileReader = new FileReader(); 
 			fileReader.onload = function() {
 				const typedarray = new Uint8Array(this.result);
-				pdfState.originalPDFBytes = typedarray;
+				const pdfBytes = typedarray;
 				const loadingTask = pdfjsLib.getDocument(typedarray);
 				loadingTask.promise.then(async (pdf) => {
-					let pdfDoc;
-					try {
-						pdfDoc = 
-							await PDFLib.PDFDocument.load(pdfState.originalPDFBytes);
-					} catch(encryptedErr) {
-						encrypted = true;
-					}
-					if (!encrypted) {
-						if (file.name.endsWith(".pdf") && pdf._pdfInfo.numPages <= 5000) {
-							// ...
-							pdfState.pdf = pdf;
-							onetimeSetup = true;
-							pdfFileName = file.name;
-							// ...
-							adjustPDFToUserViewport(pdfDoc);
-							// ...
-							renderPage(pageCounter, false);
+					if (file.name.endsWith(".pdf")) {
+						try {
+							outputPDF = await PDFLib.PDFDocument.load(pdfBytes);
+						} catch(encryptedErr) {
+							encrypted = true;
 						}
-					} else {
-						for (let i = 0; i < encryptedErrorWidgets.length; i++) {
-							encryptedErrorWidgets[i].style.display = "flex";
+						if (!encrypted) {
+							if (pdf._pdfInfo.numPages <= 5000) {
+								pdfState.pdf = pdf;
+								pdfState.originalPDFBytes = pdfBytes;
+								pdfState.existingPDFBytes = pdfBytes;
+								// ...
+								pdfState.lastPage = pdf._pdfInfo.numPages;
+								// ...
+								adjustPDFToUserViewport();
+								pdfState.renderedPage = 0;
+								// ...
+								let readerMode = true;
+								let editorMode = false;
+								const openPDFs = document.getElementsByClassName("open_pdf");
+								for (let i = 0; i < openPDFs.length; i++) {
+									if (openPDFs[i].classList.contains("btn-outline-success")) {
+										readerMode = true;
+										break;
+									} else if (openPDFs[i].classList.contains("btn-success")) {
+										readerMode = false;
+									}
+								}
+								const editorBtns = document.getElementsByClassName("editor_btn");
+								for (let i = 0; i < editorBtns.length; i++) {
+									if (editorBtns[i].classList.contains("btn-outline-success")) {
+										editorMode = true;
+										break;
+									} else if (editorBtns[i].classList.contains("btn-success")) {
+										editorMode = false;
+									}
+								}
+								if (!readerMode && editorMode) {
+									onetimeSetup = true;
+									// ...
+									setTimeout(initEditor, 300);
+								}
+								startRender = performance.now();
+								await renderPage(pageCounter, false);
+							} else {
+								pagesError = true;
+								for (let i = 0; i < pagesErrorWidgets.length; i++) {
+									pagesErrorWidgets[i].style.display = "flex";
+								}
+							}
+						} else {
+							encryptedError = true;
+							for (let i = 0; i < encryptedErrorWidgets.length; i++) {
+								encryptedErrorWidgets[i].style.display = "flex";
+							}
 						}
 					}
 				}).catch(unsupportedFileErr => {
+					noPDFError = true;
 					for (let i = 0; i < noPDFErrorWidgets.length; i++) {
 						noPDFErrorWidgets[i].style.display = "flex";
 					}
@@ -96,9 +130,11 @@ Die Funktion für den Choose file Button ist im folgenden Codeabschnitt \ref{cod
 	}
 \end{lstlisting} 
 
-Bei jedem Klick des Choose File Buttons werden alle Modi für aktive Buttons des Editors und andere Steuerungsmodi in der Funktion resetAllModes auf false gesetzt. Die Funktion cleanUp initialisiert globale Variablen auf ihre Standardwerte und globale Arrays werden leer angelegt. Ich lese die Datei mit einem FileReader Objekt ein und führe beim load Event eine Funktion aus, die das result als Uint8Array im Objektattribut originalPDFBytes des Objekts pdfState speichert. Die Funktionen fürs Laden, Erstellen und Speichern des PDFs der PDF-LIB erwarten und geben eine Uint8Array aus. Das Objekt für den Status des eingelesenen PDFs ist wie in Abbildung \ref{code:pdfstate} aufgebaut:
+Bei jedem Klick des Choose File Buttons werden alle Modi für aktive Operations-Buttons des Editors und andere Steuerungsmodi in der Funktion resetAllModes auf false gesetzt. Ich lese die Datei mit einem FileReader Objekt ein und führe beim load event eine Funktion aus, die am Ende das Rendern der Seiten anstößt. Die eingelesene PDF-Datei, bestehend aus einem Uint8Array, wird im Objektattribut originalPDFBytes und existingPDFBytes des globalen Objekts pdfState speichert. Die PDF-LIB-Funktionen für das Laden eines PDFs akzeptiert einen Parameter als Uint8Array und das Speichern gibt ein als Uint8Array serialisiertes PDF zurück. OriginalPDFBytes benötige ich für die Einbettung von Elementen im Editor. Im Editor wird bei jedem Downloadvorgang des modifizierten PDFs das originale PDF aus Grundlage zur Einbettung verwendet. 
 
-\begin{lstlisting}[style=ES6, caption={Objekt für ein geöffnetes PDF-Dokument}, label=code:pdfstate, breaklines=true]
+Das Objekt pdfState, das den aktuellen Anzeige- und Datenstatus des eingelesenen PDFs repräsentiert, ist im Codeschnipsel \ref{code:pdfstate} dargestellt:
+
+\begin{lstlisting}[style=ES6, caption={Objekt für den Status eines geöffnetes PDF-Dokuments}, label=code:pdfstate, breaklines=true]
 	let pdfState = {
 		pdf: null,
 		currentPage: 1,
@@ -112,13 +148,13 @@ Bei jedem Klick des Choose File Buttons werden alle Modi für aktive Buttons des
 	}
 \end{lstlisting} 
 
-Eine loadingTask wird durch die pdf.js Funktion getDocument erzeugt, die ein pdf als Return-Wert des Promise zurückliefert. Falls die geöffnete Datei keine PDF-Datei war wird ein Fehler zurückgegeben. In der Fehlerbehandlung wird das Fenster, was die Fehlerinformation erhält sichtbar gemacht. Nach der Ausführung der loadingTask wird eine asynchrone Funktion aufgerufen, falls der Return Wert der loadingTask ein erfolgreiches promise zurückliefert. Hier wird der Reader initialisiert, die Reader Schaltflächen sichtbar gemacht und die Seiten gerendert. Zuerst wird das PDF Dokument mit den originalPDFBytes als Input mit einer PDF-LIB Ladefunktion geladen, um festzustellen, ob es sich um ein verschlüsseltes Dokument handelt. Wenn ja wird der Fehler geworfen und von mir abgefangen. In der Fehlerbehandlung wird eine globale Variable encrypted auf true gesetzt und das entsprechende Fehlerinformationsfenster angeschaltet. Nur wenn encrypted false ist und die Dateiendung .pdf besitzt, werden weitere Schritte eingeleitet. Zunächst werden die Fehlerinformationsfenster ausgeschaltet und im Attribut pdf des pdfState Objekts der erfolgreiche Return-Wert der loadingTask gespeichert. Dieses Objekt wird für das Rendern der PDF-Seiten im Reader benötigt. Dann wird das unbearbeitete PDF-Dokument nochmals in originalPDFBytes und existingPDFBytes gespeichert. Darauffolgend wird die Reader GUI aufgebaut und das PDF wird dem Viewport des Browsers angepasst. Eine Anpassung erfolgt nur, wenn die Breite der ersten Seite des geöffneten Dokuments größer als der Viewport des Browsers ist. Dann wird der Zoomfaktor entsprechend angepasst, sodass die Seite mit einem Rand von 100 Pixeln formatfüllend in den Viewport passt. Zum Schluss wird der Rendervorgang durch die rekursive Funktion renderPage in Gang gesetzt.
+Eine loadingTask wird durch die pdf.js Funktion getDocument erzeugt, die ein libraryinternes pdf Objekt zurückliefert. Dieser Return Wert wird in pdfState.pdf abgelegt und in pdfState.lastPage wird die Seitenzahl der letzten Seite gespeichert. Das pdf.js pdf-Objekt wird für das Rendern der PDF-Seiten im Reader benötigt. Weiter im Code wird das PDF dem Viewport des Browsers angepasst. Eine Anpassung erfolgt nur, wenn die Breite der ersten Seite des geöffneten Dokuments größer als der Viewport des Browsers ist. Dann wird der Zoomfaktor entsprechend angepasst, sodass die Seite mit einem Rand von 100 Pixeln formatfüllend in den Viewport passt. Anschließend wird pdfState.renderedPage initialisiert. Dieses property enthält die aktuell gerenderte Seite, die am Ende des Rendervorgangs der letzten Seite des PDFs entspricht. Ob es sich um den Reader oder Editor handelt, wird überprüft, indem ich die Bootstrap-Klassen der zugehörigen Hauptmenü-Buttons ermittle. Falls der Editor geöffnet wurde, wird er mit einer Zeitverzögerung von 300 ms aufgebaut. Hintergrund dessen ist, dass die vorherige \gls{dom}-Version erst gerendert werden muss, sonst erhält man bei Zugriff auf HTML-Collections – ein arrayähnliches Objekt – eine Länge von Null. Am Ende wird der Rendervorgang durch die rekursive, asynchrone Funktion renderPage in Gang gesetzt. Das \gls{dom} ist eine Web \gls{api} für Webdokumente wie HTML-Dokumente. Es repräsentiert die Webseite als nodes und Objekte, sodass Programmiersprachen die Dokumentenstruktur, -style und -inhalt modulieren können. Strukturell besteht das \gls{dom} aus dem \gls{dom} tree, dessen nodes den HTML-Inhalt repräsentieren. Im \gls{dom} sind alle properties, Methoden und events für die Manipulation und Erzeugung von Webseiten als Objekte organisiert \cite{mozilla-dom}. 
 
 \subsection{Renderfunktion}
-Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
+Die Funktion renderPage ist im Codeauszug \ref{code:render} abgebildet.
 
 \begin{lstlisting}[style=ES6, caption={Renderfunktion}, label=code:render, breaklines=true]
-	function renderPage(num, renderSingle) {
+	async function renderPage(num, renderSingle) {
 		pdfState.pdf.getPage(num).then(function(page) {
 			let viewport = page.getViewport({
 				scale: pdfState.zoom
@@ -131,9 +167,7 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 			const pdfViewers = document.getElementsByClassName("pdf_viewer");
 			for (let i = 0; i < pdfViewers.length; i++) {
 				const pdfViewer = pdfViewers[i];
-				if (viewport.width > parseInt(pdfViewer.style.width, 10)) {
-					pdfViewer.style.width = viewport.width + "px";
-				}
+				// ...
 				if (writeLayerStack.length < pdfState.pdf._pdfInfo.numPages) {
 					div = document.createElement("div");
 					div.style.display = "flex";
@@ -148,10 +182,10 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 					div.classList.add("write_layer");
 					canvas = document.createElement("canvas");
 					canvas.style.display = "flex";
-					canvas.style.width = viewport.width + "px";
-					canvas.style.width = viewport.height + "px";
 					canvas.width = viewport.width;
 					canvas.height = viewport.height;
+					canvas.style.width = viewport.width + "px";
+					canvas.style.height = viewport.height + "px";
 					canvas.setAttribute('data-page', pageCounter);
 					canvas.classList.add("render_context");
 					div.appendChild(canvas);
@@ -183,26 +217,10 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 			if (!renderSingle) {
 				renderTask.promise.then(function() {
 					pdfState.renderedPage = pageCounter;
-					restrictInputValues('current_page', 1, pdfState.renderedPage, true, false);
-					const pageProgresses = document.getElementsByClassName("page_progress");
-					for (let i = 0; i < pageProgresses.length; i++) {
-						pageProgresses[i].innerText = `${pdfState.renderedPage}`;
-					}
+					// ...
 					pageCounter++;
-					if (pageCounter > pdfState.lastPage) {
-						const renderWidgetCons = 
-							document.getElementsByClassName("render_widget_con");
-						for (let i = 0; i < renderWidgetCons.length; i++) {
-							renderWidgetCons[i].style.display = "none";
-						}
-						const renderWidgets = 
-							document.getElementsByClassName("render_widget");
-						for (let i = 0; i < renderWidgets.length; i++) {
-							renderWidgets[i].style.display = "none";
-						}
-					} 
-					if (pdfState.pdf != null && pageCounter <= 
-						pdfState.pdf._pdfInfo.numPages) {
+					// ...
+					if (pdfState.pdf != null && pageCounter <= pdfState.pdf._pdfInfo.numPages) {
 						renderPage(pageCounter, false);
 					}
 				});
@@ -211,49 +229,28 @@ Die Funktion renderPage ist in Abbildung \ref{code:render} gezeigt.
 	}
 \end{lstlisting} 
 
-Die Funktion ruft sich rekursiv auf, falls noch nicht alle Seiten gerendert wurden und wird erst bei der letzten Seite verlassen. Sie kann für das Rendern von 1 Seite oder vielen Seiten verwendet werden. Beim Rotieren von Seiten um jeweils 90 Grad wird renderPage mit renderSingle=true verwendet, damit nur die gedrehte Seite neu gerendet wird. Mittels des pdfState.pdf Objekts wird die aktuelle Seite geholt und ein Promise mit einem page Objekt wird zurückgegeben. Danach wird eine umfangreiche anonyme Funktion aufgerufen. Bei allen Zoomfunktionalitäten, wie der Plus Button zum Reinzoomen wird renderPage mit einem anderen Zoomfaktor, als dem initialen Zoomfaktor von 1 aufgerufen. Das pdfState property zoom speichert den aktuellen zoom Faktor des PDF-Dokuments und wird in scale vom viewport der aktuell zu rendernden Seite gespeichert. Die viewport Variable gibt dann Auskunft über die Breite und Höhe der tatsächlichen Seite mit diesem scale Faktor. Außerdem wird ein weiterer viewport, hier viewportOriginal genannt, mit dem Skalierungsfaktor von 1 gespeichert. Die width und height von viewportOriginal wird pro Seite den originalWidths und originalHeights properties vom Typ Array von pdfState hinzugefügt. Das gerenderte PDF besteht aus mehreren verschachtelten Div HTML-Elementen, wobei das innere Element die Klasse pdf\_viewer besitzt. Dem PDF Viewer container werden pro Ausführung von renderPage ein Div mit der Klasse write\_layer und einem data Attribute data-write mit der aktuellen Seitenzahl hinzugefügt. Die Write Layer stellt die aktuelle Seite dar und dient als Container für die gerenderte PDF Seite und hinzugefügten Elemente des Editors. Die gerenderte PDF-Seite wird in einem HTML Canvas-Element als erstes Child der Write Layer hinzugefügt. Diese Canvas hat die Klasse render\_context und ein data-Attribut data-page für die aktuelle Seitenzahl. Sowohl die Write Layer als auch der Render Context haben die Größe und Breite der zugehörigen PDF-Seite im aktuellen Skalierungsfaktor. Die Write Layer wird zusätzlich einem Array writeLayerStack hinzugefügt. Falls schon alle PDF-Seiten gerendert wurden und neu gerendert werden sollen, wird aus diesem Array die Canvas des Render Contextes abermals für den Rendervorgang herausgeholt und wiederverwendet. Es müssen also keine neuen Canvas-Elemente für erneute Rendervorgänge erstellt werden. Dann wird mittels der pdf.js Library die Seite gerendert und nach der renderTask wird eine anonyme Funktion ausgeführt. Zunächst wird die Seitenzahl der gerenderten Seite, die im pageCounter festgehalten wird, dem pdfState property renderedPage zugewiesen. Dieses property wird dann als Maximalwert für die Eingabekontrolle für die Navigation zu einer bestimmten Seite verwendet und für das Infofeld, was den Renderfortschritt anzeigt. Konkret bedeutet das, dass wenn man versucht eine noch nicht gerenderte Seite anzuspringen, so navigiert der Reader nur zur zuletzt gerenderten Seite. Das Infofeld wird am Ende des Rendervorgangs ausgeblendet. Der inkrementierte pageCounter wird dem rekursiven Aufruf von renderPage übergeben, um die nächste Seite zu rendern. 
+Die Funktion ruft sich rekursiv auf, falls noch nicht alle Seiten gerendert wurden. Sie kann für das Rendern auf ein oder mehreren Seiten operieren. Pro Funktionsaufruf wird der globale pageCounter hochgezählt. Mittels des pdfState.pdf-Objekts wird die aktuelle Seite geholt und ein Seitenobjekt von pdf.js entgegengenommen. Vom Seitenobjekt wird der Viewport der Seite geholt und eine Skalierung festgelegt. Das pdfState property zoom, was die aktuelle Skalierung des gesamten PDF-Dokuments speichert wird der Viewport-Skalierung zugewiesen. Viewport besitzt width und height properties. Zusätzlich wird der Viewport mit einer Skalierung von 1 geholt, damit im weiteren Verlauf von renderPage die Arrays pdfState.originalWidths und pdfState.originalHeights die Originalgröße der PDF-Seite aufnehmen können. Der Container des gerenderten PDFs besteht aus mehreren verschachtelten DIV-HTML-Elementen, wobei das innere Element die Klasse pdf\_viewer besitzt. Dem inneren PDF-Viewer-Container werden pro Ausführung von renderPage ein DIV mit der Klasse write\_layer und einem data-Attribut data-write, was die aktuelle Seitenzahl speichert, hinzugefügt. Die Write Layer symbolisiert einen Seitencontainer, der die gerenderte PDF-Seite und beigefügten Elemente des Editors enthält. Die gerenderte PDF-Seite wird in einem Canvas-Element als erstes Child der Write Layer hinzugefügt. Diese Canvas hat die Klasse render\_context und ein data-Attribut data-page für die aktuelle Seitenzahl. Sowohl die Write Layer als auch der Render Context werden in der Größe des aktuell skalierten Viewports angelegt. Die Write Layer wird zusätzlich in einem Array writeLayerStack abgelegt. WriteLayerStack hält die Write Layers in der Reihenfolge der PDF-Seiten im Dokument. Während eines erneuten Rendervorgangs wird aus diesem Array der Render Context herausgeholt und wiederverwendet. Dann wird mittels der pdf.js-Library die Seite gerendert und nach der renderTask wird eine anonyme Funktion ausgeführt. Nachdem die Seite in den Render Context geschrieben wurde, wird pdfState.renderedPage die pageCounter Variable zugewiesen. Dieses property wird dann als Maximalwert für die Input Control bei der Navigation zu einer bestimmten Seite verwendet. Folglich kann der User nur zu einer Seite springen, die ihm bereits angezeigt wird. 
 
-\subsection{Input Control}
-Input Kontrolle findet in allen Modulen statt außer dem Merger. Alle input fields sind input type="text" Elemente, anstatt type="number", selbst wenn nur Zahlen als Eingabewerte gültig sind. Das hat folgenden Hintergrund: Es gibt eine Funktion namens restrictInputValues, die automatisch Benutzereingaben korrigiert. Sie ist in Abbildung \ref{code:input} aufgezeigt.
+\subsection{Implementierung der Vue JS 3-Module}
+Die Module Creator, Splitter und Merger verwenden das Framework Vue JS 3, zwar nicht in nativer Form als \gls{spa}, jedoch wird Vue JS 3 als stand-alone widgets in diese Module integriert. Beim Creator wird annähernd die eingestellte PDF-Seitengröße als Breite und Höhe der MediaBox durch die Berechnung in den Codezeilen \ref{code:mediabox}, die ich durch Ausprobieren herausgefunden habe, gesetzt.
 
-\begin{lstlisting}[style=ES6, caption={Funktion für Inputkontrolle und Benutzereingabekorrekturen}, label=code:input, breaklines=true]
-	function restrictInputValues(inputId, min, max, parseIntOperation, 
-		parseFloatOperation) {
-		const inputElem = document.getElementById(inputId);
-		let valToRestrict;
-		inputElem.onchange = null;
-		inputElem.onchange = function() {
-			valToRestrict = inputElem.value;
-			valToRestrict = valToRestrict.replace(/\s+/g,'');
-			document.getElementById(inputId).value = valToRestrict;
-			if (valToRestrict.match(/^-?\d+$/) || valToRestrict.match(/^\d+\.\d+$/)) {
-				if (parseIntOperation) {
-					valToRestrict = parseInt(valToRestrict, 10);
-					document.getElementById(inputId).value = valToRestrict;
-				} 
-				if (parseFloatOperation) {
-					valToRestrict = parseFloat(valToRestrict);
-				}
-				if (valToRestrict >= min && valToRestrict <= max) {
-					document.getElementById(inputId).value = valToRestrict;
-				} else {
-					if (valToRestrict < min) {
-						document.getElementById(inputId).value = min;
-					} else if (valToRestrict > max) {
-						document.getElementById(inputId).value = max;
-					}
-				}
-			}
-		}
-	}
+\begin{lstlisting}[style=ES6, caption={Berechnung der PDF-Seitengröße}, label=code:mediabox, breaklines=true]
+const pageWFactor = (blankPageWidth * 1000) / 352.8;
+const pageHFactor = (blankPageHeight * 1000) / 352.8;
+for (let i = 0; i < blankNumOfPagesCount; i++) {
+	page = pdfDoc.addPage();
+	page.setMediaBox(0, 0, pageWFactor, pageHFactor);
+}
 \end{lstlisting} 
- 
-Die Funktion wird ausgelöst, wenn das input field verändert wurde (change-Event). Der Event-Handler wird zunächst entfernt, bevor er aktiviert wird, da diese Funktion zur Beschränkung des Eingabefeldes für die aktuelle Seitenzahl beim Rendern jeder Seite aufgerufen wird. Würde man den Event-Handler nicht zuerst entfernen, so würde dieses Eingabefeld immer mehr Event-Handler akkumulieren. Zunächst werden alle Leerzeichen und white space entfernt (Zeile 8). Dann wird getestet, ob das Input ein negativer oder positiver Integer bzw. Float ist (Zeile 10). Werden Floatwerte eingegeben, obwohl Integerwerte erwartet werden, werden sie in Integers geparst. Am Ende werden Inputwerte unter dem Minimum auf den minimalen Wert gesetzt und über dem Maximum auf den maximalen Wert substituiert. Außerdem gibt es eine Funktion convertInputToSuccess die den Input String in einen Zahlenwert parst und den Wert oder -1000 zurückgibt. Falls die Funktion -1000 zurückgibt, handelt es sich um ungültige Eingabewerte und Operationen im Reader und auf Elemente werden nicht ausgeführt. Für die Eingabe von eine Liste an Seiten, gibt es eine gesonderte Funktion convertPagelistToSuccess. Hier wird zusätzlich geprüft, ob die Benutzereingabe Kommas enthält. Daraufhin wird sie an der Position der Kommas zerteilt. Ebenfalls wird white space entfernt und parseInt findet statt. Falls Floats als Seiten eingegeben wurden, gilt dies als ungültiges Input. Wurden alle Seiten extrahiert, werden doppelte Seiten entfernt und die Seitenzahlen werden in aufsteigender Reihenfolge sortiert. Als return Wert wird eine Liste mit den Seitenzahlen zurückgegeben oder eine leere Liste falls die Benutzereingabe ungültig war.
 
-\subsection{Implementierung des Splittermoduls}
+Beim Anklicken der Portrait-Orientierung wird in den Width and Height input fields der kleinere Wert der Seitendimensionen für die Width gesetzt und der größere Wert für die Height. Im Falle von Landscape werden Width und Height vertauscht und Quadratic orientiert sich an der Width.
+\par
+Wenn man den Splitter öffnet findet man zunächst einen gesperrten Save-Button vor. Der Save-Button wird erst benutzbar, wenn man eine PDF-Datei und Split-Methode im selection menu ausgewählt hat. Der Dateiname, begrenzt auf 50 Zeichen, wird unter dem Choose file-Button abgebildet. Die Methode list of pages kann man auch zum Splitten nach einer bestimmten Seite verwenden. Erst wenn man diesen Menüpunkt ausgewählt hat, wird das input field für die Seitenliste aktiviert. Die Split-Funktion fürs Splitten nach geraden und ungeraden Seiten heißt SplitAfter. Basierend auf den Rest Modulo 2 wird die Funktion nur ausgeführt, wenn bei der even pages-Split-Methode mehr als 3 Seiten im Input-PDF vorliegen bzw. bei der odd pages-Split-Methode mehr als 2 Seiten vorhanden sind. Andernfalls wird der Save-Button ebenfalls deaktiviert. Die Input-PDF Bestandteile als Dokumentobjekte von PDF-LIB, die nach jedem Split-Vorgang bei der PDF-LIB-Funktion PDFDocument.create entstehen, werden in einem globalen Array splittedPDFs gesichert. Die Arraybestandteile werden durch Klick auf Save einzeln zu einem Uint8Array serialisiert und in einem globalen Array pdfBytesList gespeichert. PdfBytesList wird dann der compressMultipleToZip funktion übergeben. Jedes gesplittete PDF enthält den Ursprungsdateinamen, einen Unterstrich und einen Index beginnend mit 0, der das Teil-PDF in der Split-Reihenfolge aufsteigend nummeriert. Alle Source-PDF-Bestandteile werden in einen Zip-Ordner verpackt. Am Ende des Downloads werden splittedPDFs und pdfBytesList wieder als leeres Array gesetzt.
+\par
+Im Merger wird eine geöffnete Datei als Uint8Array einem globalen Array selectedPDFBytes hinzugefügt. Zusätzlich wird einem UL-HTML-Element, dem Dateilistencontainer, pro Datei ein LI-HTML-Element mit der Klasse file\_unselected, sowie dem Dateinamen gekürzt auf 50 Characters und einem click Event Handler für die Dateimarkierung, hinzugefügt. Erst wenn man mehr als 1 Datei oder maximal 100 ausgewählt hat werden der Save- und Remove-Button funktionstüchtig gemacht. Außerdem wird dem LI eine Reihe an drag-Events hinzugefügt: dragstart, dragover und drop. Funktion der drag-Events ist, dass der Benutzer die Listeneinträge in ihrer Reihenfolge verschieben kann. Dabei spiegelt selectedPDFBytes die Reihenfolge der Listeneinträge wieder. Für das dragging muss der Listeneintrag nicht markiert sein, jedoch beim Entfernen von einzelnen Listeneinträgen schon. Ist ein Listeneintrag schwarz markiert, so wird die Klasse file\_unselected vom entsprechenden LI entfernt und stattdessen die Klasse file\_selected hinzugefügt. Hat man so viele Listeneinträge entfernt, dass nur noch 1 oder keine Datei übrig bleibt, so wird Save abermals gesperrt. Ebenso wird Remove bei keinen Elementen deaktiviert.
 
 \subsection{Struktur des Editors}
 
 \subsection{Implementierung des Zooms}
 
-\subsection{Speichern von hinzugefügten Elementen}
+\subsection{Downloadfunktion}
