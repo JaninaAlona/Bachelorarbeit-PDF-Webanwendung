@@ -490,7 +490,7 @@ Die Funktion zum Hinzufügen von Drawings heißt draw und ist mit dem Klick-Even
 
 
 \subsection{Erzeugung von Layers}
-Die Layer zum zugehörigen Element wird in dessen Erstellungsmethode addText, addShape, addImage oder draw erzeugt. Die Funktion heißt createStackLayer. Anfangs ist die Layer nicht ausgewählt und nicht gesperrt. Dies wird durch die Klassen layer\_unselected und unlocked angezeigt. Die Klassen werden einem DIV mit der Klasse layercontainer hinzugefügt. Layercontainer hat außerdem ein data-page, data-index und data-type Attribut. Page entspricht der zugehörigen Seitenzahl, index dem Editorelementindex in der Liste und type kann entweder text, drawing, shape oder image sein. Alle weiteren HTML-Elemente im layercontainer sind mit den gleichen data-Attributen versehen. In createStackLayer werden Event-Listener an HTML-Elemente von layercontainer gebunden. Die checkbox ist mit einer Funktion hideLayer und einem input-Event verknüpft und das input-HTML-Element mit der Klasse layername für den editierbaren Layernamen hört auf die Funktion markLayer mit einem Klick-Event. Das DIV mit der Id layer\_stack\_con wird mit einer Funktion moveLayer verknüpft, die dragstart-, dragover- und drop-Events enthält, damit man die Layers in ihrer Reihenfolge verschieben kann, was bewirkt dass die Editorelemente Richtung Vordergrund oder Hintergrund verschoben werden in ihrer z-Achsenreihenfolge. Außerdem wird die neu erzeugte Layer automatisch markiert.
+Die Layer zum zugehörigen Element wird in dessen Erstellungsmethode addText, addShape, addImage oder draw erzeugt. Die Funktion heißt createStackLayer. Anfangs ist die Layer nicht ausgewählt und nicht gesperrt. Dies wird durch die Klassen layer\_unselected und unlocked angezeigt. Die Klassen werden einem DIV mit der Klasse layercontainer hinzugefügt. Layercontainer hat außerdem ein data-page, data-index und data-type Attribut. Page entspricht der zugehörigen Seitenzahl, index dem Editorelementindex in der Liste und type kann entweder text, drawing, shape oder image sein. Alle weiteren HTML-Elemente im layercontainer sind mit den gleichen data-Attributen versehen. In createStackLayer werden Event-Listener an HTML-Elemente von layercontainer gebunden. Die checkbox ist mit einer Funktion hideLayer und einem input-Event verknüpft und das input-HTML-Element mit der Klasse layername für den editierbaren Layernamen hört auf die Funktion markLayer mit einem Klick-Event. Das DIV mit der Id layer\_stack\_con wird mit einer Funktion moveLayer verknüpft, die dragstart-, dragover- und drop-Events enthält, damit man die Layers in ihrer Reihenfolge verschieben kann, was bewirkt dass die Editorelemente Richtung Vordergrund oder Hintergrund verschoben werden in ihrer z-Achsenreihenfolge. Außerdem wird die neu erzeugte Layer mit dem aktuellen Element automatisch in Rosa markiert. Abbildung \ref{fig:layer:stack} zeigt den Aufbau der HTML-Elemente des layer\_stacks.
 
 \begin{figure}[!htbp]
 	\centering
@@ -499,22 +499,16 @@ Die Layer zum zugehörigen Element wird in dessen Erstellungsmethode addText, ad
 	\label{fig:layer-stack}
 \end{figure}
 
-\subsection{Kopieren von Layers}
+Beim Kopieren von Layers, was die Funktion dublicateLayerByElement hervorruft, wird zunächst die Layer per cloneNode(true) dubliziert und erhält einen inkrementierten Index in seinen data-index Attributen, d.h. wenn es bereits 3 Textelemente gibt und eins davon dubliziert wird, erhält das dublizierte Element und die Layer den Index von 3 (Index startet bei 0). Die dublizierte Layer wird hinter der source Layer eingefügt im layer\_stack. Folglich liegt das kopierte Element über dem source Element in der z-Achsenreihenfolge. Außerdem wird der kopierten Layer ein input-Event mit der hideLayer-Funktion und ein Klick-Event mit der markLayer-Funktion angeheftet. Zusätzlich wird erneut moveLayer auf dem layer\_stack\_con ausgeführt, damit die drag-Events auf der neuen Layer ausführbar sind. Die Funktion dublicateElement kopiert das Element der dublizierten Ebene. Dabei wird das Nodestrukturobjekt aus seiner Liste geholt und anhand dessen ein neues Nodestrukturobjekt samt Eigenschaftsobjekt erzeugt und dessen properties werden mit den Werten der source-Objekte initialisiert. Bei kopierten drawingLayer-Objekten ist zu beachten, dass das Objekt mit der deepCopy-Funktion nicht nur die Referenzen kopiert, sondern tatsächlich das Objekt und alle Unterobjekte in paths. Das kopierte Objekt wird seiner Liste hinzugefügt und die source Layer bleibt ausgewählt, während die kopierte Layer nicht ausgewählt ist. Gesperrte kopierte Objekte bleiben gesperrt.
 
+\subsection{Box Mode Modi}
+Bei jeder Operation auf einem Element im Operations Bar und Tools, außer bei den Operationen zum Hinzufügen von Elementen wird zunächst geprüft, ob der User sich im Box Mode oder layer Mode befindet und, ob die Layer locked ist. Alle Operationen im Box Mode besitzen einen Modus. Jeder Modus wird mit seinem Boolean-Wert in einem Modi-Array festgehalten. Die Modusliste für Operationen auf Text heißt userModes, für Drawings userModesDrawer, für Shapes userModesGeometry und für Images userModesImages. Bei den meisten Buttons im Reader und Editor wird eine Funktion resetAllModes ausgeführt. Sie setzt alle Modilistenbestandteile auf false. Dadurch kann der Benutzer einen Operationsmodus verlassen, wenn er eine andere Operation ausführt und in ihren Modus gelangen. Somit kann der Benutzer beispielsweise mehrere Textelemente mit einem Click auf Font Color in Rot färben, ohne erneut auf Font Color klicken zu müssen. Der zugehörige Modus der Operation wird im Event-Handler auf true gesetzt, falls der Benutzer sich im Box Mode befindet.
 
-
-
-
-
-
-
-
-
-
-\subsection{Implementierung des Zooms}
+\subsection{Zoomfunktionalität}
+Bei den Zoom Operationen ist eine Verzögerung von 300 ms eingebaut. Das liegt daran, dass man nicht zu schnell hintereinander Zoomen sollte, da sonst ein Fehler geworfen wird, dass man nicht gleichzeitige Renderoperationen auf dem gleichen Canvas-HTML-Element ausführen kann. Bei den Funktionen zoomIn, zoomOut und enterZoomFactor wird erst eine Funktion namens placeEditorElements ausgeführt, die die controlBoxes und Editorelemente passend zum Zoomfaktor auf der Seite platziert. Alle Editorelemente werden neu und verkleinert bzw. vergrößert gezeichnet. ControlBoxes behalten beim Zoomen ihre Größe bei. Danach werden alle Seiten mit dem neuen Zoomfaktor gerendert.
 
 \subsection{Downloadfunktion}
-
+Die Downloadfunktion für Editorelemente wird in einer promise-Chain ausgeführt. Zunächst wird der aktuelle Zoomfaktor gespeichert und das PDF-Dokument wird auf 500 \% Prozent vergrößert. Das hat den Hintergrund, dass alle Editorelemente anschließend als DataURL in Form eines PNG-Bildes in das PDF mit originalPDFBytes eingebettet werden. Genauer gesagt werden alle Canvas-HTML-Elemente editimg mit der Klasse visible als DataURL eingebettet. Editimgs erhalten die Klasse hidden, wenn Layers im Layers Menu über die grüne Checkbox ausgeblendet werden. Nach der Einbettung der PNG-Bilder mit 500 \% Skalierung wird die Datei zu einem ZIP-Archiv komprimiert. Das Archiv wird zu einem ObjectURL umgewandelt und durch ein neu erstelltes Anchor-HTML-Element, was dem Body hinzugefügt wird, gedownloaded. Anschließend wird das Anchror-Element wieder vom Body entfernt und das PDF im Editor zoomt zurück auf seine vorherige Skalierung.
 
 
 
