@@ -54,6 +54,7 @@
 	toc,
 	symbols,
 	acronyms,
+	%nonumberlist
 ]{glossaries}
 
 %Literaturverzeichnis
@@ -166,4 +167,12 @@
 		enum, export, extends, finally, from, implements, import, instanceof,
 		let, static, super, switch, throw, try},
 	morestring=[b]` % Interpolation strings.
+}
+
+%Acronyms white space
+\newglossarystyle{mylong}{%
+	\setglossarystyle{long}%
+	\renewenvironment{theglossary}%
+	{\begin{longtable}[l]{@{}p{\dimexpr 2cm-\tabcolsep}p{0.8\hsize}}}% <-- change the value here
+		{\end{longtable}}%
 }
