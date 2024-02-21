@@ -1,8 +1,8 @@
 \subsection{Performance Tests}
-Zu Beginn habe ich die Renderdauer mit verschieden großen PDF-Dateien im Bezug auf Speichergröße und Seitenanzahl gemessen. Danach überprüfe ich die Ausführungszeit jedes Moduls. Beim Editor ermittel ich die Downloaddauer, wenn man verschiedene Elemente hinzugefügt hat.
+Zu Beginn habe ich die Renderdauer mit variierend großen PDF-Dateien im Bezug auf Speichergröße und Seitenanzahl gemessen. Anschließend habe ich die Ausführungszeit jedes Moduls überprüft. Im Editor ermittelte ich die Downloaddauer von hinzugefügten Elementen.
 
 \subsubsection{Renderdauer}
-Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle \ref{table:render-dur} bezieht sich ausschließlich auf Tests im Reader. 
+Die renderPage-Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die Tabelle \ref{table:render-dur} bezieht sich ausschließlich auf Tests im Reader. 
 
 \begin{table}[!htbp]
 	\centering
@@ -28,7 +28,7 @@ Die renderPage Funktion wurde mit verschiedenen PDF-Testdateien ausgeführt. Die
 \end{table}
 
 \subsubsection{Modulleistung}
-In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. Konkret messe ich die Ausführungszeit des jeweiligen Moduls das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls schreibe ich in jeweils eine Tabelle. Ich fange mit dem Creator an. Hier habe ich ein PDF erstellt, was die Maximalgröße von 10000 mm hat. Diese Größe kann nicht mehr vom Adobe Reader angezeigt werden. Die Seiten dieses PDF werden dort auf ca. 5079 mm verkleinert. Die zugehörige Tabelle \ref{table:creator-dur} zeigt Extremfälle der PDF-Erstellung.
+In diesem Abschnitt messe ich die Leistung der übrigen Module. Konkret beobachte ich die Ausführungszeit des jeweiligen Moduls, das PDF zu erstellen und zu Downloaden. Die Testergebnisse eines Moduls fließen in eine Tabelle ein. Diese Tabelle \ref{table:creator-dur} zeigt Extremfälle der PDF-Erstellung. Im Creator habe ich ein PDF erstellt, welches die Maximalgröße von 10000 mm aufweist. Diese Größe kann nicht mehr vom Adobe Reader angezeigt werden. Die Seiten dieses PDFs werden in diesem Programm auf ca. 5079 mm verkleinert. 
 
 \begin{table}[!htbp]
 	\centering
@@ -47,7 +47,7 @@ In diesem Abschnitt messe ich die Leistung der übrigen Module der PDF Web App. 
 	\label{table:creator-dur}
 \end{table}
 
-Als Nächstes nehme ich mir den Splitter vor, dessen Ergebnisse in Tabelle \ref{table:splitter-dur} gezeigt sind. Falls eine Liste an Zahlen angegeben ist, ist damit die Split-Methode list of pages gemeint.
+Als Nächstes untersuche ich den Splitter. Dessen Testergebnisse sind in Tabelle \ref{table:splitter-dur} gezeigt. Eine Liste an Seitenzahlen symbolisiert die Split-Methode list of pages.
 
 \begin{table}[!htbp]
 	\centering
@@ -67,7 +67,7 @@ Als Nächstes nehme ich mir den Splitter vor, dessen Ergebnisse in Tabelle \ref{
 	\label{table:splitter-dur}
 \end{table}
 
-Bei den Tests des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputdateien in der Merge-Reihenfolge auf.
+In den Testresultaten des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputdateien in der Merge-Reihenfolge auf.
 
 \begin{table}[!htbp]
 	\centering
@@ -86,7 +86,7 @@ Bei den Tests des Mergers in Tabelle \ref{table:merger-dur} liste ich die Inputd
 	\label{table:merger-dur}
 \end{table}
 
-In der letzten Tabelle messe ich die Leistung der Downloadfunktion des Editors mit der PDF-Datei Animal-Crossing-Amiibo-s1-2 mit 2 Seiten. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich füge verschiedene Elemente hinzu, wobei ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image bezeichne. Alle Elemente haben keine Einstellungen, sondern sind Standardelemente und es sind jeweils 10 Elemente von jedem Typ auf der einen Seite und die jeweils anderen 10 Elemente auf der anderen Seite. Nach jedem Downloadvorgang habe ich das PDF erneut geöffnet. Die Downloadfunktion verwendet ZIP-Kompression und ermöglicht sogar Downloads von großen PDF-Dateien.
+Als abschließenden Schritt messe ich die Leistung der Downloadfunktion des Editors mit der zweiseitigen PDF-Datei Animal-Crossing-Amiibo-s1-2. Ihre Performance ist in der Tabelle \ref{table:editor-dur} aufgelistet. Ich habe verschiedene Elemente dem PDF hinzugefügt. Zu Darstellungszwecken habe ich die Elemente mit t für Text, d für Drawing, s für Shape und i für Image abgekürzt. Alle Elemente sind Standardelemente. Jeweils 10 Elemente aller verwendeten Typen pro Testdurchlauf wurden auf der ersten Seite und die übrigen 10 Elemente auf der anderen Seite wahllos platziert. Nach jedem Downloadvorgang habe ich das PDF erneut geöffnet. Die Downloadfunktion verwendet ZIP-Kompression und ermöglicht sogar Downloads von großen PDF-Dateien.
 
 \begin{table}[!htbp]
 	\centering
