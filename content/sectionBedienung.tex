@@ -27,21 +27,12 @@ In fast allen Modulen gibt es die Möglichkeit Benutzereingaben zu tätigen. Die
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=1\textwidth]{"images/errorpages.png"}
-	\caption{Fehlermeldung bei einem Input- oder Output-PDF mit mehr als 5000 Seiten}
+	\caption{Splitter Fehlermeldung beim Öffnen eines PDFs von mehr als 5000 Seiten}
 	\label{fig:errorpages}
 \end{figure}
 
-Alle Module unterstützen Input- und Output-PDFs von maximal 5000 Seiten. Falls ein PDF mit mehr als 5000 Seiten geöffnet wird, erscheint eine entsprechende Fehlermeldung. Sie wird ebenfalls beim Versuch ein PDF von über 5000 Seiten zu mergen angezeigt, was Screenshot \ref{fig:errorpages} visualisiert. Jegliche Fehlermeldung verschwindet, sobald eine neue PDF-Datei ausgewählt oder ein anderer Hauptmenüpunkt aufgerufen wurde. \\
-Ist ein Modul der PDF Web App geöffnet, so wird der entsprechende Hauptmenübutton durch einen dunkelgrauen Hintergrund mit grüner Schrift symbolisiert. Initial ist der Reader ausgewählt. Der Button Create führt zum Creator für leere PDFs, Split zum Splitter für das Seiten Zerteilen, Merge zum Merger für das Zusammenfügen von PDF-Dateien, Text zum Writer für Textbearbeitung, Draw zum Drawer fürs Zeichnen, Shape zum Shaper zur Geometrieerstellung und Image zum Imager zur Bildbearbeitung. Falls aktuell der Reader, Merger, Splitter oder Creator geöffnet ist und anschließend auf ein Editormodul geklickt wird, ist standardmäßig der Writer ausgewählt. Um ein anderes Editormodul zu aktivieren, muss ein weiteres Mal auf das gewünschte Editormodul geklickt werden. Jedes Modul in der PDF Web App besitzt einen grünen Save-Button. Save downloaded das aktuelle PDF als ZIP-Archiv und legt es im Downloads-Ordner im lokalen Dateisystem ab. Sobald die Maus über den Save-Button bewegt wird, erscheint eine schwarze Dialogbox, in der ein benutzerdefinierter Dateinamen mit maximal 50 Zeichen vergeben werden kann. Wurde ein benutzerdefinierter Dateinamen definiert, erhält das Output-PDF und der ZIP-Ordner dessen Namen. Andernfalls wird ein default Name verwendet, der aus dem Ursprungsdateinamen und einem Suffix besteht. Der Screenshot \ref{fig:save} bildet die Dialogbox zur Vergabe des Dateinamens ab. Bei Splitter und Merger wird der Dateiname, der im Dateibrowser selektierten Datei, auf 50 Zeichen gekürzt, falls der Dateiname größer oder gleich 54 Zeichen ist.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{"images/save.png"}
-	\caption{Dateibenennungsdialog des Save-Buttons der PDF Web App}
-	\label{fig:save}
-\end{figure}
-
-Bei Navigation zu Read, Text, Draw, Shape oder Image erscheint zunächst der Choose file-Button, damit im Dateisystem ein PDF-Dokument zum Lesen oder Bearbeiten auswählt werden kann. Ein geöffnetes Dokument passt seine Zoomgröße basierend auf die Dimensionen der ersten Seite automatisch an das Browserfenster an, sodass es formatfüllend mit Randabstand in den Viewport des Browserfensters passt. Diese Anpassung erfolgt nur, wenn das Dokument derart riesig ist, sodass es über den Viewport hinausragt.
+Alle Module unterstützen Input- und Output-PDFs von maximal 5000 Seiten. Falls ein PDF mit mehr als 5000 Seiten geöffnet wird, erscheint eine entsprechende Fehlermeldung. Sie wird ebenfalls beim Versuch ein PDF von über 5000 Seiten zu mergen angezeigt. Der Screenshot \ref{fig:errorpages} visualisiert diese Fehlermeldung im Splitter. Jegliche Fehlermeldung verschwindet, sobald eine neue PDF-Datei ausgewählt oder ein anderer Hauptmenüpunkt aufgerufen wurde. \\
+Ist ein Modul der PDF Web App geöffnet, so wird der entsprechende Hauptmenübutton durch einen dunkelgrauen Hintergrund mit grüner Schrift symbolisiert. Initial ist der Reader ausgewählt. Der Button Create führt zum Creator für leere PDFs, Split zum Splitter für das Seiten Zerteilen, Merge zum Merger für das Zusammenfügen von PDF-Dateien, Text zum Writer für Textbearbeitung, Draw zum Drawer fürs Zeichnen, Shape zum Shaper zur Geometrieerstellung und Image zum Imager zur Bildbearbeitung. Falls aktuell der Reader, Merger, Splitter oder Creator geöffnet ist und anschließend auf ein Editormodul geklickt wird, ist standardmäßig der Writer ausgewählt. Um ein anderes Editormodul zu aktivieren, muss ein weiteres Mal auf das gewünschte Editormodul geklickt werden. Jedes Modul in der PDF Web App besitzt einen grünen Save-Button. Save downloaded das aktuelle PDF als ZIP-Archiv und legt es im Downloads-Ordner im lokalen Dateisystem ab. Sobald die Maus über den Save-Button bewegt wird, erscheint eine schwarze Dialogbox, in der ein benutzerdefinierter Dateinamen mit maximal 50 Zeichen vergeben werden kann. Wurde ein benutzerdefinierter Dateinamen definiert, erhält das Output-PDF und der ZIP-Ordner dessen Namen. Andernfalls wird ein default Name verwendet, der aus dem Ursprungsdateinamen und einem Suffix besteht. Bei Navigation zu Read, Text, Draw, Shape oder Image erscheint zunächst der Choose file-Button, damit im Dateisystem ein PDF-Dokument zum Lesen oder Bearbeiten auswählt werden kann. Ein geöffnetes Dokument passt seine Zoomgröße basierend auf die Dimensionen der ersten Seite automatisch an das Browserfenster an, sodass es formatfüllend mit Randabstand in den Viewport des Browserfensters passt. Diese Anpassung erfolgt nur, wenn das Dokument derart riesig ist, sodass es über den Viewport hinausragt.
 
 \subsection{Bedienung des Readers}
 Der Reader mit geöffneter PDF-Datei präsentiert sich in Screenshot \ref{fig:reader}.
@@ -65,49 +56,17 @@ Der Creator ist mittels des Create-Buttons im Hauptmenü ansteuerbar. Im Screens
 	\label{fig:creator}
 \end{figure}
 
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{"images/creator-sel.png"}
-	\caption{Creator selection menu der PDF Web App}
-	\label{fig:creator-sel}
-\end{figure}
-
-Eine Anzahl an gewünschten Seiten, sowie die Breite und Höhe in mm des leeren PDFs können zur Verfügung gestellt werden. Wahlweise lässt sich das grüne selection menu für ein DIN A-Preset voreinstellen, was in Screenshot \ref{fig:creator-sel} veranschaulicht wird. Mittels der Schnellauswahl kann die Orientierung justiert werden: Portrait, Landscape oder Quadratic. Minimale und maximale Werte für die Anzahl an Seiten, die Breite und Höhe sind ebenfalls abgebildet. 
+Eine Anzahl an gewünschten Seiten, sowie die Breite und Höhe in mm des leeren PDFs können zur Verfügung gestellt werden. Wahlweise lässt sich das grüne selection menu für ein DIN A-Preset voreinstellen. Mittels der Schnellauswahl kann die Orientierung justiert werden: Portrait, Landscape oder Quadratic. Minimale und maximale Werte für die Anzahl an Seiten, die Breite und Höhe sind ebenfalls abgebildet. 
 
 \subsection{Bedienung des Splitters}
-Zum Splitter kann über den Split-Button navigiert werden, dessen GUI in Screenshot \ref{fig:splitter} dargestellt ist.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=1\textwidth]{"images/splitter.png"}
-	\caption{Splitter GUI der PDF Web App}
-	\label{fig:splitter}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{"images/splitter2.png"}
-	\caption{Splitter selection menu der PDF Web App}
-	\label{fig:splitter2}
-\end{figure}
-
-Nach Dateiauswahl wird über den Dateiname und die Anzahl an Seiten des Dokuments unterrichtet. Erneutes Wählen einer anderen PDF-Datei ersetzt die vorherige. Das selection menu stellt folgende Auswahlmöglichkeiten bereit: Zerteilen nach every page (jeder Seite), odd pages (ungeraden Seiten), even pages (geraden Seiten) und list of pages (Liste an Seiten). Die Abbildung \ref{fig:splitter2} illustriert das selection menu. Nach Selektierung von list of pages können durch Komma separierte Seitennummern zur Verfügung gestellt werden. Die Seitenzahlen müssen nicht in aufsteigender Reihenfolge angegeben werden. Invalid input leert den Inhalt des input fields. 
+Zum Splitter kann über den Split-Button navigiert werden, dessen GUI ich zuvor in Screenshot \ref{fig:errorpages} dargestellt habe. Nach Dateiauswahl wird über den Dateiname und die Anzahl an Seiten des Dokuments unterrichtet. Erneutes Wählen einer anderen PDF-Datei ersetzt die vorherige. Das selection menu stellt folgende Auswahlmöglichkeiten bereit: Zerteilen nach every page (jeder Seite), odd pages (ungeraden Seiten), even pages (geraden Seiten) und list of pages (Liste an Seiten). Nach Selektierung von list of pages können durch Komma separierte Seitennummern zur Verfügung gestellt werden. Die Seitenzahlen müssen nicht in aufsteigender Reihenfolge angegeben werden. Invalid input leert den Inhalt des input fields. 
 
 \subsection{Bedienung des Mergers}
-Der Merger ist mit dem Hauptmenüpunkt Merge zu öffnen. Abbildung \ref{fig:merger} zeigt die Startseite des Mergers. 
+Der Merger ist mit dem Hauptmenüpunkt Merge zu öffnen. Hier lassen sich nacheinander mehrere Dateien mittels Choose file öffnen und sie erscheinen – entsprechend der Auswahlreihenfolge – in einer scrollbaren Liste. Die eingangs ausgewählte Datei steht dabei am Listenanfang. Es können maximal 100 Dateien der Liste hinzugefügt werden. In der Liste kann eine Quelldatei mit gedrückter Maustaste zu einer Zieldatei verschoben werden (drag and drop). Darüber hinaus  kann eine Datei in der Liste selektiert und über den Remove-Buttons aus der Liste entfernt werden. Eine selektierte Datei wird durch einen schwarzen Hintergrund, der in Screenshot \ref{fig:mergelist} gezeigt wird, symbolisiert.
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=1\textwidth]{"images/merger.png"}
-	\caption{Merger-Startseite der PDF Web App}
-	\label{fig:merger}
-\end{figure}
-
-Hier lassen sich nacheinander mehrere Dateien mittels Choose file öffnen und sie erscheinen – entsprechend der Auswahlreihenfolge – in einer scrollbaren Liste. Die eingangs ausgewählte Datei steht dabei am Listenanfang. Es können maximal 100 Dateien der Liste hinzugefügt werden. In der Liste kann eine Quelldatei mit gedrückter Maustaste zu einer Zieldatei verschoben werden (drag and drop). Darüber hinaus  kann eine Datei in der Liste selektiert und über den Remove-Buttons aus der Liste entfernt werden. Eine selektierte Datei wird durch einen schwarzen Hintergrund, der in Screenshot \ref{fig:mergelist} gezeigt wird, symbolisiert.
-
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{"images/mergelist.png"}
+	\includegraphics[width=0.5\textwidth]{"images/mergelist.png"}
 	\caption{Merger Dateiliste der PDF Web App mit selektierter Datei}
 	\label{fig:mergelist}
 \end{figure}
